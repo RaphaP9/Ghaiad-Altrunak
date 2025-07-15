@@ -24,14 +24,14 @@ public class DataSaveUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GeneralDataSaveLoader.OnDataSaveStart += GeneralDataSaveLoader_OnDataSaveStart;
-        GeneralDataSaveLoader.OnDataSaveComplete += GeneralDataSaveLoader_OnDataSaveComplete;
+        GeneralDataManager.OnDataSaveStart += GeneralDataSaveLoader_OnDataSaveStart;
+        GeneralDataManager.OnDataSaveComplete += GeneralDataSaveLoader_OnDataSaveComplete;
     }
 
     private void OnDisable()
     {
-        GeneralDataSaveLoader.OnDataSaveStart -= GeneralDataSaveLoader_OnDataSaveStart;
-        GeneralDataSaveLoader.OnDataSaveComplete -= GeneralDataSaveLoader_OnDataSaveComplete;
+        GeneralDataManager.OnDataSaveStart -= GeneralDataSaveLoader_OnDataSaveStart;
+        GeneralDataManager.OnDataSaveComplete -= GeneralDataSaveLoader_OnDataSaveComplete;
     }
 
     public void ShowIndicator()

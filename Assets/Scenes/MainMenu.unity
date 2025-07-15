@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 221651121}
   - component: {fileID: 221651122}
   m_Layer: 0
-  m_Name: --MAIN MENU SCENE DATA SAVE LOADER--
+  m_Name: --MAIN MENU DATA HANDLER--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 221651119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107c8d3e3b655fa4dac3a52ad12d3ff3, type: 3}
+  m_Script: {fileID: 11500000, guid: 204f8ae3eede44e4da05a3f940302b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   awakeLoadMode: 0

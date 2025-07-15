@@ -49,7 +49,7 @@ public class BootstrapSceneManager : MonoBehaviour
 
     private IEnumerator WaitForDataLoad() //Async Method!
     {
-        Task loadTask = GeneralDataSaveLoader.Instance.CompleteDataLoadAsync();
+        Task loadTask = GeneralDataManager.Instance.CompleteDataLoadAsync();
 
         while (!loadTask.IsCompleted)
         {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Threading.Tasks;
 
 public class DevMenuUIButtonsHandler : MonoBehaviour
 {
@@ -25,8 +24,6 @@ public class DevMenuUIButtonsHandler : MonoBehaviour
 
     private int stageValue = 1;
     private int roundValue = 1;
-
-    public static Func<Task> OnTriggerForceJSONSave;
 
     private void Awake()
     {
@@ -53,7 +50,7 @@ public class DevMenuUIButtonsHandler : MonoBehaviour
 
     private void ForceJSONSave()
     {
-        OnTriggerForceJSONSave?.Invoke();
+        GeneralDataManager.Instance.SaveRunJSONDataAsyncWrapper();
     }
 
     private void InjectValuesToContainer()
