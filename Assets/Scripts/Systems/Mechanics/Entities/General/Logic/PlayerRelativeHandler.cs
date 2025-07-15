@@ -31,7 +31,7 @@ public class PlayerRelativeHandler : MonoBehaviour
         playerPosition = PlayerTransformRegister.Instance.PlayerTransform.position;
         distanceToPlayer = Vector2.Distance(GetPosition(), GetPlayerPosition());
         directionToPlayer = (GetPlayerPosition() - GetPosition()).normalized;
-        angleToPlayer = GeneralUtilities.GetVector2AngleDegrees(directionToPlayer);
+        angleToPlayer = GeneralUtilities.Vector2ToAngleDegrees(directionToPlayer);
     }
 
     private Vector2 GetPlayerPosition()

@@ -22,7 +22,7 @@ public class ArenaParallaxHandler : MonoBehaviour
     {
         if (refferenceCameraTransform == null) return;
 
-        Vector2 cameraOffsetFromCenter = GeneralUtilities.SupressZComponent(refferenceCameraTransform.position - arenaCenterRefference.position);
+        Vector2 cameraOffsetFromCenter = GeneralUtilities.Vector3ToVector2(refferenceCameraTransform.position - arenaCenterRefference.position);
 
         if (cameraOffsetFromCenter.magnitude > DISTANCE_THRESHOLD_TO_UPDATE) return;
        

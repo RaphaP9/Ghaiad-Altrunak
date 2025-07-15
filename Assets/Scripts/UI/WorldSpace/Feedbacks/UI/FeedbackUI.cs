@@ -92,7 +92,7 @@ public class FeedbackUI : MonoBehaviour
     protected void ChooseRandomDirection()
     {
         float randomAngle = Random.Range(minAngle, maxAngle);
-        Vector2 randomDirection = GeneralUtilities.GetAngleDegreesVector2(randomAngle);
+        Vector2 randomDirection = GeneralUtilities.AngleDegreesToVector2(randomAngle);
 
         chosenDirection = randomDirection;
     }

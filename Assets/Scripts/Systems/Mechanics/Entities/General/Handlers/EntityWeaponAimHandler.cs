@@ -41,10 +41,10 @@ public abstract class EntityWeaponAimHandler : MonoBehaviour, IDirectionHandler
 
     protected abstract Vector2 GetTargetPosition();
 
-    private float CalculatePivotAimRefferenceAngle() => GeneralUtilities.GetVector2AngleDegrees(GeneralUtilities.SupressZComponent(refferenceAimPoint.position - weaponPivot.position));
-    private float CalculatePivotAimRefferenceDistance() => GeneralUtilities.SupressZComponent(refferenceAimPoint.position - weaponPivot.position).magnitude;
-    private float CalculatePivotTargetAngle() => GeneralUtilities.GetVector2AngleDegrees(GetTargetPosition() - GeneralUtilities.SupressZComponent(weaponPivot.position));
-    private float CalculatePivotTargetDistance() => (GetTargetPosition() - GeneralUtilities.SupressZComponent(weaponPivot.position)).magnitude;
+    private float CalculatePivotAimRefferenceAngle() => GeneralUtilities.Vector2ToAngleDegrees(GeneralUtilities.Vector3ToVector2(refferenceAimPoint.position - weaponPivot.position));
+    private float CalculatePivotAimRefferenceDistance() => GeneralUtilities.Vector3ToVector2(refferenceAimPoint.position - weaponPivot.position).magnitude;
+    private float CalculatePivotTargetAngle() => GeneralUtilities.Vector2ToAngleDegrees(GetTargetPosition() - GeneralUtilities.Vector3ToVector2(weaponPivot.position));
+    private float CalculatePivotTargetDistance() => (GetTargetPosition() - GeneralUtilities.Vector3ToVector2(weaponPivot.position)).magnitude;
 
     public void HandlePivotRotation() //Called By the corresponding entity StateHandler: PlayerStateHandler, MeleeEnemyStateHandler, etc
     {
@@ -88,7 +88,7 @@ public abstract class EntityWeaponAimHandler : MonoBehaviour, IDirectionHandler
         #region Aim Angle Logic
 
         weaponAimAngle = facingDirectionHandler.IsFacingRight() ? beta : 180 + beta;
-        weaponAimDirection = GeneralUtilities.GetAngleDegreesVector2(weaponAimAngle);
+        weaponAimDirection = GeneralUtilities.AngleDegreesToVector2(weaponAimAngle);
 
         #endregion
     }

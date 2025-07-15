@@ -24,8 +24,8 @@ public class GoldCollection : MonoBehaviour
     {
         if (!GeneralUtilities.CheckGameObjectInLayerMask(collision.gameObject, playerLayerMask)) return;
 
-        OnGoldCollected?.Invoke(this, new OnGoldEventArgs { value = value, position = GeneralUtilities.SupressZComponent(transform.position)});
-        OnAnyGoldCollected?.Invoke(this, new OnGoldEventArgs { value = value, position = GeneralUtilities.SupressZComponent(transform.position)});
+        OnGoldCollected?.Invoke(this, new OnGoldEventArgs { value = value, position = GeneralUtilities.Vector3ToVector2(transform.position)});
+        OnAnyGoldCollected?.Invoke(this, new OnGoldEventArgs { value = value, position = GeneralUtilities.Vector3ToVector2(transform.position)});
 
         Destroy(gameObject);
     }

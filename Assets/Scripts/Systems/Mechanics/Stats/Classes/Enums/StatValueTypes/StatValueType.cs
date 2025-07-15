@@ -1,5 +1,4 @@
 public enum StatValueType
 {
-    Numeric,
-    Asset
+    Numeric
 }

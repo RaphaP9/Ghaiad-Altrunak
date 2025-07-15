@@ -37,7 +37,7 @@ public class ThrowMovement : MonoBehaviour
     protected void ChooseRandomDirection()
     {
         chosenAngle = UnityEngine.Random.Range(minVelAngle, maxVelAngle);
-        chosenDirection = GeneralUtilities.GetAngleDegreesVector2(chosenAngle);
+        chosenDirection = GeneralUtilities.AngleDegreesToVector2(chosenAngle);
     }
 
     protected IEnumerator StopInTimeCoroutine()

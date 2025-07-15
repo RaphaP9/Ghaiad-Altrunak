@@ -8,5 +8,5 @@ public class PlayerAimDirectionHandler : EntityAimDirectionHandler
     [SerializeField] private MouseDirectionHandler mouseDirectionHandler;
 
     protected override Vector2 CalculateAimDirection() => mouseDirectionHandler.NormalizedMouseDirection;
-    protected override float CalculateAimAngle() => GeneralUtilities.GetVector2AngleDegrees(CalculateAimDirection());
+    protected override float CalculateAimAngle() => GeneralUtilities.Vector2ToAngleDegrees(CalculateAimDirection());
 }

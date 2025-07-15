@@ -30,8 +30,8 @@ public class EntityFacingDirectionHandler : MonoBehaviour
     public bool IsInterruptingFacingDirection => isInterruptingFacing;
     public bool IsOverridingFacingDirection => isOverridingFacing;
 
-    public float RawFacingAngle => GeneralUtilities.GetVector2AngleDegrees(currentRawFacingDirection);
-    public float FacingAngle => GeneralUtilities.GetVector2AngleDegrees(currentFacingDirection);
+    public float RawFacingAngle => GeneralUtilities.Vector2ToAngleDegrees(currentRawFacingDirection);
+    public float FacingAngle => GeneralUtilities.Vector2ToAngleDegrees(currentFacingDirection);
 
     private IDirectionHandler directionHandler;
     private List<IFacingInterruption> facingInterruptions;

@@ -105,7 +105,7 @@ public class CameraTransitionHandler : MonoBehaviour
         Transform previousCameraFollowTransform = currentCameraFollowTransform;
 
         GameObject cameraFollowGameObject = new GameObject("CameraFollowGameObject");
-        cameraRefferenceBasePosition = GeneralUtilities.SupressZComponent(cameraRefferenceTransform.position);
+        cameraRefferenceBasePosition = GeneralUtilities.Vector3ToVector2(cameraRefferenceTransform.position);
         cameraFollowGameObject.transform.position = cameraRefferenceBasePosition;
 
         Transform cameraFollowTransform = cameraFollowGameObject.transform;

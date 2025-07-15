@@ -77,7 +77,6 @@ public static class DataUtilities
 
     #endregion
 
-
     #region CharacterSO Translation
     public static CharacterSO TranslateCharacterIDToCharacterSO(int characterID)
     {
@@ -158,96 +157,6 @@ public static class DataUtilities
         return dataModeledNumericStat;
     }
 
-    #endregion
-
-    #region Asset Stat Translation
-    public static List<AssetStatModifier> TranslateDataModeledAssetStatsToAssetStatModifiers(List<DataModeledAssetStat> dataModeledAssetStats)
-    {
-        List<AssetStatModifier> assetStatModifiers = new List<AssetStatModifier>();
-
-        foreach (DataModeledAssetStat dataModeledAssetStat in dataModeledAssetStats)
-        {
-            AssetStatModifier assetStatModifier = TranslateDataModeledAssetStatToAssetStatModifier(dataModeledAssetStat);
-            if (assetStatModifier == null) continue;
-            assetStatModifiers.Add(assetStatModifier);
-        }
-
-        return assetStatModifiers;
-    }
-    private static AssetStatModifier TranslateDataModeledAssetStatToAssetStatModifier(DataModeledAssetStat dataModeledAssetStat)
-    {
-        AssetStatModifier assetStatModifier = new AssetStatModifier();
-
-        assetStatModifier.originGUID = dataModeledAssetStat.originGUID;
-
-        if (Enum.TryParse<AssetStatType>(dataModeledAssetStat.assetStatType, true, out var assetStatType)) assetStatModifier.assetStatType = assetStatType;
-        else
-        {
-            if (DEBUG) Debug.Log($"Can not resolve enum from string:{dataModeledAssetStat.assetStatType}");
-            return null;
-        }
-
-        if (Enum.TryParse<AssetStatModificationType>(dataModeledAssetStat.assetStatModificationType, true, out var assetStatModificationType)) assetStatModifier.assetStatModificationType = assetStatModificationType;
-        else
-        {
-            if (DEBUG) Debug.Log($"Can not resolve enum from string:{dataModeledAssetStat.assetStatModificationType}");
-            return null;
-        }
-
-        //Now we will translate the ID according to the AssetStatType
-
-        switch (assetStatModifier.assetStatType)
-        {
-            case AssetStatType.MovementType:
-            default:
-                /* EXAMPLE:
-                #region MovementType Translation
-                if (MovementTypeAssetLibrary.Instance == null)
-                {
-                    if (DEBUG) Debug.Log("MovementTypeAssetLibrary is null. Can not resolve MovementTypeSO Asset");
-                    return null;
-                }
-                assetStatModifier.asset = MovementTypeAssetLibrary.Instance.GetMovementTypeSOByID(dataModeledAssetStat.assetID);
-                #endregion
-                */
-                break;
-        }
-
-        if(assetStatModifier.asset == null)
-        {
-            if (DEBUG) Debug.Log("Could not resolve assetStatModifier. Asset is null");
-            return null;
-        }
-
-        return assetStatModifier;
-    }
-
-    //
-
-    public static List<DataModeledAssetStat> TranslateAssetStatModifiersToDataModeledAssetStats(List<AssetStatModifier> assetStatModifiers)
-    {
-        List<DataModeledAssetStat> dataModeledAssetStats = new List<DataModeledAssetStat>();
-
-        foreach (AssetStatModifier assetStatModifier in assetStatModifiers)
-        {
-            DataModeledAssetStat dataModeledAssetStat = TranslateAssetStatModifierToDataModeledAssetStat(assetStatModifier);
-            if (dataModeledAssetStat == null) continue;
-            dataModeledAssetStats.Add(dataModeledAssetStat);
-        }
-
-        return dataModeledAssetStats;
-    }
-
-    private static DataModeledAssetStat TranslateAssetStatModifierToDataModeledAssetStat(AssetStatModifier assetStatModifier)
-    {
-        string originGUID = assetStatModifier.originGUID;
-        string numericStatType = assetStatModifier.assetStatType.ToString();
-        string numericStatModificationType = assetStatModifier.assetStatModificationType.ToString();
-        int assetID = assetStatModifier.asset.id;
-
-        DataModeledAssetStat dataModeledAssetStat = new DataModeledAssetStat(originGUID, numericStatType, numericStatModificationType, assetID);
-        return dataModeledAssetStat;
-    }
     #endregion
 
     #region Ability Level Group Translation

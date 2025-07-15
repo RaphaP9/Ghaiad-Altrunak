@@ -73,7 +73,7 @@ public class EnemyMovement : EntityMovement
             Collider2D col = results[i];
             if (col == null || col == _collider2D) continue;
 
-            Vector2 directionFromAvoidee = GeneralUtilities.SupressZComponent(transform.position - col.transform.position);
+            Vector2 directionFromAvoidee = GeneralUtilities.Vector3ToVector2(transform.position - col.transform.position);
             float distance = directionFromAvoidee.magnitude;
 
             if (distance > AVOID_ENEMY_THRESHOLD_DISTANCE)
