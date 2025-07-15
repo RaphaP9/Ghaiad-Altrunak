@@ -34,7 +34,7 @@ public class WinManager : MonoBehaviour
         if (wipeRunDataOnWin)
         {
             DataUtilities.WipeRunData();
-            SessionRunDataContainer.Instance.ResetRunData();
+            RunDataContainer.Instance.ResetRunData();
         }
 
         StartCoroutine(WinGameCoroutine());

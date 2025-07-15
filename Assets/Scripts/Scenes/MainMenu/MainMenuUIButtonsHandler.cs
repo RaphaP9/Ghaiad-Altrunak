@@ -58,15 +58,15 @@ public class MainMenuUIButtonsHandler : MonoBehaviour
     private void StartNewGame()
     {
         DataUtilities.WipeRunData(); //Delete JSON Run Data
-        SessionRunDataContainer.Instance.ResetRunData(); //Reset the Run Data in Data Container
+        RunDataContainer.Instance.ResetRunData(); //Reset the Run Data in Data Container
 
         GeneralSceneSettings.Instance.TransitionToNewGameScene();
     }
 
     private void DeleteData()
     {
-        SessionRunDataContainer.Instance.ResetRunData(); //Reset the Run Data in Data Container
-        SessionPerpetualDataContainer.Instance.ResetPerpetualData(); //Reset the Perpetual Data in Data Container
+        RunDataContainer.Instance.ResetRunData(); //Reset the Run Data in Data Container
+        PerpetualDataContainer.Instance.ResetPerpetualData(); //Reset the Perpetual Data in Data Container
 
         DataUtilities.WipeAllData();
 

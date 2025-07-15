@@ -58,15 +58,15 @@ public class DevMenuUIButtonsHandler : MonoBehaviour
 
     private void InjectValuesToContainer()
     {
-        SessionRunDataContainer.Instance.SetCurrentGold(GoldManager.Instance.CurrentGold);
+        RunDataContainer.Instance.SetCurrentGold(GoldManager.Instance.CurrentGold);
 
         if (debug) Debug.Log($"Injected Gold: {GoldManager.Instance.CurrentGold}.");
 
         bool validInputFieldValues = ValidateInputFieldValues();
         if (!validInputFieldValues) return;
 
-        SessionRunDataContainer.Instance.SetCurrentStageNumber(stageValue);
-        SessionRunDataContainer.Instance.SetCurrentRoundNumber(roundValue);
+        RunDataContainer.Instance.SetCurrentStageNumber(stageValue);
+        RunDataContainer.Instance.SetCurrentRoundNumber(roundValue);
 
         if (debug) Debug.Log($"Injected Values Stage: {stageValue}, Round: {roundValue}.");
     }

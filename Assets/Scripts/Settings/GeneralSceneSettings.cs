@@ -55,7 +55,7 @@ public class GeneralSceneSettings : MonoBehaviour
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     #region Starting Scene
-    public bool ShouldTransitionToFirstSessionStartingScene() => SessionPerpetualDataContainer.Instance.PerpetualData.timesEnteredGame <= 0;
+    public bool ShouldTransitionToFirstSessionStartingScene() => PerpetualDataContainer.Instance.PerpetualData.timesEnteredGame <= 0;
 
     public void TransitionToStartingScene()
     {
@@ -65,7 +65,7 @@ public class GeneralSceneSettings : MonoBehaviour
     #endregion
 
     #region PlayScene
-    private bool ShouldTransitionToCharacterSelectionScene() => SessionPerpetualDataContainer.Instance.HasUnlockedCharacters();
+    private bool ShouldTransitionToCharacterSelectionScene() => PerpetualDataContainer.Instance.HasUnlockedCharacters();
 
     public void TransitionToNewGameScene()
     {
@@ -77,10 +77,10 @@ public class GeneralSceneSettings : MonoBehaviour
     #region Run Scene
     public void TransitionToRunScene()
     {
-        int runCharacterID = SessionRunDataContainer.Instance.RunData.currentCharacterID;
+        int runCharacterID = RunDataContainer.Instance.RunData.currentCharacterID;
 
         CharacterSpecificScenes characterSpecificScenes = GetCharacterSpecificScenesByCharacterID(runCharacterID);
-        DataModeledCharacterData dataModeledCharacterData = SessionPerpetualDataContainer.Instance.GetDataModeledCharacterDataByCharacterID(runCharacterID);
+        DataModeledCharacterData dataModeledCharacterData = PerpetualDataContainer.Instance.GetDataModeledCharacterDataByCharacterID(runCharacterID);
 
         if(characterSpecificScenes == null)
         {
@@ -105,10 +105,10 @@ public class GeneralSceneSettings : MonoBehaviour
     #region Win Scene
     public void TransitionToWinScene()
     {
-        int runCharacterID = SessionRunDataContainer.Instance.RunData.currentCharacterID;
+        int runCharacterID = RunDataContainer.Instance.RunData.currentCharacterID;
 
         CharacterSpecificScenes characterSpecificScenes = GetCharacterSpecificScenesByCharacterID(runCharacterID);
-        DataModeledCharacterData dataModeledCharacterData = SessionPerpetualDataContainer.Instance.GetDataModeledCharacterDataByCharacterID(runCharacterID);
+        DataModeledCharacterData dataModeledCharacterData = PerpetualDataContainer.Instance.GetDataModeledCharacterDataByCharacterID(runCharacterID);
 
         if (characterSpecificScenes == null)
         {
@@ -134,10 +134,10 @@ public class GeneralSceneSettings : MonoBehaviour
     #region Lose Scene
     public void TransitionToLoseScene()
     {
-        int runCharacterID = SessionRunDataContainer.Instance.RunData.currentCharacterID;
+        int runCharacterID = RunDataContainer.Instance.RunData.currentCharacterID;
 
         CharacterSpecificScenes characterSpecificScenes = GetCharacterSpecificScenesByCharacterID(runCharacterID);
-        DataModeledCharacterData dataModeledCharacterData = SessionPerpetualDataContainer.Instance.GetDataModeledCharacterDataByCharacterID(runCharacterID);
+        DataModeledCharacterData dataModeledCharacterData = PerpetualDataContainer.Instance.GetDataModeledCharacterDataByCharacterID(runCharacterID);
 
         if (characterSpecificScenes == null)
         {

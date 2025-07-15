@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7535539065777201091}
   m_Layer: 0
-  m_Name: SessionDataContainers
+  m_Name: DataContainers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 5438476101881666189}
   - {fileID: 6034867946566760265}
+  - {fileID: 8688912727927426303}
   - {fileID: 7535539065777201091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,8 +125,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595adedafe09d374580058504ceccd0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JSONPerpetualDataPersistenceManager: {fileID: 8760021311983487090}
-  JSONRunDataPersistenceManager: {fileID: 2701710326143417633}
+  perpetualJSONDataManager: {fileID: 8760021311983487090}
+  runJSONDataManager: {fileID: 1389243533606511320}
+--- !u!1 &2673882984942153100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2410822274255363376}
+  - component: {fileID: 2316684884578128229}
+  m_Layer: 0
+  m_Name: PerpetualMiddleMan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2410822274255363376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673882984942153100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8688912727927426303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2316684884578128229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673882984942153100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c645b606751672345ae9d475a692c4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perpetualDataContainer: {fileID: 1447158261534299102}
 --- !u!1 &4167956191503538801
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6034867946566760265}
   m_Layer: 0
-  m_Name: JSON
+  m_Name: JSONManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,6 +205,39 @@ Transform:
   - {fileID: 7737801450158516308}
   m_Father: {fileID: 7502182881953366360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4206616347705101786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8688912727927426303}
+  m_Layer: 0
+  m_Name: MiddleMen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8688912727927426303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206616347705101786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2410822274255363376}
+  - {fileID: 2486331956104430705}
+  m_Father: {fileID: 7502182881953366360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4965559129573934671
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,10 +247,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7737801450158516308}
-  - component: {fileID: 1619847258035464001}
-  - component: {fileID: 5695797677233154482}
+  - component: {fileID: 1389243533606511320}
   m_Layer: 0
-  m_Name: JSONDataSaveLoaders
+  m_Name: RunJSONDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +270,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6034867946566760265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1619847258035464001
+--- !u!114 &1389243533606511320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,23 +279,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 4965559129573934671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c645b606751672345ae9d475a692c4b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5158e0d4b0a28cc49a2259cefcf37cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionPerpetualDataContainer: {fileID: 2250207830094748565}
---- !u!114 &5695797677233154482
+  enableDataPersistence: 1
+  fileName: runData.atdata
+  useEncryption: 0
+  debug: 0
+  runJSONDataContainerMiddleMan: {fileID: 3481978666890943367}
+--- !u!1 &6307661913251035211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2486331956104430705}
+  - component: {fileID: 3481978666890943367}
+  m_Layer: 0
+  m_Name: RunMiddleMan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2486331956104430705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6307661913251035211}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8688912727927426303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3481978666890943367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4965559129573934671}
+  m_GameObject: {fileID: 6307661913251035211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4856d00951aff4a4facbc0515d8250d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ba39ed78d076ab41a12a2448ae658c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionRunDataContainer: {fileID: 1157331636952980508}
+  runDataContainer: {fileID: 1157331636952980508}
 --- !u!1 &6386673774542449218
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,9 +342,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7617335305876864666}
   - component: {fileID: 8760021311983487090}
-  - component: {fileID: 2701710326143417633}
   m_Layer: 0
-  m_Name: JSONDataPersistenceManagers
+  m_Name: PerpetualJSONDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,29 +373,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6386673774542449218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ef5c70b30b8674b91386ce86aecece, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f1a737a5df673b4dab9787244f2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enableDataPersistence: 1
   fileName: perpetualData.atdata
   useEncryption: 0
   debug: 0
---- !u!114 &2701710326143417633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6386673774542449218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2699da9ad9864f043bebaae5f36206d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableDataPersistence: 1
-  fileName: runData.atdata
-  useEncryption: 0
-  debug: 0
+  perpetualJSONDataContainerMiddleMan: {fileID: 2316684884578128229}
 --- !u!1 &7114819439076509471
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +392,7 @@ GameObject:
   - component: {fileID: 3892344761253757590}
   - component: {fileID: 1157331636952980508}
   m_Layer: 0
-  m_Name: SessionRunDataContainer
+  m_Name: RunDataContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,15 +422,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7114819439076509471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd4ff96e9fdc8040b580afd2ffb953c, type: 3}
+  m_Script: {fileID: 11500000, guid: 60eea88ac5995424eaf622a9a4930f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   runData:
     tutorializedRun: 0
-    currentStageNumber: 0
-    currentRoundNumber: 0
+    currentStageNumber: 1
+    currentRoundNumber: 1
     currentGold: 0
-    currentCharacterID: 0
+    currentCharacterID: 1
     currentHealth: 0
     currentShield: 0
     objects: []
@@ -349,9 +447,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4812637332839544634}
-  - component: {fileID: 2250207830094748565}
+  - component: {fileID: 1447158261534299102}
   m_Layer: 0
-  m_Name: SessionPerpetualDataContainer
+  m_Name: PerpetualDataContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -372,7 +470,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7535539065777201091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2250207830094748565
+--- !u!114 &1447158261534299102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -381,9 +479,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7233732281889248120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f7c250297803f4fbc060e41b9b903c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ec0f08e65a37774da6bdac8a6569143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   perpetualData:
     hasCompletedTutorial: 0
-    unlockedCharacterIDs: 01000000
+    timesEnteredGame: 0
+    unlockedCharacterIDs: 
+    dataModeledCharacterDataList: []

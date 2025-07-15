@@ -10,8 +10,8 @@ public class GeneralDataSaveLoader : MonoBehaviour
     public static GeneralDataSaveLoader Instance { get; private set; }
 
     [Header("Components")]
-    [SerializeField] private JSONPerpetualDataPersistenceManager JSONPerpetualDataPersistenceManager;
-    [SerializeField] private JSONRunDataPersistenceManager JSONRunDataPersistenceManager;   
+    [SerializeField] private PerpetualJSONDataManager perpetualJSONDataManager;
+    [SerializeField] private RunJSONDataManager runJSONDataManager;   
 
     public static event EventHandler OnDataLoadStart;
     public static event EventHandler OnDataLoadComplete;
@@ -37,7 +37,6 @@ public class GeneralDataSaveLoader : MonoBehaviour
         }
     }
 
-
     #region Complete JSON Load
     public void CompleteDataLoad()
     {
@@ -55,8 +54,8 @@ public class GeneralDataSaveLoader : MonoBehaviour
     {
         OnDataLoadStart?.Invoke(this, EventArgs.Empty);
 
-        JSONPerpetualDataPersistenceManager.LoadData(); //NOTE: Order is important
-        JSONRunDataPersistenceManager.LoadData();
+        perpetualJSONDataManager.LoadData(); //NOTE: Order is important
+        runJSONDataManager.LoadData();
 
         OnDataLoadComplete?.Invoke(this, EventArgs.Empty);
     }
@@ -64,64 +63,9 @@ public class GeneralDataSaveLoader : MonoBehaviour
     {
         OnDataLoadStart?.Invoke(this, EventArgs.Empty);
 
-        await JSONPerpetualDataPersistenceManager.LoadDataAsync();
-        await JSONRunDataPersistenceManager.LoadDataAsync();
+        await perpetualJSONDataManager.LoadDataAsync();
+        await runJSONDataManager.LoadDataAsync();
 
-        OnDataLoadComplete?.Invoke(this, EventArgs.Empty);
-    }
-    #endregion
-
-    #region Perpetual JSON Load
-    public void PerpetualDataLoad()
-    {
-        LoadPerpetualJSONData();
-        InjectAllDataFromContainers();
-    }
-
-    public async Task PerpetualDataLoadAsync()
-    {
-        await LoadPerpetualJSONDataAsync();
-        InjectAllDataFromContainers();
-    }
-
-    public void LoadPerpetualJSONData()
-    {
-        OnDataLoadStart?.Invoke(this, EventArgs.Empty);
-        JSONPerpetualDataPersistenceManager.LoadData(); 
-        OnDataLoadComplete?.Invoke(this, EventArgs.Empty);
-    }
-
-    public async Task LoadPerpetualJSONDataAsync()
-    {
-        OnDataLoadStart?.Invoke(this, EventArgs.Empty);
-        await JSONPerpetualDataPersistenceManager.LoadDataAsync();
-        OnDataLoadComplete?.Invoke(this, EventArgs.Empty);
-    }
-    #endregion
-
-    #region Run JSON Load
-    public void RunDataLoad()
-    {
-        LoadRunJSONData();
-        InjectAllDataFromContainers();
-    }
-
-    public async Task RunDataLoadAsync()
-    {
-        await LoadRunJSONDataAsync();
-        InjectAllDataFromContainers();
-    }
-    public void LoadRunJSONData()
-    {
-        OnDataLoadStart?.Invoke(this, EventArgs.Empty);
-        JSONRunDataPersistenceManager.LoadData();
-        OnDataLoadComplete?.Invoke(this, EventArgs.Empty);
-    }
-
-    public async Task LoadRunJSONDataAsync()
-    {
-        OnDataLoadStart?.Invoke(this, EventArgs.Empty);
-        await JSONPerpetualDataPersistenceManager.LoadDataAsync();
         OnDataLoadComplete?.Invoke(this, EventArgs.Empty);
     }
     #endregion
@@ -129,9 +73,9 @@ public class GeneralDataSaveLoader : MonoBehaviour
     #region Data Containers Injection
     public void InjectAllDataFromContainers()
     {
-        List<SessionDataSaveLoader> sessionDataSaveLoaders = FindObjectsOfType<SessionDataSaveLoader>().ToList();
+        List<DataContainerInjectorExtractor> sessionDataSaveLoaders = FindObjectsOfType<DataContainerInjectorExtractor>().ToList();
 
-        foreach (SessionDataSaveLoader sessionDataSaveLoader in sessionDataSaveLoaders)
+        foreach (DataContainerInjectorExtractor sessionDataSaveLoader in sessionDataSaveLoaders)
         {
             sessionDataSaveLoader.InjectAllDataFromDataContainers();
         }
@@ -157,8 +101,8 @@ public class GeneralDataSaveLoader : MonoBehaviour
     {
         OnDataSaveStart?.Invoke(this, EventArgs.Empty);
 
-        JSONPerpetualDataPersistenceManager.SaveData();
-        JSONRunDataPersistenceManager.SaveData();
+        perpetualJSONDataManager.SaveData();
+        runJSONDataManager.SaveData();
 
         OnDataSaveComplete?.Invoke(this, EventArgs.Empty);
     }
@@ -167,8 +111,8 @@ public class GeneralDataSaveLoader : MonoBehaviour
     {
         OnDataSaveStart?.Invoke(this, EventArgs.Empty);
 
-        await JSONPerpetualDataPersistenceManager.SaveDataAsync();
-        await JSONRunDataPersistenceManager.SaveDataAsync();
+        await perpetualJSONDataManager.SaveDataAsync();
+        await runJSONDataManager.SaveDataAsync();
 
         OnDataSaveComplete?.Invoke(this, EventArgs.Empty);
     }
@@ -190,14 +134,14 @@ public class GeneralDataSaveLoader : MonoBehaviour
     public void SavePerpetualJSONData()
     {
         OnDataSaveStart?.Invoke(this, EventArgs.Empty);
-        JSONPerpetualDataPersistenceManager.SaveData();
+        perpetualJSONDataManager.SaveData();
         OnDataSaveComplete?.Invoke(this, EventArgs.Empty);
     }
 
     public async Task SavePerpetualJSONDataAsync()
     {
         OnDataSaveStart?.Invoke(this, EventArgs.Empty);
-        await JSONPerpetualDataPersistenceManager.SaveDataAsync();
+        await perpetualJSONDataManager.SaveDataAsync();
         OnDataSaveComplete?.Invoke(this, EventArgs.Empty);
     }
     #endregion
@@ -218,14 +162,14 @@ public class GeneralDataSaveLoader : MonoBehaviour
     public void SaveRunJSONData()
     {
         OnDataSaveStart?.Invoke(this, EventArgs.Empty);
-        JSONRunDataPersistenceManager.SaveData();
+        runJSONDataManager.SaveData();
         OnDataSaveComplete?.Invoke(this, EventArgs.Empty);
     }
 
     public async Task SaveRunJSONDataAsync()
     {
         OnDataSaveStart?.Invoke(this, EventArgs.Empty);
-        await JSONRunDataPersistenceManager.SaveDataAsync();
+        await runJSONDataManager.SaveDataAsync();
         OnDataSaveComplete?.Invoke(this, EventArgs.Empty);
     }
     #endregion
@@ -233,9 +177,9 @@ public class GeneralDataSaveLoader : MonoBehaviour
     #region Data Containers Extraction
     public void ExtractAllDataToContainers()
     {
-        List<SessionDataSaveLoader> sessionDataSaveLoaders = FindObjectsOfType<SessionDataSaveLoader>().ToList();
+        List<DataContainerInjectorExtractor> sessionDataSaveLoaders = FindObjectsOfType<DataContainerInjectorExtractor>().ToList();
 
-        foreach (SessionDataSaveLoader sessionDataSaveLoader in sessionDataSaveLoaders)
+        foreach (DataContainerInjectorExtractor sessionDataSaveLoader in sessionDataSaveLoaders)
         {
             sessionDataSaveLoader.ExtractAllDataToDataContainers();
         }
