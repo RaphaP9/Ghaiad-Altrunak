@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8860690d183e2364bba2ae1c6e131102, type: 3}
+  m_Name: TestProjectileEnemySO
+  m_EditorClassIdentifier: 
+  id: 202
+  entityName: TestProjectileEnemy
+  description: 'TestProjectileEnemy
+
+'
+  sprite: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  prefab: {fileID: 1504599749268194510, guid: 7ca476a64904ae74791a47e0f17b43a2, type: 3}
+  baseHealth: 25
+  baseShield: 0
+  baseArmor: 0
+  baseDodgeChance: 0
+  baseAttackDamage: 3
+  baseAttackSpeed: 1
+  baseAttackCritChance: 0
+  baseAttackCritDamageMultiplier: 0.5
+  baseLifesteal: 0
+  damageColor: {r: 0.5647059, g: 0.039215688, b: 0.039215688, a: 1}
+  baseMovementSpeed: 2
+  pushResistanceFactor: 1.5
+  goldDrop: 2
+  spawnDuration: 1.5
+  cleanupTime: 3
+  tooCloseDistance: 3
+  preferredDistance: 5
+  tooFarDistance: 7
+  aimingTimeMult: 0.35
+  shootingTimeMult: 0.15
+  reloadTimeMult: 0.5
+  attackExecutionTimeMult: 0

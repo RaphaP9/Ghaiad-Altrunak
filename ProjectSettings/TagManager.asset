@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - PLAYER
+  - ENEMY
+  - CONFINER
+  - WORLD SPACE UI
+  - ALLY
+  - NEUTRAL ENTITY
+  - TERRAIN
+  - PROJECTILE
+  - GOLD
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: EnvironmentBelow
+    uniqueID: 3093839029
+    locked: 0
+  - name: Shadows
+    uniqueID: 595185503
+    locked: 0
+  - name: Entities
+    uniqueID: 300410655
+    locked: 0
+  - name: Proyectiles
+    uniqueID: 297191843
+    locked: 0
+  - name: VFX
+    uniqueID: 2960658275
+    locked: 0
+  - name: EnvironmentOver
+    uniqueID: 1232649101
+    locked: 0
+  - name: FeedbackUI
+    uniqueID: 1761373133
+    locked: 0
+  - name: UI
+    uniqueID: 3274985619
+    locked: 0

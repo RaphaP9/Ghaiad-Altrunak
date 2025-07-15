@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b86b7ea8c536eb41a2fd853d4e7fb25, type: 3}
+  m_Name: Stage1
+  m_EditorClassIdentifier: 
+  stageName: "La Ruta del Cham\xE1n"
+  stageNameColor: {r: 0.7028302, g: 0.9400447, b: 1, a: 1}
+  roundGroups:
+  - difficultyTier: 6
+    rounds:
+    - {fileID: 11400000, guid: e30a80f59b5fe66499216880da2f2b58, type: 2}
+  - difficultyTier: 6
+    rounds:
+    - {fileID: 11400000, guid: 3fbe50232ff60f54a92abe941bcd481d, type: 2}
+  - difficultyTier: 6
+    rounds:
+    - {fileID: 11400000, guid: 7f9993b1644784c408a151f6973bcc63, type: 2}
+  - difficultyTier: 6
+    rounds:
+    - {fileID: 11400000, guid: 3879fb8ab9399f643a7ab78886a49cbd, type: 2}
+  - difficultyTier: 6
+    rounds:
+    - {fileID: 11400000, guid: 5e77837b514162a44957468a7f216a7f, type: 2}

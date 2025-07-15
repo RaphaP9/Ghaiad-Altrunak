@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df823755eb67814dacc01339f77596e, type: 3}
+  m_Name: Delice_Merchant_Dialogue
+  m_EditorClassIdentifier: 
+  id: 1
+  dialogueSentences:
+  - localID: 1
+    dialogueSpeakerSO: {fileID: 11400000, guid: 947d6c583014ebb4187f04852fcb9e84, type: 2}
+    sentenceText: "\xBFLograste acabar con ellos? No sab\xEDa que las alas de Tessiptera
+      pod\xEDan resistir a la luz del sol siquiera. Buena esa, ni\xF1a."
+    speakerSprite: {fileID: 0}
+    dialogueBoxSprite: {fileID: 0}
+    speakerBoxSprite: {fileID: 0}
+    speakerOnRight: 0
+    triggerSentenceTransition: 0
+    audioClip: {fileID: 0}
+  - localID: 2
+    dialogueSpeakerSO: {fileID: 11400000, guid: a92f0bdce03b0a846ad4572db854db4a, type: 2}
+    sentenceText: "\xBFY t\xFA de donde saliste? \xA1Yo no soy ninguna ni\xF1a y
+      no me gusta que me esp\xEDen, as\xED que fuera de aqu\xED! "
+    speakerSprite: {fileID: 0}
+    dialogueBoxSprite: {fileID: 0}
+    speakerBoxSprite: {fileID: 0}
+    speakerOnRight: 1
+    triggerSentenceTransition: 1
+    audioClip: {fileID: 0}
+  - localID: 3
+    dialogueSpeakerSO: {fileID: 11400000, guid: 947d6c583014ebb4187f04852fcb9e84, type: 2}
+    sentenceText: "Vaya actitud... Solamente quiero ofrecerte un trato donde ambos
+      salimos ganando, t\xFA me consigues la esencia de esos monstruos y yo te la
+      intercambio por estos artefactos que te servir\xE1n para seguir su traves\xEDa,
+      y de seguro te har\xE1n ver mejor que los dem\xE1s de tu especie."
+    speakerSprite: {fileID: 0}
+    dialogueBoxSprite: {fileID: 0}
+    speakerBoxSprite: {fileID: 0}
+    speakerOnRight: 0
+    triggerSentenceTransition: 1
+    audioClip: {fileID: 0}

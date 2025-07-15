@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520dff8c8471b1745bf66ae88fb6fd80, type: 3}
+  m_Name: TestRegenMeleeEnemySO
+  m_EditorClassIdentifier: 
+  id: 205
+  entityName: TestMeleeRegenEnemy
+  description: TestMeleeRegenEnemy
+  sprite: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  prefab: {fileID: 8171095813524711411, guid: ed71f3f49b77b5044abd769e148cb9cd, type: 3}
+  baseHealth: 50
+  baseShield: 0
+  baseArmor: 0
+  baseDodgeChance: 0
+  baseAttackDamage: 2
+  baseAttackSpeed: 1
+  baseAttackCritChance: 0
+  baseAttackCritDamageMultiplier: 0.5
+  baseLifesteal: 0
+  damageColor: {r: 0.5660378, g: 0.040049836, b: 0.040049836, a: 1}
+  baseMovementSpeed: 2.5
+  pushResistanceFactor: 1.5
+  goldDrop: 4
+  spawnDuration: 1.5
+  cleanupTime: 3
+  attackDistance: 1
+  attackArea: 1
+  chargingTimeMult: 0.3
+  attackingTimeMult: 0.3
+  recoverTimeMult: 0.22
+  attackExecutionTimeMult: 0

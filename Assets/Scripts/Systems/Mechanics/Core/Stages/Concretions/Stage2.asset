@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b86b7ea8c536eb41a2fd853d4e7fb25, type: 3}
+  m_Name: Stage2
+  m_EditorClassIdentifier: 
+  stageName: Campamento de los Chakuqkuna
+  stageNameColor: {r: 0.95364094, g: 0.8254717, b: 1, a: 1}
+  roundGroups:
+  - difficultyTier: 5
+    rounds:
+    - {fileID: 11400000, guid: c3f597b7a5592d94597a6e0747d7b8e3, type: 2}
+  - difficultyTier: 5
+    rounds:
+    - {fileID: 11400000, guid: a34163542366f684bb54285312792fb3, type: 2}
+  - difficultyTier: 5
+    rounds:
+    - {fileID: 11400000, guid: 4b7a3b130352c9342b9d378b110f9d4a, type: 2}
+  - difficultyTier: 5
+    rounds:
+    - {fileID: 11400000, guid: 25716c407a0c96544918a2429b80f1fa, type: 2}
+  - difficultyTier: 5
+    rounds:
+    - {fileID: 11400000, guid: 5e30141eb88eac247b8eaab9228bc179, type: 2}

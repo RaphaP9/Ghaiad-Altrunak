@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TemporalNumericStatModifierManager : NumericStatModifierManager
+{
+    public static TemporalNumericStatModifierManager Instance { get; private set; }
+
+    protected virtual void OnEnable()
+    {
+
+    }
+
+    protected virtual void OnDisable()
+    {
+
+    }
+
+    protected override void SetSingleton()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("There is more than one TemporalNumericStatModifierManager instance, proceding to destroy duplicate");
+            Destroy(gameObject);
+        }
+    }
+}

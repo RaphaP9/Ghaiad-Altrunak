@@ -1,0 +1,1227 @@
+fileFormatVersion: 2
+guid: 03c970ac5e2390341a3dcf65b44abff4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_0
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 6766
+        width: 435
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec7fb92971e5ade49a799201d533f9c5
+      internalID: 1129671593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_1
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 6766
+        width: 494
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 575c967974587464e8b40e2958284eed
+      internalID: -1236371979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_2
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 6786
+        width: 288
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e58b7115b05a65f4b888813172cf67e8
+      internalID: -67860259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_3
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 6552
+        width: 372
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30151d2a0b812f747b9c30c3f288ca97
+      internalID: 1653862467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_4
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 6548
+        width: 388
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 092b48294c0371241a77646727d0fa52
+      internalID: 797458195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_5
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 6572
+        width: 123
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d39fe8d423c31e468ab008af57916b8
+      internalID: 2101246704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_6
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 6584
+        width: 123
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4702baac2c81df41bd71f507afb594a
+      internalID: 1796941069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_7
+      rect:
+        serializedVersion: 2
+        x: 2252
+        y: 6394
+        width: 1013
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 107bb83774e07ae478447c2acf301eca
+      internalID: -751231107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_8
+      rect:
+        serializedVersion: 2
+        x: 7084
+        y: 5498
+        width: 751
+        height: 1266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36db7eab43b4f724dbabc2fc78068d82
+      internalID: 1558225317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_9
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 6546
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ff2d89e206a9a64da018d9f374a9aec
+      internalID: 1877479508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_10
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 6546
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e448fe9373711b24c85d3c1c8c7f839e
+      internalID: 1477503365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_11
+      rect:
+        serializedVersion: 2
+        x: 4153
+        y: 6091
+        width: 443
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18485d062cdc30b4aafec29e154264a4
+      internalID: 660113220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_12
+      rect:
+        serializedVersion: 2
+        x: 4770
+        y: 6091
+        width: 467
+        height: 475
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c326b0ae9e6dae844b4904232b984896
+      internalID: -626462045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_13
+      rect:
+        serializedVersion: 2
+        x: 5735
+        y: 5953
+        width: 807
+        height: 597
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 496e81edba1397e40828924bca6d50ac
+      internalID: 1131106091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_14
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 6335
+        width: 388
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10c2a1cd081a8a74a93d4bc80c96b2a0
+      internalID: 1513039191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_15
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 6333
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5b3cf7047316b5498af84c5df793643
+      internalID: -1011959907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_16
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 6333
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 930566853a8c0f94185a1681739c1fb5
+      internalID: 1553044212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_17
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 6316
+        width: 372
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bf4a30497a7ec047865b52208c74294
+      internalID: 1970322473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_18
+      rect:
+        serializedVersion: 2
+        x: 1675
+        y: 6283
+        width: 289
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cba3ae2a5c92bfd4d8c884af315aa169
+      internalID: 1386708811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_19
+      rect:
+        serializedVersion: 2
+        x: 3408
+        y: 6101
+        width: 521
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2382740e287d59f4d87c511c33d9cd86
+      internalID: -1294250734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_20
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 6109
+        width: 494
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efeb3a477eaa726498d294943d29ef42
+      internalID: 1679932391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_21
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 6101
+        width: 435
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7cc4d0e97f7af7409bf4458c302090a
+      internalID: -622744490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_22
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 6082
+        width: 376
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a80966937a5545048903633baad3542f
+      internalID: -1146039281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_23
+      rect:
+        serializedVersion: 2
+        x: 2260
+        y: 6078
+        width: 342
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c0fee2ee2a70804980e8cc9769a943e
+      internalID: -1695102988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_24
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 4329
+        width: 1728
+        height: 1626
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95fc4bee001b4ac4bbee7e9648ad4a0e
+      internalID: -1269379914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_25
+      rect:
+        serializedVersion: 2
+        x: 2114
+        y: 4401
+        width: 1582
+        height: 1534
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81d35f69753eca143aab73e6f9b13726
+      internalID: 935789087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_26
+      rect:
+        serializedVersion: 2
+        x: 4151
+        y: 4373
+        width: 1495
+        height: 1597
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8cff92e6b2e649418d6b5eb8e93dcb6
+      internalID: 258263049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_27
+      rect:
+        serializedVersion: 2
+        x: 5790
+        y: 5079
+        width: 977
+        height: 593
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bbc3244490cef74f88f1452f6cb8892
+      internalID: 1518498842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_28
+      rect:
+        serializedVersion: 2
+        x: 7048
+        y: 3987
+        width: 785
+        height: 1274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5d037e256b8f95499b6ed7fa8750016
+      internalID: -830952372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_29
+      rect:
+        serializedVersion: 2
+        x: 3583
+        y: 2490
+        width: 2170
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b1474acaecd2f949887a671f8a45933
+      internalID: -411470320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_30
+      rect:
+        serializedVersion: 2
+        x: 5810
+        y: 4304
+        width: 922
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10082bbe7d4b8cc41bf48de01531e2d8
+      internalID: -477290986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_31
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 3975
+        width: 510
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f654773f0dedb9b47824e42c11191dee
+      internalID: 636793857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_32
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 2605
+        width: 1569
+        height: 1637
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5276214da0e2cd04b80bfc5411bb86a3
+      internalID: -193999611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_33
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 3629
+        width: 510
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 808621dcb5cbf444885a34d5c725ccd1
+      internalID: -438021393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_34
+      rect:
+        serializedVersion: 2
+        x: 5905
+        y: 2539
+        width: 2055
+        height: 1295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dbb08f47b5f71d49870f6fada7e42da
+      internalID: 1501857583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_35
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 3012
+        width: 719
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a27477e9b48b1e847ae86a40208bd6fd
+      internalID: -1589137208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_36
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 3192
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a370d1b9fda55f4886a43dd8b36a843
+      internalID: 1083715099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_37
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 2444
+        width: 459
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa5b689ae9ff7e24a9a9b094274d640e
+      internalID: 1212593900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_38
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 2405
+        width: 447
+        height: 482
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fb0caff48c4bd5419c88d339db5f95d
+      internalID: 1498405077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_39
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 375
+        width: 996
+        height: 1886
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a5dee079bee5974da016e575cbe183d
+      internalID: 1381059022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_40
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 268
+        width: 1107
+        height: 2099
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d6498f7cea427947a9266ad05f49c19
+      internalID: 2076424389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_41
+      rect:
+        serializedVersion: 2
+        x: 2953
+        y: 319
+        width: 945
+        height: 1787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fb75da9c1f8d3a4b9c8e84c507a7fbd
+      internalID: 1878356207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_42
+      rect:
+        serializedVersion: 2
+        x: 4277
+        y: 477
+        width: 2158
+        height: 1813
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80bcb9f2dfdd8a546ab78b2250954c83
+      internalID: 258558158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_43
+      rect:
+        serializedVersion: 2
+        x: 6536
+        y: 1901
+        width: 729
+        height: 478
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba0581577de1b3c43b2982027c8c1b32
+      internalID: 942161768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_44
+      rect:
+        serializedVersion: 2
+        x: 6577
+        y: 1179
+        width: 621
+        height: 538
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcd28c82bd6b54347999c130eeaee289
+      internalID: 433023511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_45
+      rect:
+        serializedVersion: 2
+        x: 7333
+        y: 945
+        width: 633
+        height: 495
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e313e31b63505a14fa0ceb09a75c1ae8
+      internalID: 38015369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_46
+      rect:
+        serializedVersion: 2
+        x: 6609
+        y: 621
+        width: 573
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd3911859536d614db65983b49c9bf21
+      internalID: 1516472067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_47
+      rect:
+        serializedVersion: 2
+        x: 4325
+        y: 172
+        width: 340
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f049f483c53e9ce4da1da4047ce77406
+      internalID: -1108339359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_48
+      rect:
+        serializedVersion: 2
+        x: 4962
+        y: 89
+        width: 684
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09ae874ab1009a142a0f9d558eb32c1f
+      internalID: 521361249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Delice_Stage3_Sprites_49
+      rect:
+        serializedVersion: 2
+        x: 5974
+        y: 121
+        width: 506
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac57ad098a0b7bb4d99ac54b05d8749c
+      internalID: -265889629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Delice_Stage3_Sprites_0: 1129671593
+      Delice_Stage3_Sprites_1: -1236371979
+      Delice_Stage3_Sprites_10: 1477503365
+      Delice_Stage3_Sprites_11: 660113220
+      Delice_Stage3_Sprites_12: -626462045
+      Delice_Stage3_Sprites_13: 1131106091
+      Delice_Stage3_Sprites_14: 1513039191
+      Delice_Stage3_Sprites_15: -1011959907
+      Delice_Stage3_Sprites_16: 1553044212
+      Delice_Stage3_Sprites_17: 1970322473
+      Delice_Stage3_Sprites_18: 1386708811
+      Delice_Stage3_Sprites_19: -1294250734
+      Delice_Stage3_Sprites_2: -67860259
+      Delice_Stage3_Sprites_20: 1679932391
+      Delice_Stage3_Sprites_21: -622744490
+      Delice_Stage3_Sprites_22: -1146039281
+      Delice_Stage3_Sprites_23: -1695102988
+      Delice_Stage3_Sprites_24: -1269379914
+      Delice_Stage3_Sprites_25: 935789087
+      Delice_Stage3_Sprites_26: 258263049
+      Delice_Stage3_Sprites_27: 1518498842
+      Delice_Stage3_Sprites_28: -830952372
+      Delice_Stage3_Sprites_29: -411470320
+      Delice_Stage3_Sprites_3: 1653862467
+      Delice_Stage3_Sprites_30: -477290986
+      Delice_Stage3_Sprites_31: 636793857
+      Delice_Stage3_Sprites_32: -193999611
+      Delice_Stage3_Sprites_33: -438021393
+      Delice_Stage3_Sprites_34: 1501857583
+      Delice_Stage3_Sprites_35: -1589137208
+      Delice_Stage3_Sprites_36: 1083715099
+      Delice_Stage3_Sprites_37: 1212593900
+      Delice_Stage3_Sprites_38: 1498405077
+      Delice_Stage3_Sprites_39: 1381059022
+      Delice_Stage3_Sprites_4: 797458195
+      Delice_Stage3_Sprites_40: 2076424389
+      Delice_Stage3_Sprites_41: 1878356207
+      Delice_Stage3_Sprites_42: 258558158
+      Delice_Stage3_Sprites_43: 942161768
+      Delice_Stage3_Sprites_44: 433023511
+      Delice_Stage3_Sprites_45: 38015369
+      Delice_Stage3_Sprites_46: 1516472067
+      Delice_Stage3_Sprites_47: -1108339359
+      Delice_Stage3_Sprites_48: 521361249
+      Delice_Stage3_Sprites_49: -265889629
+      Delice_Stage3_Sprites_5: 2101246704
+      Delice_Stage3_Sprites_6: 1796941069
+      Delice_Stage3_Sprites_7: -751231107
+      Delice_Stage3_Sprites_8: 1558225317
+      Delice_Stage3_Sprites_9: 1877479508
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

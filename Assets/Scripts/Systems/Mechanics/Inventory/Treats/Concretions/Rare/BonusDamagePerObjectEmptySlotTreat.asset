@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699723a33aa6d91428cbf19ad440a0ed, type: 3}
+  m_Name: BonusDamagePerObjectEmptySlotTreat
+  m_EditorClassIdentifier: 
+  id: 2303
+  _name: Bolsa del Rumai
+  objectRarity: 2
+  description: "Por cada ranura de objeto vac\xEDa que tengas en el inventario, obtienes
+    1 de Da\xF1o de Ataque."
+  sprite: {fileID: 21300000, guid: e5c320c7479415741858c8d9d70441aa, type: 3}
+  price: 30
+  sellPrice: 21
+  numericEmbeddedStats: []
+  recommendedCharacters: []

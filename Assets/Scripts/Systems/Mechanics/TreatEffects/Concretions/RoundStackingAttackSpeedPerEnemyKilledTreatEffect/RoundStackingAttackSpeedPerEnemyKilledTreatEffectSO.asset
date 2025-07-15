@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8fef6d0016d8048b0f50a71aafab69, type: 3}
+  m_Name: RoundStackingAttackSpeedPerEnemyKilledTreatEffectSO
+  m_EditorClassIdentifier: 
+  activatorInventoryObjects:
+  - {fileID: 11400000, guid: 907ee16499ef35540a394adbf0d18321, type: 2}
+  treatName: RoundStackingAttackSpeedPerEnemyKilledTreatEffect
+  sprite: {fileID: 0}
+  description: RoundStackingAttackSpeedPerEnemyKilledTreatEffect
+  refferencialGUID: GUID_RoundStackingAttackSpeedPerEnemyKilledTreatEffect
+  statPerStack:
+    numericStatType: 7
+    numericStatModificationType: 1
+    value: 0.02

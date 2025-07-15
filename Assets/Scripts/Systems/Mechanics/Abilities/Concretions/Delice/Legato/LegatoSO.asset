@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9600b9ff954911942b19d0cfe73b3699, type: 3}
+  m_Name: LegatoSO
+  m_EditorClassIdentifier: 
+  id: 13
+  abilityName: Legato
+  sprite: {fileID: 21300000, guid: dbfce6d4d80aef64c89c8ba4e426883d, type: 3}
+  description: Legato
+  abilityClassification: 4
+  abilityInfoSO: {fileID: 11400000, guid: bbf3645d9f73db84f9e90c5a366a86c8, type: 2}
+  statAffinities: 0a000000
+  baseCooldown: 10
+  flyStartDuration: 0.5
+  flyDuration: 3
+  flyEndDuration: 0.5
+  dodgeTimeAfterLand: 0.5
+  damageColor: {r: 1, g: 0.45882353, b: 0.7764706, a: 1}
+  actionRadius: 4
+  landDamage: 7
+  pushForce: 5
+  refferencialGUID: GUID_Legato
+  numericEmbeddedStats:
+  - numericStatType: 10
+    numericStatModificationType: 1
+    value: 0.25

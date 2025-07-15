@@ -1,0 +1,3 @@
+How to create invisible characters on TMPro (dot example): 
+
+<color=#00000000>.</color>

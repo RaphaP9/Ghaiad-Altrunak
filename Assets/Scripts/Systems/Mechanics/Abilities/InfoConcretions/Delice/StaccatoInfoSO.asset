@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5232f24873f32b4d982585e2f2bca20, type: 3}
+  m_Name: StaccatoInfoSO
+  m_EditorClassIdentifier: 
+  abilityLevelInfos:
+  - abilityLevel: 0
+    levelDescription: "Delice ejecuta sus notas con Staccato, aumentando su velocidad
+      de ataque en un 25% y convirtiendo sus ataques en r\xE1fagas de 3 proyectiles
+      durante 3 segundos."
+    cardLevelDescription: "Delice aumenta su velocidad de ataque y sus ataques se
+      vuelven r\xE1fagas temporalmente."
+    cardPrefab: {fileID: 7804676402468727170, guid: a2914d0d43e65b94cb3d4623c429b91c, type: 3}
+  - abilityLevel: 1
+    levelDescription: "Delice ejecuta sus notas con Staccato, aumentando su velocidad
+      de ataque en un 25% y convirtiendo sus ataques en r\xE1fagas de 3 proyectiles
+      durante 3 segundos."
+    cardLevelDescription: "Delice aumenta su velocidad de ataque y sus ataques se
+      vuelven r\xE1fagas temporalmente."
+    cardPrefab: {fileID: 7804676402468727170, guid: a2914d0d43e65b94cb3d4623c429b91c, type: 3}
+  - abilityLevel: 2
+    levelDescription: "Delice ejecuta sus notas con Staccato, aumentando su velocidad
+      de ataque en un 25% y convirtiendo sus ataques en r\xE1fagas de 3 proyectiles
+      durante 3 segundos. De manera pasiva sus ataques disparan un proyectil secundario
+      con un 50% del da\xF1o base."
+    cardLevelDescription: "Los ataques de Delice ahora disparan un proyectil secundario
+      con un 50% del da\xF1o de base."
+    cardPrefab: {fileID: 7804676402468727170, guid: 2f0439a51febc604b9449406ec181610, type: 3}
+  - abilityLevel: 3
+    levelDescription: "Delice ejecuta sus notas con Staccato, aumentando su velocidad
+      de ataque en un 25% y convirtiendo sus ataques en r\xE1fagas de 3 proyectiles
+      durante 3 segundos, lanzando dos proyectiles secundarios en diagonal por cada
+      r\xE1faga. De manera pasiva sus ataques disparan un proyectil secundario con
+      un 50% del da\xF1o base."
+    cardLevelDescription: "Durante Staccato, se disparan dos proyectiles secundarios
+      en l\xEDnea diagonal por cada ataque de r\xE1faga."
+    cardPrefab: {fileID: 7804676402468727170, guid: 88dc4350ab82d864b813d5759de23d83, type: 3}

@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3b49ba506126243980644485cf89ce, type: 3}
+  m_Name: ShopSettingsSO
+  m_EditorClassIdentifier: 
+  shopSize: 3
+  shopInventoryObjectTypeSettings:
+  - inventoryObjectType: 0
+    weight: 80
+    cap: 3
+  - inventoryObjectType: 1
+    weight: 20
+    cap: 1
+  stageShopInventoryObjectRaritySettings:
+  - stageNumber: 1
+    shopInventoryObjectRaritySettings:
+    - inventoryObjectRarity: 0
+      weight: 80
+      cap: 3
+    - inventoryObjectRarity: 1
+      weight: 20
+      cap: 1
+    - inventoryObjectRarity: 2
+      weight: 0
+      cap: 0
+    - inventoryObjectRarity: 3
+      weight: 0
+      cap: 0
+    - inventoryObjectRarity: 4
+      weight: 0
+      cap: 0
+  - stageNumber: 2
+    shopInventoryObjectRaritySettings:
+    - inventoryObjectRarity: 0
+      weight: 75
+      cap: 3
+    - inventoryObjectRarity: 1
+      weight: 20
+      cap: 2
+    - inventoryObjectRarity: 2
+      weight: 5
+      cap: 1
+    - inventoryObjectRarity: 3
+      weight: 0
+      cap: 0
+    - inventoryObjectRarity: 4
+      weight: 0
+      cap: 0
+  - stageNumber: 3
+    shopInventoryObjectRaritySettings:
+    - inventoryObjectRarity: 0
+      weight: 65
+      cap: 3
+    - inventoryObjectRarity: 1
+      weight: 20
+      cap: 2
+    - inventoryObjectRarity: 2
+      weight: 5
+      cap: 2
+    - inventoryObjectRarity: 3
+      weight: 5
+      cap: 1
+    - inventoryObjectRarity: 4
+      weight: 0
+      cap: 0
+  - stageNumber: 4
+    shopInventoryObjectRaritySettings:
+    - inventoryObjectRarity: 0
+      weight: 58
+      cap: 3
+    - inventoryObjectRarity: 1
+      weight: 25
+      cap: 2
+    - inventoryObjectRarity: 2
+      weight: 10
+      cap: 2
+    - inventoryObjectRarity: 3
+      weight: 5
+      cap: 1
+    - inventoryObjectRarity: 4
+      weight: 2
+      cap: 1
+  rerollBaseCost: 5
+  rerollCostIncreasePerReroll: 1
+  objectsPool:
+  - {fileID: 11400000, guid: 02de4dd2773720443a4ac31108ee3144, type: 2}
+  - {fileID: 11400000, guid: caf4b2fb6b02de54e92635fd928de7e3, type: 2}
+  - {fileID: 11400000, guid: 268922dd9b3c4ab4c8f18325733c2355, type: 2}
+  - {fileID: 11400000, guid: 8921104c166fb1c46a534a34709b98e5, type: 2}
+  - {fileID: 11400000, guid: df70edf7f81faa94e885653acf3f78cd, type: 2}
+  - {fileID: 11400000, guid: 6ba4a054da834094fa775315dc7dd830, type: 2}
+  - {fileID: 11400000, guid: 287666f3903216e47a5e9a40dc521768, type: 2}
+  - {fileID: 11400000, guid: 6b88585bea547274c80ce3361a616de5, type: 2}
+  - {fileID: 11400000, guid: e54c5deaabe627d4c87ff6d1ec2589e3, type: 2}
+  - {fileID: 11400000, guid: e193c872d0c39b844a4cc4899706a226, type: 2}
+  - {fileID: 11400000, guid: ac1b69e14508bb04aabd61849bfd0b90, type: 2}
+  - {fileID: 11400000, guid: 0b2544f2412631746b2082258ee09a11, type: 2}
+  - {fileID: 11400000, guid: e77182a2fb2719142b0a69a25ce68f7b, type: 2}
+  - {fileID: 11400000, guid: 2551fbac91eed89499c9234d8c48d873, type: 2}
+  - {fileID: 11400000, guid: ebaa58c7171653445bb8b57146cd2262, type: 2}
+  - {fileID: 11400000, guid: 89d359617d6ad074b898578bd1827138, type: 2}
+  - {fileID: 11400000, guid: 66e78a332f2f8504ab367eeb1b2a37aa, type: 2}
+  - {fileID: 11400000, guid: 2fe23aab48a26fa489f2e74115224b83, type: 2}
+  - {fileID: 11400000, guid: 48bb84bfb746ec64d92fd3ff1197e2ab, type: 2}
+  - {fileID: 11400000, guid: d1ccc5725c66a4345b3b29c89d2ccd50, type: 2}
+  treatsPool:
+  - {fileID: 11400000, guid: 3854010c372e63448a5f9161dd5a18d9, type: 2}
+  - {fileID: 11400000, guid: 2b2dc3fc5fdb4214882031155ecf2eaa, type: 2}
+  - {fileID: 11400000, guid: af882b6d676d50642904516bf17cde6a, type: 2}
+  - {fileID: 11400000, guid: 090818f51cdaf1a42b83f580a8ee7a23, type: 2}
+  - {fileID: 11400000, guid: 1505598d537f98848aea47ce31447da2, type: 2}
+  - {fileID: 11400000, guid: 0b15350a21d56514abbbdbc0a66d6633, type: 2}
+  - {fileID: 11400000, guid: b660a1e748c804c46a76a14ca215ea6d, type: 2}
+  - {fileID: 11400000, guid: 79cb1ec46f518d943915170e016d4c79, type: 2}
+  - {fileID: 11400000, guid: b34e6e05daf24414f877f937d3e9e5d3, type: 2}
+  - {fileID: 11400000, guid: 907ee16499ef35540a394adbf0d18321, type: 2}
+  - {fileID: 11400000, guid: 2f8e09d1b55afc441ab395edd7fc328e, type: 2}
+  - {fileID: 11400000, guid: d6cc3d1a45cfec74798ad7fd8185b6d5, type: 2}
+  - {fileID: 11400000, guid: f6bdf3f84a74fcb4faa10a8b80a71cf1, type: 2}
+  randomBreakerInventoryObjectList:
+  - {fileID: 11400000, guid: 02de4dd2773720443a4ac31108ee3144, type: 2}
+  - {fileID: 11400000, guid: caf4b2fb6b02de54e92635fd928de7e3, type: 2}
+  - {fileID: 11400000, guid: 268922dd9b3c4ab4c8f18325733c2355, type: 2}
+  - {fileID: 11400000, guid: 8921104c166fb1c46a534a34709b98e5, type: 2}
+  - {fileID: 11400000, guid: df70edf7f81faa94e885653acf3f78cd, type: 2}
+  - {fileID: 11400000, guid: 6ba4a054da834094fa775315dc7dd830, type: 2}
+  defaultInventoryObjectType: 0
+  defaultInventoryObjectRarity: 0

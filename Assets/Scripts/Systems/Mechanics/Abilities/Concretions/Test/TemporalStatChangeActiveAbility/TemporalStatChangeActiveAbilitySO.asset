@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1591e8c9e1d4f924090a23c2a86c8480, type: 3}
+  m_Name: TemporalStatChangeActiveAbilitySO
+  m_EditorClassIdentifier: 
+  id: 123
+  abilityName: TempStatChange
+  sprite: {fileID: 21300000, guid: 1618585ccd0160b4bab2e3d5179f561d, type: 3}
+  description: TemporalStatChangeAA
+  abilityClassification: 4
+  abilityInfoSO: {fileID: 11400000, guid: 4e88df66d8afeee4491d4ecb5671eab6, type: 2}
+  statAffinities: 
+  baseCooldown: 5
+  numericEmbeddedStats:
+  - numericStatType: 12
+    numericStatModificationType: 0
+    value: 1
+  changeDuration: 3

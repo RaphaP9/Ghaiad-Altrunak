@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc55077aa9fe9a04aaa8b464a478063b, type: 3}
+  m_Name: Object_Rare_2
+  m_EditorClassIdentifier: 
+  id: 1302
+  _name: "P\xE9ndulo Fracturado"
+  objectRarity: 2
+  description: 
+  sprite: {fileID: 21300000, guid: e5c320c7479415741858c8d9d70441aa, type: 3}
+  price: 30
+  sellPrice: 21
+  numericEmbeddedStats:
+  - numericStatType: 0
+    numericStatModificationType: 0
+    value: 2
+  - numericStatType: 12
+    numericStatModificationType: 0
+    value: 0.05
+  - numericStatType: 10
+    numericStatModificationType: 1
+    value: -0.05
+  recommendedCharacters: []

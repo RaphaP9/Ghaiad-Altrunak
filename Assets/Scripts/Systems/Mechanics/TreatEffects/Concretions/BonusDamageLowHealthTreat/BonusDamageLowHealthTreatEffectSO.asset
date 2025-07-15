@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13faa16b3c45f44ea81ba1aa2671a54, type: 3}
+  m_Name: BonusDamageLowHealthTreatEffectSO
+  m_EditorClassIdentifier: 
+  activatorInventoryObjects:
+  - {fileID: 11400000, guid: 3854010c372e63448a5f9161dd5a18d9, type: 2}
+  treatName: BonusDamageLowHealthTreat
+  sprite: {fileID: 0}
+  description: BonusDamageLowHealthTreat
+  refferencialGUID: GUID_BonusDamageLowHealthTreat
+  healthThreshold: 5
+  numericEmbeddedStats:
+  - numericStatType: 6
+    numericStatModificationType: 1
+    value: 1
