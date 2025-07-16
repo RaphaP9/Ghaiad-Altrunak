@@ -92,7 +92,7 @@ public class MusicManager : MonoBehaviour
                 break;
             default:
                 StopMusic();
-                Debug.Log("Music Stopped CinematicScene");
+                Debug.Log("No Music On Scene");
             break;
         }
     }

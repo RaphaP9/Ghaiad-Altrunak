@@ -339,7 +339,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5554819483533937557}
   - component: {fileID: 967868445402340617}
-  - component: {fileID: 1226524130109811475}
   - component: {fileID: 1745675015781674559}
   - component: {fileID: 8309975983145625986}
   - component: {fileID: 5003616657934743761}
@@ -349,7 +348,6 @@ GameObject:
   - component: {fileID: 5930587708578372876}
   - component: {fileID: 8844724857378226313}
   - component: {fileID: 3654785395795810660}
-  - component: {fileID: 6181913077647479785}
   - component: {fileID: 3287368004166176090}
   m_Layer: 6
   m_Name: StatsResolvers
@@ -383,21 +381,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91f2535231ef6494da3a5842682c9ab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityIdentifier: {fileID: 1965199428449930878}
-  value: 0
-  baseValue: 0
---- !u!114 &1226524130109811475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520426018347751691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b761552936fcb428f36cdf37e0a494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 1965199428449930878}
@@ -534,21 +517,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dde1dff8c87668f4c8cf621af97ab057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityIdentifier: {fileID: 1965199428449930878}
-  value: 0
-  baseValue: 0
---- !u!114 &6181913077647479785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520426018347751691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc37903ca62d52945960fccab102f6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 1965199428449930878}
@@ -840,7 +808,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 1965199428449930878}
   entityMaxHealthStatResolver: {fileID: 967868445402340617}
-  entityMaxShieldStatResolver: {fileID: 1226524130109811475}
   entityArmorStatResolver: {fileID: 1745675015781674559}
   entityDodgeChanceStatResolver: {fileID: 8309975983145625986}
   dodgerComponents:
@@ -848,7 +815,6 @@ MonoBehaviour:
   immunerComponents: []
   invulnerableTimeAfterTakingDamage: 0.75
   currentHealth: 0
-  currentShield: 0
 --- !u!114 &4661234364419359008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,7 +896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterIdentifier: {fileID: 1965199428449930878}
   healthRegenStatResolver: {fileID: 3654785395795810660}
-  shieldRegenStatResolver: {fileID: 6181913077647479785}
   playerHealth: {fileID: 6586126778679378193}
 --- !u!1 &1977812988520784575
 GameObject:

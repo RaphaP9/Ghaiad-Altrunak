@@ -18,14 +18,8 @@ public class EnemyHealth : EntityHealth
     public static event EventHandler<OnEntityHealthTakeDamageEventArgs> OnAnyEnemyHealthTakeDamage;
     public event EventHandler<OnEntityHealthTakeDamageEventArgs> OnEnemyHealthTakeDamage;
 
-    public static event EventHandler<OnEntityShieldTakeDamageEventArgs> OnAnyEnemyShieldTakeDamage;
-    public event EventHandler<OnEntityShieldTakeDamageEventArgs> OnEnemyShieldTakeDamage;
-
     public static event EventHandler<OnEntityHealEventArgs> OnAnyEnemyHeal;
     public event EventHandler<OnEntityHealEventArgs> OnEnemyHeal;
-
-    public static event EventHandler<OnEntityShieldRestoredEventArgs> OnAnyEnemyShieldRestored;
-    public event EventHandler<OnEntityShieldRestoredEventArgs> OnEnemyShieldRestored;
 
     public static event EventHandler<OnEntityDeathEventArgs> OnAnyEnemyDeath;
     public event EventHandler<OnEntityDeathEventArgs> OnEnemyDeath;
@@ -35,9 +29,6 @@ public class EnemyHealth : EntityHealth
 
     public static event EventHandler<OnEntityCurrentHealthClampedEventArgs> OnAnyEnemyCurrentHealthClamped;
     public event EventHandler<OnEntityCurrentHealthClampedEventArgs> OnEnemyCurrentHealthClamped;
-
-    public static event EventHandler<OnEntityCurrentShieldClampedEventArgs> OnAnyEnemyCurrentShieldClamped;
-    public event EventHandler<OnEntityCurrentShieldClampedEventArgs> OnEnemyCurrentShieldClamped;
     #endregion
 
     public override bool AvoidDamagePassThrough()
@@ -53,8 +44,8 @@ public class EnemyHealth : EntityHealth
     {
         base.OnEntityInitializedMethod();
 
-        OnEnemyInitialized?.Invoke(this, new OnEntityInitializedEventArgs { currentHealth = currentHealth, currentShield = currentShield });
-        OnAnyEnemyInitialized?.Invoke(this, new OnEntityInitializedEventArgs { currentHealth = currentHealth, currentShield = currentShield });
+        OnEnemyInitialized?.Invoke(this, new OnEntityInitializedEventArgs { currentHealth = currentHealth});
+        OnAnyEnemyInitialized?.Invoke(this, new OnEntityInitializedEventArgs { currentHealth = currentHealth});
     }
 
     protected override void OnEntityDodgeMethod(DamageData damageData)
@@ -76,32 +67,12 @@ public class EnemyHealth : EntityHealth
         newHealth = currentHealth, maxHealth = entityMaxHealthStatResolver.Value, isCrit = isCrit, damageSource = damageSource, damageReceiver = this});
     }
 
-    protected override void OnEntityShieldTakeDamageMethod(int damageTakenByShield, int rawDamage, int previousShield, bool isCrit, IDamageSource damageSource)
-    {
-        base.OnEntityShieldTakeDamageMethod(damageTakenByShield, rawDamage, previousShield, isCrit, damageSource);
-
-        OnEnemyShieldTakeDamage?.Invoke(this, new OnEntityShieldTakeDamageEventArgs {damageTakenByShield = damageTakenByShield, rawDamage = rawDamage, previousShield = previousShield, 
-        newShield = currentShield, maxShield = entityMaxShieldStatResolver.Value, isCrit = isCrit, damageSource = damageSource, damageReceiver = this});
-
-        OnAnyEnemyShieldTakeDamage?.Invoke(this, new OnEntityShieldTakeDamageEventArgs {damageTakenByShield = damageTakenByShield, rawDamage = rawDamage,previousShield = previousShield, 
-        newShield = currentShield, maxShield = entityMaxShieldStatResolver.Value, isCrit = isCrit, damageSource = damageSource, damageReceiver = this});
-
-    }
-
     protected override void OnEntityHealMethod(int healAmount, int previousHealth, IHealSource healSource)
     {
         base.OnEntityHealMethod(healAmount, previousHealth, healSource);
 
         OnEnemyHeal?.Invoke(this, new OnEntityHealEventArgs { healDone = healAmount, previousHealth = previousHealth, newHealth = currentHealth, maxHealth = entityMaxHealthStatResolver.Value, healSource = healSource, healReceiver = this});
         OnAnyEnemyHeal?.Invoke(this, new OnEntityHealEventArgs { healDone = healAmount, previousHealth = previousHealth, newHealth = currentHealth, maxHealth = entityMaxHealthStatResolver.Value, healSource = healSource, healReceiver = this});
-    }
-
-    protected override void OnEntityShieldRestoredMethod(int shieldAmount, int previousShield, IShieldSource shieldSource)
-    {
-        base.OnEntityShieldRestoredMethod(shieldAmount, previousShield, shieldSource);
-
-        OnEnemyShieldRestored?.Invoke(this, new OnEntityShieldRestoredEventArgs { shieldRestored = shieldAmount, previousShield = previousShield, newShield = currentShield, maxShield = entityMaxShieldStatResolver.Value, shieldSource = shieldSource, shieldReceiver = this });
-        OnAnyEnemyShieldRestored?.Invoke(this, new OnEntityShieldRestoredEventArgs { shieldRestored = shieldAmount, previousShield = previousShield, newShield = currentShield, maxShield = entityMaxShieldStatResolver.Value, shieldSource = shieldSource, shieldReceiver = this });
     }
 
     protected override void OnEntityDeathMethod(EntitySO entitySO, IDamageSource damageSource)
@@ -126,14 +97,6 @@ public class EnemyHealth : EntityHealth
 
         OnEnemyCurrentHealthClamped?.Invoke(this, new OnEntityCurrentHealthClampedEventArgs { currentHealth = currentHealth, maxHealth = entityMaxHealthStatResolver.Value });
         OnAnyEnemyCurrentHealthClamped?.Invoke(this, new OnEntityCurrentHealthClampedEventArgs { currentHealth = currentHealth, maxHealth = entityMaxHealthStatResolver.Value });
-    }
-
-    protected override void OnEntityCurrentShieldClampedMethod()
-    {
-        base.OnEntityCurrentShieldClampedMethod();
-
-        OnEnemyCurrentShieldClamped?.Invoke(this, new OnEntityCurrentShieldClampedEventArgs { currentShield = currentShield, maxShield = entityMaxShieldStatResolver.Value });
-        OnAnyEnemyCurrentShieldClamped?.Invoke(this, new OnEntityCurrentShieldClampedEventArgs { currentShield = currentShield, maxShield = entityMaxShieldStatResolver.Value });
     }
     #endregion
 }

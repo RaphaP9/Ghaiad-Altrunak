@@ -47,7 +47,7 @@ public class ExecuteTreatEffectHandler : TreatEffectHandler
         if (e.newHealth > ExecuteTreatConfigSO.healthExecuteThreshold) return; //Do not execute if above threshold
         if (e.damageSource.GetDamageSourceClassification() != DamageSourceClassification.Character) return; //Must be damaged by character
 
-        ExecuteDamageData executeDamageData = new ExecuteDamageData(true, ExecuteTreatConfigSO, true, true);
+        ExecuteDamageData executeDamageData = new ExecuteDamageData(true, ExecuteTreatConfigSO, true);
 
         enemyHealth.Execute(executeDamageData);
         OnExecuteTreatExecution?.Invoke(this, new OnExecuteTreatExecutionEventArgs { enemyHealth = enemyHealth, healthEnemyHadToExecute = e.newHealth });

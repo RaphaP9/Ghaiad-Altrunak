@@ -645,7 +645,6 @@ MonoBehaviour:
     m_Bits: 0
   currentPushData:
     pushForce: 1
-    actionRadius: 1
   currentPushDirection: {x: 0, y: 0}
 --- !u!1 &5231287543475964899
 GameObject:
@@ -689,7 +688,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4997006968070370165}
   - component: {fileID: 1096758079199732240}
-  - component: {fileID: 80324980162622377}
   - component: {fileID: 1866552495512391508}
   - component: {fileID: 1886175068400914796}
   - component: {fileID: 2009993509235919477}
@@ -730,21 +728,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f390ef19f0df544880b2b7868e94695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityIdentifier: {fileID: 8246813395085610927}
-  value: 0
-  baseValue: 0
---- !u!114 &80324980162622377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7839226316697343315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e286d639c5fca419f782d05bce8b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 8246813395085610927}
@@ -1026,14 +1009,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 8246813395085610927}
   entityMaxHealthStatResolver: {fileID: 1096758079199732240}
-  entityMaxShieldStatResolver: {fileID: 80324980162622377}
   entityArmorStatResolver: {fileID: 1866552495512391508}
   entityDodgeChanceStatResolver: {fileID: 1886175068400914796}
   dodgerComponents: []
   immunerComponents: []
   invulnerableTimeAfterTakingDamage: 0
   currentHealth: 0
-  currentShield: 0
   enemySpawnHandler: {fileID: 8942189645329353576}
 --- !u!114 &5914679703919730462
 MonoBehaviour:
@@ -1056,6 +1037,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackInterruptionComponents: []
+  critOverriderComponents: []
   debug: 1
   enemyIdentifier: {fileID: 8246813395085610927}
   firePoint: {fileID: 2502583288736862255}

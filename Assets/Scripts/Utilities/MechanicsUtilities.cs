@@ -18,9 +18,6 @@ public static class MechanicsUtilities
     public const int MIN_MAX_HEALTH = 1;
     public const int MAX_MAX_HEALTH = 1000;
 
-    public const int MIN_MAX_SHIELD = 0;
-    public const int MAX_MAX_SHIELD = 1000;
-
     public const int MIN_ARMOR = 0;
     public const int MAX_ARMOR = 1000;
 
@@ -44,9 +41,6 @@ public static class MechanicsUtilities
 
     public const int MIN_HEALTH_REGEN = 0;
     public const int MAX_HEALTH_REGEN = 20;
-
-    public const int MIN_SHIELD_REGEN = 0;
-    public const int MAX_SHIELD_REGEN = 20;
 
     public const float MIN_LIFESTEAL = 0f;
     public const float MAX_LIFESTEAL = 1f;
@@ -203,8 +197,6 @@ public static class MechanicsUtilities
         {
             case NumericStatType.MaxHealth:
                 return ClampNumericStat(baseValue, MIN_MAX_HEALTH, MAX_MAX_HEALTH);
-            case NumericStatType.MaxShield:
-                return ClampNumericStat(baseValue, MIN_MAX_SHIELD, MAX_MAX_SHIELD);
             case NumericStatType.Armor:
                 return ClampNumericStat(baseValue, MIN_ARMOR, MAX_ARMOR);
             case NumericStatType.DodgeChance:
@@ -221,8 +213,6 @@ public static class MechanicsUtilities
                 return ClampNumericStat(baseValue, MIN_CRIT_MULT, MAX_CRIT_MULT);
             case NumericStatType.HealthRegen:
                 return ClampNumericStat(baseValue, MIN_HEALTH_REGEN, MAX_HEALTH_REGEN);
-            case NumericStatType.ShieldRegen:
-                return ClampNumericStat(baseValue, MIN_SHIELD_REGEN, MAX_SHIELD_REGEN);
             case NumericStatType.Lifesteal:
                 return ClampNumericStat(baseValue, MIN_LIFESTEAL, MAX_LIFESTEAL);
             case NumericStatType.CooldownReduction:

@@ -15,7 +15,6 @@ public abstract class EntitySO : ScriptableObject, IAttackable, IDamageSource //
 
     [Header("Entity Health Settings")]
     [Range(0, 1000)] public int baseHealth;
-    [Range(0, 1000)] public int baseShield;
     [Range(0, 20)] public int baseArmor;
     [Space]
     [Range(0, 1)] public float baseDodgeChance;

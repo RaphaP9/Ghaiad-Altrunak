@@ -240,7 +240,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2038073049732446937}
   - component: {fileID: 4712361618856226690}
-  - component: {fileID: 38370390387965136}
   - component: {fileID: 6674717182866825152}
   - component: {fileID: 2755648767274397407}
   - component: {fileID: 9046120050030887215}
@@ -281,21 +280,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f390ef19f0df544880b2b7868e94695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityIdentifier: {fileID: 5412602289760510124}
-  value: 0
-  baseValue: 0
---- !u!114 &38370390387965136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4431815600608122159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e286d639c5fca419f782d05bce8b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 5412602289760510124}
@@ -715,14 +699,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityIdentifier: {fileID: 5412602289760510124}
   entityMaxHealthStatResolver: {fileID: 4712361618856226690}
-  entityMaxShieldStatResolver: {fileID: 38370390387965136}
   entityArmorStatResolver: {fileID: 6674717182866825152}
   entityDodgeChanceStatResolver: {fileID: 2755648767274397407}
   dodgerComponents: []
   immunerComponents: []
   invulnerableTimeAfterTakingDamage: 0
   currentHealth: 0
-  currentShield: 0
   enemySpawnHandler: {fileID: 3257223475304700248}
 --- !u!114 &8811045212219346871
 MonoBehaviour:

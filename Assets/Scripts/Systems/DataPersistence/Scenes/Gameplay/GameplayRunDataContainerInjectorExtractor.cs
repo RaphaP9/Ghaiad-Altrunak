@@ -51,7 +51,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         InjectCurrentGold();
 
         InjectPlayerCurrentHealth();
-        InjectPlayerCurrentShield();
 
         InjectObjects();
         InjectTreats();
@@ -74,7 +73,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         ExtractCurrentGold();
 
         ExtractPlayerCurrentHealth();
-        ExtractPlayerCurrentShield();
 
         ExtractObjects();
         ExtractTreats();
@@ -99,7 +97,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         ExtractCurrentGold();
 
         ExtractPlayerCurrentHealth();
-        ExtractPlayerCurrentShield();
 
         ExtractObjects();
         ExtractTreats();
@@ -168,17 +165,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         if (playerHealth == null) return;   
 
         playerHealth.SetCurrentHealth(RunDataContainer.Instance.RunData.currentHealth);
-    }
-
-    private void InjectPlayerCurrentShield()
-    {
-        if (playerTransform == null) return;
-
-        PlayerHealth playerHealth = playerTransform.GetComponentInChildren<PlayerHealth>();
-
-        if (playerHealth == null) return;
-
-        playerHealth.SetCurrentShield(RunDataContainer.Instance.RunData.currentShield);
     }
 
     private void InjectCharacterAbilityLevels()
@@ -263,17 +249,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         RunDataContainer.Instance.SetCurrentHealth(playerHealth.CurrentHealth);
     }
 
-    private void ExtractPlayerCurrentShield()
-    {
-        if (playerTransform == null) return;
-
-        PlayerHealth playerHealth = playerTransform.GetComponentInChildren<PlayerHealth>();
-
-        if (playerHealth == null) return;
-
-        RunDataContainer.Instance.SetCurrentShield(playerHealth.CurrentShield);
-    }
-
     private void ExtractCharacterAbilityLevels()
     {
         if (playerTransform == null) return;
@@ -304,7 +279,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         playerTransform = e.playerTransform;
 
         InjectPlayerCurrentHealth();
-        InjectPlayerCurrentShield();
 
         InjectCharacterAbilityLevels();
         InjectCharacterSlotsAbilityVariants();

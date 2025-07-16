@@ -55,7 +55,6 @@ public class RunDataContainer : MonoBehaviour
     public void SetCurrentCharacterID(int characterID) => runData.currentCharacterID = characterID;
 
     public void SetCurrentHealth(int currentHealth) => runData.currentHealth = currentHealth;
-    public void SetCurrentShield(int currentShield) => runData.currentShield = currentShield;
 
     public void SetObjects(List<DataModeledObject> dataModeledObjects) => runData.objects = dataModeledObjects;
     public void SetTreats(List<DataModeledTreat> dataModeledTreats) => runData.treats = dataModeledTreats;

@@ -7,7 +7,6 @@ public class PlayerHealthRegen : MonoBehaviour
     [Header("Components")]
     [SerializeField] private CharacterIdentifier characterIdentifier;
     [SerializeField] private PlayerHealthRegenStatResolver healthRegenStatResolver;
-    [SerializeField] private PlayerShieldRegenStatResolver shieldRegenStatResolver;
     [SerializeField] private PlayerHealth playerHealth;
 
     private void OnEnable()
@@ -26,17 +25,10 @@ public class PlayerHealthRegen : MonoBehaviour
         playerHealth.Heal(healData);
     }
 
-    private void RestoreShieldFromShieldRegen()
-    {
-        ShieldData shieldData = new ShieldData(shieldRegenStatResolver.Value, characterIdentifier.CharacterSO);
-        playerHealth.RestoreShield(shieldData);
-    }
-
     private void GameManager_OnStateChanged(object sender, GameManager.OnStateChangeEventArgs e)
     {
         if (e.newState != GameManager.State.BeginningCombat) return;
 
         HealFromHealthRegen();
-        RestoreShieldFromShieldRegen();
     }
 }

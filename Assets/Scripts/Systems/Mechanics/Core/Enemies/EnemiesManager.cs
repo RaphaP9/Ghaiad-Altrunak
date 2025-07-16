@@ -125,7 +125,7 @@ public class EnemiesManager : MonoBehaviour
 
         foreach (EnemyHealth enemyHealth in enemyHealths)
         {
-            SelfExecuteDamageData selfExecuteDamageData = new SelfExecuteDamageData(true, false, false);
+            SelfExecuteDamageData selfExecuteDamageData = new SelfExecuteDamageData(true, false);
 
             enemyHealth.SelfExecute(selfExecuteDamageData);
         }
@@ -137,7 +137,7 @@ public class EnemiesManager : MonoBehaviour
 
         foreach (EnemyHealth enemyHealth in enemyHealths)
         {
-            SelfExecuteDamageData selfExecuteDamageData = new SelfExecuteDamageData(true, false, false);
+            SelfExecuteDamageData selfExecuteDamageData = new SelfExecuteDamageData(true, false);
 
             enemyHealth.SelfExecute(selfExecuteDamageData);
         }

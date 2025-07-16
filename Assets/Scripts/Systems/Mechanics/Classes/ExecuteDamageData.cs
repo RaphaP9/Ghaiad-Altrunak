@@ -5,16 +5,14 @@ public class ExecuteDamageData
     public bool isCrit;
     public IDamageSource damageSource;
     public bool triggerHealthTakeDamageEvents;
-    public bool triggerShieldTakeDamageEvents;
 
     public int executeDamage;
 
-    public ExecuteDamageData(bool isCrit, IDamageSource damageSource, bool triggerHealthTakeDamageEvents, bool triggerShieldTakeDamageEvents)
+    public ExecuteDamageData(bool isCrit, IDamageSource damageSource, bool triggerHealthTakeDamageEvents)
     {
         this.isCrit = isCrit;
         this.damageSource = damageSource;
         this.triggerHealthTakeDamageEvents = triggerHealthTakeDamageEvents;
-        this.triggerShieldTakeDamageEvents = triggerShieldTakeDamageEvents;
         executeDamage = EXECUTE_DAMAGE;
     }
 }

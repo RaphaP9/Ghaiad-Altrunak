@@ -1,12 +1,10 @@
 public enum NumericStatType 
 {
     MaxHealth,
-    MaxShield,
     Armor,
     DodgeChance,
 
     HealthRegen,
-    ShieldRegen,
 
     AttackDamage,
     AttackSpeed,

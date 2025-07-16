@@ -4,14 +4,13 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewCharacterSO", menuName = "ScriptableObjects/Entities/Characters/Character(Default)")]
-public class CharacterSO : EntitySO, IHealSource, IShieldSource
+public class CharacterSO : EntitySO, IHealSource
 {
     [Header("Attack Settings")]
     [Range(0.5f, 2f)] public float attackDamagePercentage;
 
     [Header("Character Health Settings")]
     [Range(0, 10)] public int baseHealthRegen;
-    [Range(0, 10)] public int baseShieldRegen;
 
     [Header("Character Cooldown Settings")]
     [Range(0f, 1f)] public float baseCooldownReduction;
@@ -26,11 +25,5 @@ public class CharacterSO : EntitySO, IHealSource, IShieldSource
     public string GetHealSourceName() => entityName;
     public string GetHealSourceDescription() => description;
     public Sprite GetHealSourceSprite() => sprite;
-    #endregion
-
-    #region IShieldSource Methods
-    public string GetShieldSourceName() => entityName;
-    public string GetShieldSourceDescription() => description;
-    public Sprite GetShieldSourceSprite() => sprite;
     #endregion
 }

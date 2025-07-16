@@ -16,7 +16,6 @@ public class HittableObjectSO : ScriptableObject, IAttackable
 
     [Header("Entity Stats")]
     [Range(0, 5)] public int health;
-    [Range(0, 5)] public int shield;
 
     #region IAttackableSO Methods
     public string GetAttackableName() => hittableObjectName;

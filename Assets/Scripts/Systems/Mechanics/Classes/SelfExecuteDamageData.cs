@@ -4,15 +4,13 @@ public class SelfExecuteDamageData
 
     public bool isCrit;
     public bool triggerHealthTakeDamageEvents;
-    public bool triggerShieldTakeDamageEvents;
 
     public int executeDamage;
 
-    public SelfExecuteDamageData(bool isCrit, bool triggerHealthTakeDamageEvents, bool triggerShieldTakeDamageEvents)
+    public SelfExecuteDamageData(bool isCrit, bool triggerHealthTakeDamageEvents)
     {
         this.isCrit = isCrit;
         this.triggerHealthTakeDamageEvents = triggerHealthTakeDamageEvents;
-        this.triggerShieldTakeDamageEvents = triggerShieldTakeDamageEvents;
         executeDamage = EXECUTE_DAMAGE;
     }
 }

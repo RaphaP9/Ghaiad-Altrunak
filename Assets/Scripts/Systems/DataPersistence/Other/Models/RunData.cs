@@ -15,7 +15,6 @@ public class RunData : DataModel
     public int currentCharacterID;
     [Space]
     public int currentHealth;
-    public int currentShield;
     [Space]
     public List<DataModeledObject> objects;
     [Space]
@@ -38,7 +37,6 @@ public class RunData : DataModel
         currentCharacterID = 1;
 
         currentHealth = 0;
-        currentShield = 0;
 
         objects = new List<DataModeledObject>();
 

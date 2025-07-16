@@ -21,9 +21,7 @@ public static class MappingUtilities
 
     #region Numeric Stat Consts
     private const string MAX_HEALTH_STAT = "Vida Máxima";
-    private const string MAX_SHIELD_STAT = "Escudo Máximo";
     private const string HEALTH_REGEN_STAT = "Regen. de Vida";
-    private const string SHIELD_REGEN_STAT = "Regen. de Escudo";
     private const string ARMOR_STAT = "Armadura";
     private const string DODGE_CHANCE_STAT = "Evasión";
     private const string ATTACK_DAMAGE_STAT = "Daño de Ataque";
@@ -67,10 +65,8 @@ public static class MappingUtilities
         switch (numericStatType)
         {
             case NumericStatType.MaxHealth:
-            case NumericStatType.MaxShield:
             case NumericStatType.Armor:
             case NumericStatType.HealthRegen:
-            case NumericStatType.ShieldRegen:
             case NumericStatType.AttackDamage:
             case NumericStatType.MovementSpeed:
             case NumericStatType.AttackSpeed:
@@ -143,10 +139,8 @@ public static class MappingUtilities
         switch (numericStatType)
         {
             case NumericStatType.MaxHealth:
-            case NumericStatType.MaxShield:
             case NumericStatType.Armor:
             case NumericStatType.HealthRegen:
-            case NumericStatType.ShieldRegen:
             case NumericStatType.AttackDamage:
                 return ProcessCurrentValueToSimpleInt(value);
             case NumericStatType.MovementSpeed:
@@ -193,10 +187,8 @@ public static class MappingUtilities
         switch (numericStatType)
         {
             case NumericStatType.MaxHealth:
-            case NumericStatType.MaxShield:
             case NumericStatType.Armor:
             case NumericStatType.HealthRegen:
-            case NumericStatType.ShieldRegen:
             case NumericStatType.AttackDamage:
                 return ProcessCurrentValueToSimpleInt(value);
             case NumericStatType.MovementSpeed:
@@ -218,10 +210,8 @@ public static class MappingUtilities
         switch (numericStatType)
         {
             case NumericStatType.MaxHealth:
-            case NumericStatType.MaxShield:
             case NumericStatType.Armor:
             case NumericStatType.HealthRegen:
-            case NumericStatType.ShieldRegen:
             case NumericStatType.AttackDamage:
             case NumericStatType.MovementSpeed:
             case NumericStatType.AttackSpeed:
@@ -241,10 +231,8 @@ public static class MappingUtilities
         switch (numericStatType)
         {
             case NumericStatType.MaxHealth:
-            case NumericStatType.MaxShield:
             case NumericStatType.Armor:
             case NumericStatType.HealthRegen:
-            case NumericStatType.ShieldRegen:
             case NumericStatType.AttackDamage:
                 return ProcessCurrentValueToSimpleInt(value);
             case NumericStatType.MovementSpeed:
@@ -307,14 +295,10 @@ public static class MappingUtilities
             case NumericStatType.MaxHealth:
             default:
                 return MAX_HEALTH_STAT;
-            case NumericStatType.MaxShield:
-                return MAX_SHIELD_STAT;
             case NumericStatType.Armor:
                 return ARMOR_STAT;
             case NumericStatType.HealthRegen:
                 return HEALTH_REGEN_STAT;
-            case NumericStatType.ShieldRegen:
-                return SHIELD_REGEN_STAT;
             case NumericStatType.MovementSpeed:
                 return MOVEMENT_SPEED_STAT;
             case NumericStatType.AttackDamage:
