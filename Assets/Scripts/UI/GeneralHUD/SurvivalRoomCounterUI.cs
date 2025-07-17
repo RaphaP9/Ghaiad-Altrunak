@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TimedRoundCounterUI : MonoBehaviour
+public class SurvivalRoomCounterUI : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Animator animator;
 
     [Header("UI Components")]
-    [SerializeField] private TextMeshProUGUI timedRoundCounterText;
+    [SerializeField] private TextMeshProUGUI survivalRoomCounterText;
 
     [Header("Settings")]
     [SerializeField, Range (0, 15)] private int thresholdToTick;
@@ -23,7 +23,7 @@ public class TimedRoundCounterUI : MonoBehaviour
     private int previousCounter;
     private bool enableCounterUpdate;
 
-    public static event EventHandler OnTimedRoundCounterTick;
+    public static event EventHandler OnSurvivalRoomCounterTick;
 
     private void OnEnable()
     {
@@ -75,11 +75,11 @@ public class TimedRoundCounterUI : MonoBehaviour
     private void Tick()
     {
         animator.SetTrigger(TICK_TRIGGER);
-        OnTimedRoundCounterTick?.Invoke(this, EventArgs.Empty);
+        OnSurvivalRoomCounterTick?.Invoke(this, EventArgs.Empty);
     }
 
     private void ResetPreviousCounter() => previousCounter = 0;
-    private void SetCounterText(int counter) => timedRoundCounterText.text = counter.ToString();
+    private void SetCounterText(int counter) => survivalRoomCounterText.text = counter.ToString();
 
     #region Subscriptions
 

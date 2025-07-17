@@ -14884,7 +14884,7 @@ GameObject:
   - component: {fileID: 713414311}
   - component: {fileID: 713414310}
   m_Layer: 5
-  m_Name: TimedRoundCounterText
+  m_Name: SurvivalRoomCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15128,7 +15128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakeLoadMode: 0
-  applicationQuitSaveMode: 2
+  applicationQuitSaveMode: 0
 --- !u!1 &716640896
 GameObject:
   m_ObjectHideFlags: 0
@@ -20959,9 +20959,6 @@ MonoBehaviour:
   dialogueGroups:
   - id: 1
     characterSO: {fileID: 11400000, guid: 093269bbc084cce44b95dcaf480a1d78, type: 2}
-    stageNumber: 1
-    roundNumber: 2
-    dialogueChronology: 1
     dialogueSO: {fileID: 11400000, guid: 445ad903ac87bc84b85586945209bfa0, type: 2}
     enabled: 1
     playEvenIfAlreadyPlayed: 1
@@ -21870,7 +21867,7 @@ GameObject:
   - component: {fileID: 1051713918}
   - component: {fileID: 1051713917}
   m_Layer: 5
-  m_Name: TimedRoundCounterUI
+  m_Name: SurvivalRoomCounterUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21909,7 +21906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1051713918}
-  timedRoundCounterText: {fileID: 713414310}
+  survivalRoomCounterText: {fileID: 713414310}
   thresholdToTick: 10
 --- !u!95 &1051713918
 Animator:
@@ -23965,7 +23962,7 @@ GameObject:
   - component: {fileID: 1137749995}
   - component: {fileID: 1137749997}
   m_Layer: 5
-  m_Name: WavesRoundIndicatorUI
+  m_Name: WavesRoomIndicatorUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24037,7 +24034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1137749995}
-  wavesRoundIndicatorText: {fileID: 1677505089}
+  wavesRoomIndicatorText: {fileID: 1677505089}
 --- !u!1 &1138277169
 GameObject:
   m_ObjectHideFlags: 0
@@ -34660,7 +34657,7 @@ GameObject:
   - component: {fileID: 1677505090}
   - component: {fileID: 1677505089}
   m_Layer: 5
-  m_Name: WavesRoundIndicatorText
+  m_Name: WavesRoomIndicatorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

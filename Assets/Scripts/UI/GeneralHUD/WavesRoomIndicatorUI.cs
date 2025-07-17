@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 using System;
 
-public class WavesRoundIndicatorUI : MonoBehaviour
+public class WavesRoomIndicatorUI : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Animator animator;
 
     [Header("UI Components")]
-    [SerializeField] private TextMeshProUGUI wavesRoundIndicatorText;
+    [SerializeField] private TextMeshProUGUI wavesRoomIndicatorText;
 
     private const string SHOW_TRIGGER = "Show";
     private const string HIDE_TRIGGER = "Hide";
@@ -20,7 +20,7 @@ public class WavesRoundIndicatorUI : MonoBehaviour
     private int currentWave;
     private int totalWaves;
 
-    public static event EventHandler OnWavesRoundIndicatorTick;
+    public static event EventHandler OnWavesRoomIndicatorTick;
 
     private void OnEnable()
     {
@@ -47,10 +47,10 @@ public class WavesRoundIndicatorUI : MonoBehaviour
     private void Tick()
     {
         animator.SetTrigger(TICK_TRIGGER);
-        OnWavesRoundIndicatorTick?.Invoke(this, EventArgs.Empty);
+        OnWavesRoomIndicatorTick?.Invoke(this, EventArgs.Empty);
     }
 
-    private void SetWavesRoundIndicatorText(int currentWave, int totalWaves) => wavesRoundIndicatorText.text = $"{currentWave}/{totalWaves}";
+    private void SetWavesRoomIndicatorText(int currentWave, int totalWaves) => wavesRoomIndicatorText.text = $"{currentWave}/{totalWaves}";
 
     #region Subscriptions
 

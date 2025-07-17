@@ -9,11 +9,7 @@ public class GoldMovement : ThrowMovement
     [SerializeField, Range(0.5f, 7f)] private float basePlayerDetectionRange;
     [SerializeField, Range(1f, 100f)] private float moveTowardsPlayerSmoothFactor;
 
-    [Header("Collection By Round End Settings")]
-    [SerializeField, Range(1f, 100f)] private float moveTowardsPlayerRoundEndSmoothFactor;
-
     private bool playerDetected = false;
-    private bool collectionByRoundEnd = false;
 
     public static event EventHandler OnAnyPlayerDetected;
     public event EventHandler OnPlayerDetected;
@@ -22,7 +18,6 @@ public class GoldMovement : ThrowMovement
     {
         HandlePlayerDetection();
         HandleMoveTowardsPlayer();
-        HandleMoveTowardsPlayerRoundEnd();
     }
 
     private void HandlePlayerDetection()
@@ -43,20 +38,10 @@ public class GoldMovement : ThrowMovement
 
     private void HandleMoveTowardsPlayer()
     {
-        if (collectionByRoundEnd) return;
         if (!playerDetected) return;
         if (PlayerTransformRegister.Instance == null) return;
         if (PlayerTransformRegister.Instance.PlayerTransform == null) return;
 
         transform.position = Vector3.Lerp(transform.position, PlayerTransformRegister.Instance.PlayerTransform.position, moveTowardsPlayerSmoothFactor*Time.deltaTime);
-    }
-
-    private void HandleMoveTowardsPlayerRoundEnd()
-    {
-        if (!collectionByRoundEnd) return;
-        if (PlayerTransformRegister.Instance == null) return;
-        if (PlayerTransformRegister.Instance.PlayerTransform == null) return;
-
-        transform.position = Vector3.Lerp(transform.position, PlayerTransformRegister.Instance.PlayerTransform.position, moveTowardsPlayerRoundEndSmoothFactor * Time.deltaTime);
     }
 }

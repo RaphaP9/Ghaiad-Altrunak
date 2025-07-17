@@ -7,9 +7,6 @@ public class GeneralGameSettings : MonoBehaviour
     public static GeneralGameSettings Instance { get; private set; }
 
     [Header("Base Game Settings")]
-    [SerializeField] private int startingStage;
-    [SerializeField] private int startingRound;
-    [Space]
     [SerializeField] private int startingGoldQuantity;
     [Space]
     [SerializeField] private CharacterSO defaultCharacter;
@@ -39,8 +36,6 @@ public class GeneralGameSettings : MonoBehaviour
     #endregion
 
     public int GetStartingGoldQuantity() => startingGoldQuantity;
-    public int GetStartingStage() => startingStage;
-    public int GetStartingRound() => startingRound;
     public int GetDefaultCharacterID() => defaultCharacter.id;
 
     public List<int> GetStartingUnlockedCharacterIDs()

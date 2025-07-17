@@ -65,4 +65,9 @@ public class SceneDataHandler : MonoBehaviour
                 break;
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        HandleDataSaveOnQuit();
+    }
 }

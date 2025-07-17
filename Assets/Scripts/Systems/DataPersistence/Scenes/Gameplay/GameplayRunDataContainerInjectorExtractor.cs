@@ -69,23 +69,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
 
     #endregion
 
-    private void ExtractAllCurrentRoundDataToDataContainers()
-    {
-        ExtractPlayerCurrentCharacter();
-
-        ExtractCurrentGold();
-
-        ExtractPlayerCurrentHealth();
-
-        ExtractObjects();
-        ExtractTreats();
-
-        ExtractRunNumericStats();
-
-        ExtractCharacterAbilityLevels();
-        ExtractCharacterSlotsAbilityVariants();
-    }
-
     #region Injection 
     private void InjectCurrentCharacter()
     {

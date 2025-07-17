@@ -30,64 +30,6 @@ public class DialogueTriggerHandler : MonoBehaviour
         }
     }
 
-
-    #region Public Methods
-    public bool ExistDialogueWithConditions(CharacterSO characterSO, int stageNumber, int roundNumber, DialogueChronology dialogueChronology)
-    {
-        foreach(DialogueGroup dialogueGroup in dialogueGroups)
-        {
-            if (!dialogueGroup.enabled) continue;
-            if (dialogueGroup.hasBeenPlayed && !dialogueGroup.playEvenIfAlreadyPlayed) continue;
-
-            if (dialogueGroup.characterSO != characterSO) continue;
-            if (dialogueGroup.stageNumber != stageNumber) continue;
-            if (dialogueGroup.roundNumber != roundNumber) continue;
-            if (dialogueGroup.dialogueChronology != dialogueChronology) continue;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public void PlayDialogueWithConditions(CharacterSO characterSO, int stageNumber, int roundNumber, DialogueChronology dialogueChronology)
-    {
-        DialogueGroup dialogueGroup = FindDialogueGroupWithConditions(characterSO, stageNumber, roundNumber,dialogueChronology);
-
-        if(dialogueGroup == null)
-        {
-            if (debug) Debug.Log("DialogueGroup was not found. Dialogue Play will be ignored.");
-            return;
-        }
-
-        if(dialogueGroup.dialogueSO == null)
-        {
-            if (debug) Debug.Log("DialogueSO is null. Dialogue Play will be ignored.");
-            return;
-        }
-
-        DialogueManager.Instance.StartDialogue(dialogueGroup.dialogueSO);
-        dialogueGroup.hasBeenPlayed = true;
-    }
-
-    private DialogueGroup FindDialogueGroupWithConditions(CharacterSO characterSO, int stageNumber, int roundNumber, DialogueChronology dialogueChronology)
-    {
-        foreach (DialogueGroup dialogueGroup in dialogueGroups)
-        {
-            if (!dialogueGroup.enabled) continue;
-
-            if (dialogueGroup.characterSO != characterSO) continue;
-            if (dialogueGroup.stageNumber != stageNumber) continue;
-            if (dialogueGroup.roundNumber != roundNumber) continue;
-            if (dialogueGroup.dialogueChronology != dialogueChronology) continue;
-
-            return dialogueGroup;
-        }
-
-        return null;
-    }
-    #endregion
-
     #region Save/Load Related Methods
     public void SetDialoguesPlayed(List<DataModeledCharacterData> dataModeledCharacterDataList)
     {

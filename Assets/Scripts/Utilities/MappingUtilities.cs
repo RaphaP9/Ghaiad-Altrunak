@@ -41,7 +41,7 @@ public static class MappingUtilities
     private const string LEVEL_3 = "Nivel 3";
     #endregion
 
-    #region Stage Consts
+    #region Ability Consts
     private const string PASSIVE_ABILITY = "Habilidad Pasiva";
     private const string ACTIVE_ABILITY = "Habilidad Activa";
     private const string ACTIVE_PASSIVE_ABILITY = "Habilidad Activa/Pasiva";

@@ -5,9 +5,6 @@ public class DialogueGroup
 {
     public int id;
     public CharacterSO characterSO;
-    public int stageNumber;
-    public int roundNumber;
-    public DialogueChronology dialogueChronology;
     public DialogueSO dialogueSO;
     [Space]
     public bool enabled;
