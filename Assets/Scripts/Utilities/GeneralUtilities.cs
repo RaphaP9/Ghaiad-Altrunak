@@ -3,10 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.TextCore.Text;
 
 public static class GeneralUtilities
 {
     private const bool DEBUG = true;
+
+    #region Seed Consts
+    private const string SEED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private const int SEED_SIZE = 9;
+    private const int SEED_SIZE_FOR_HYPHEN = 4;
+    private const string HYPHEN_CHARACTER = "-";
+    #endregion
+
 
     private static readonly Vector2Int[] directions8 = new Vector2Int[]
     {
@@ -19,6 +28,24 @@ public static class GeneralUtilities
         new Vector2Int(-1,  0),  // Left
         new Vector2Int(-1,  1),  // Up-Left
     };
+
+    #region Seed
+    public static string GenerateSeed()
+    {
+        System.Text.StringBuilder seedStringBuilder = new System.Text.StringBuilder(SEED_SIZE);
+        System.Random random = new System.Random();
+
+        for (int i = 0; i < SEED_SIZE-1; i++)
+        {
+            if (i == SEED_SIZE_FOR_HYPHEN) seedStringBuilder.Append(HYPHEN_CHARACTER);
+            char randomCharacter = SEED_CHARACTERS[random.Next(SEED_CHARACTERS.Length)];
+            seedStringBuilder.Append(randomCharacter);
+        }
+
+        return seedStringBuilder.ToString();
+    }
+
+    #endregion
 
     #region GUIDs
     public static string GenerateGUID()

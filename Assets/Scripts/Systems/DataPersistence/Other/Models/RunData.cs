@@ -5,6 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class RunData : DataModel
 {
+    public string runSeed;
+    [Space]
+    public int currentLevel;
+    [Space]
     public int currentCharacterID;
     [Space]
     public int currentGold;
@@ -48,6 +52,10 @@ public class RunData : DataModel
 
         //JSON Perpetual Data Loads Before Run Data (Loaded From JSON into Data Containers)
         //PerpetualData is Ready before RunData, it is safe to call the following line
+        runSeed = GeneralUtilities.GenerateSeed();
+
+        currentLevel = GeneralGameSettings.Instance.GetStartingLevel();
+
         currentGold = GeneralGameSettings.Instance.GetStartingGoldQuantity();
 
         currentCharacterID = GeneralGameSettings.Instance.GetDefaultCharacterID();

@@ -11,6 +11,10 @@ public class GameInitializer : MonoBehaviour
     private void Awake()
     {
         SetSingleton();
+    }
+
+    private void Start()
+    {
         InitializeGame();
     }
 

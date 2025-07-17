@@ -6,16 +6,12 @@ using UnityEngine;
 public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorExtractor
 {
     [Header("Data Scripts - Already On Scene")]
-    [SerializeField] private GameManager gameManager;
-    [Space]
+    [SerializeField] private SeedManager seedManager;
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private PlayerCharacterManager playerCharacterManager;
-    [Space]
     [SerializeField] private GoldManager goldManager;   
-    [Space]
     [SerializeField] private ObjectsInventoryManager objectsInventoryManager;
-    [Space]
     [SerializeField] private TreatsInventoryManager treatsInventoryManager;
-    [Space]
     [SerializeField] private RunNumericStatModifierManager runNumericStatModifierManager;
 
     //Runtime Filled
@@ -35,6 +31,10 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
 
     public override void InjectAllDataFromDataContainers()
     {
+        InjectRunSeed();
+
+        InjectCurrentLevel();
+
         InjectCurrentCharacter();
 
         InjectCurrentGold();
@@ -52,6 +52,10 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
 
     public override void ExtractAllDataToDataContainers()
     {
+        ExtractRunSeed();
+
+        ExtractCurrentLevel();
+
         ExtractPlayerCurrentCharacter();
 
         ExtractCurrentGold();
@@ -70,6 +74,18 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
     #endregion
 
     #region Injection 
+    private void InjectRunSeed()
+    {
+        if (seedManager == null) return;
+        seedManager.SetSeed(RunDataContainer.Instance.RunData.runSeed);
+    }
+
+    private void InjectCurrentLevel()
+    {
+        if (levelManager == null) return;
+        levelManager.SetCurrentLevel(RunDataContainer.Instance.RunData.currentLevel);
+    }
+
     private void InjectCurrentCharacter()
     {
         if (playerCharacterManager == null) return;
@@ -135,6 +151,19 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
     #endregion
 
     #region Extraction Methods
+
+    private void ExtractRunSeed()
+    {
+        if(seedManager == null) return;
+        RunDataContainer.Instance.SetRunSeed(seedManager.Seed);
+    }
+
+    private void ExtractCurrentLevel()
+    {
+        if(levelManager == null) return;
+        RunDataContainer.Instance.SetCurrentLevel(levelManager.CurrentLevel);
+    }
+
     private void ExtractCurrentGold()
     {
         if(goldManager == null) return;

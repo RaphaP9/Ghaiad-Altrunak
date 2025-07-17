@@ -45,7 +45,9 @@ public class RunDataContainer : MonoBehaviour
     #endregion
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
+    public void SetRunSeed(string seed) => runData.runSeed = seed;
+    public void SetCurrentLevel(int level) => runData.currentLevel = level;
     public void SetCurrentGold(int gold) => runData.currentGold = gold;
 
     public void SetCurrentCharacterID(int characterID) => runData.currentCharacterID = characterID;

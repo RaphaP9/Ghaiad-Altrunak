@@ -381,13 +381,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runData:
-    tutorializedRun: 0
-    currentStageNumber: 1
-    currentRoundNumber: 1
-    currentGold: 0
+    runSeed: 
+    currentLevel: 0
     currentCharacterID: 1
+    currentGold: 0
     currentHealth: 0
-    currentShield: 0
     objects: []
     treats: []
     numericStats: []
