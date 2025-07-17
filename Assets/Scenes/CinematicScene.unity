@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 65094215}
   - component: {fileID: 65094216}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CinematicUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 173385370}
   - component: {fileID: 173385372}
   - component: {fileID: 173385371}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VideoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,6 +291,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173385369}
   m_CullTransparentMesh: 1
+--- !u!1 &218644271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 218644272}
+  - component: {fileID: 218644273}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &218644272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218644271}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 451794800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &218644273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218644271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: ed4567d415d86fd4faf69f5584975022, type: 2}
 --- !u!1 &409657244
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +370,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1805609771}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &451794799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451794800}
+  m_Layer: 0
+  m_Name: --RENDERING--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &451794800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451794799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 218644272}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &552327710
@@ -692,6 +773,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1068177949085597542, guid: 347553ec8a2213c45943905091672b14, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1805609770}
     - target: {fileID: 1138440840629685694, guid: 347553ec8a2213c45943905091672b14, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2595,7 +2680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1001869422}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VideoUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,7 +3066,7 @@ GameObject:
   - component: {fileID: 1394234217}
   - component: {fileID: 1394234219}
   - component: {fileID: 1394234218}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3417,7 +3502,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3481,7 +3566,7 @@ GameObject:
   - component: {fileID: 1946035619}
   - component: {fileID: 1946035618}
   - component: {fileID: 1946035617}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CinematicCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3557,9 +3642,9 @@ Canvas:
   m_GameObject: {fileID: 1946035615}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1805609770}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -3568,7 +3653,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1019981677
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1001 &1972887947
@@ -3640,7 +3725,7 @@ GameObject:
   - component: {fileID: 1979644486}
   - component: {fileID: 1979644485}
   - component: {fileID: 1979644484}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3760,7 +3845,7 @@ GameObject:
   - component: {fileID: 2034660866}
   - component: {fileID: 2034660868}
   - component: {fileID: 2034660867}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BlackPanelCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3870,6 +3955,7 @@ SceneRoots:
   - {fileID: 1203347636}
   - {fileID: 627130321}
   - {fileID: 409657245}
+  - {fileID: 451794800}
   - {fileID: 1303471688}
   - {fileID: 697745450}
   - {fileID: 579544111}

@@ -243,6 +243,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84083609}
   m_CullTransparentMesh: 1
+--- !u!1 &128832623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128832624}
+  - component: {fileID: 128832625}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &128832624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128832623}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1174297663}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &128832625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128832623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: ed4567d415d86fd4faf69f5584975022, type: 2}
 --- !u!1 &152514521
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +304,7 @@ GameObject:
   - component: {fileID: 152514525}
   - component: {fileID: 152514524}
   - component: {fileID: 152514523}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +425,7 @@ GameObject:
   - component: {fileID: 165837996}
   - component: {fileID: 165837995}
   - component: {fileID: 165837994}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +592,7 @@ GameObject:
   - component: {fileID: 255131203}
   - component: {fileID: 255131205}
   - component: {fileID: 255131204}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -677,7 +726,7 @@ GameObject:
   - component: {fileID: 275848118}
   - component: {fileID: 275848120}
   - component: {fileID: 275848119}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +861,7 @@ GameObject:
   - component: {fileID: 327793606}
   - component: {fileID: 327793605}
   - component: {fileID: 327793604}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +1026,7 @@ GameObject:
   - component: {fileID: 441938528}
   - component: {fileID: 441938527}
   - component: {fileID: 441938526}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,9 +1102,9 @@ Canvas:
   m_GameObject: {fileID: 441938524}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1836230873}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1064,7 +1113,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1019981677
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &499055835
@@ -1250,7 +1299,7 @@ GameObject:
   - component: {fileID: 561583704}
   - component: {fileID: 561583706}
   - component: {fileID: 561583705}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1441,7 +1490,7 @@ GameObject:
   - component: {fileID: 600846727}
   - component: {fileID: 600846729}
   - component: {fileID: 600846728}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1712,7 +1761,7 @@ GameObject:
   - component: {fileID: 762741055}
   - component: {fileID: 762741054}
   - component: {fileID: 762741053}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1832,7 +1881,7 @@ GameObject:
   - component: {fileID: 837968478}
   - component: {fileID: 837968480}
   - component: {fileID: 837968479}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2011,7 +2060,7 @@ GameObject:
   - component: {fileID: 950049053}
   - component: {fileID: 950049055}
   - component: {fileID: 950049054}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameTitleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2189,7 +2238,7 @@ GameObject:
   - component: {fileID: 996420080}
   - component: {fileID: 996420079}
   - component: {fileID: 996420078}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2584,6 +2633,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163118124}
   m_CullTransparentMesh: 1
+--- !u!1 &1174297662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1174297663}
+  m_Layer: 0
+  m_Name: --RENDERING--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1174297663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174297662}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 128832624}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1202037059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2709,7 +2790,7 @@ GameObject:
   - component: {fileID: 1214984517}
   - component: {fileID: 1214984519}
   - component: {fileID: 1214984518}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2785,7 +2866,7 @@ GameObject:
   - component: {fileID: 1401596771}
   - component: {fileID: 1401596770}
   - component: {fileID: 1401596769}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DeleteDataButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2938,7 +3019,7 @@ GameObject:
   - component: {fileID: 1495794766}
   - component: {fileID: 1495794768}
   - component: {fileID: 1495794767}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3386,7 +3467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760252815}
   - component: {fileID: 1760252817}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MainMenuUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3553,7 +3634,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3647,7 +3728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2058083403}
   - component: {fileID: 2058083404}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ButtonsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6391,8 +6472,8 @@ Canvas:
   m_GameObject: {fileID: 3639927967608736147}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1836230873}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6403,7 +6484,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1019981677
-  m_SortingOrder: 12
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!222 &3580722573908579690
 CanvasRenderer:
@@ -9397,6 +9478,7 @@ SceneRoots:
   - {fileID: 2047666799}
   - {fileID: 221651121}
   - {fileID: 1929468249}
+  - {fileID: 1174297663}
   - {fileID: 1000421520}
   - {fileID: 1487275278}
   - {fileID: 1610656860}
