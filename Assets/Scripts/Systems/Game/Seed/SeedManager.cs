@@ -10,6 +10,7 @@ public class SeedManager : MonoBehaviour
     [SerializeField] private string seed;
 
     public string Seed => seed;
+    public System.Random SeededRandom {  get; private set; }
 
     private void Awake()
     {
@@ -29,5 +30,11 @@ public class SeedManager : MonoBehaviour
         }
     }
 
-    public void SetSeed(string setterSeed) => seed = setterSeed;
+    public void SetSeed(string setterSeed)
+    { 
+        seed = setterSeed;
+
+        GeneralUtilities.ApplySeedToGlobalRandom(seed);
+        SeededRandom = GeneralUtilities.GetSeededRandom(seed);
+    }
 }

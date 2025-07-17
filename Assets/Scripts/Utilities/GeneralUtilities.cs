@@ -11,9 +11,10 @@ public static class GeneralUtilities
 
     #region Seed Consts
     private const string SEED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private const int SEED_SIZE = 9;
-    private const int SEED_SIZE_FOR_HYPHEN = 4;
-    private const string HYPHEN_CHARACTER = "-";
+    private const int SEED_SIZE = 8;
+
+    private const int HASH_BASE_NUMBER = 23;
+    private const int HASH_MULTIPLIER_NUMBER = 31;
     #endregion
 
 
@@ -35,14 +36,38 @@ public static class GeneralUtilities
         System.Text.StringBuilder seedStringBuilder = new System.Text.StringBuilder(SEED_SIZE);
         System.Random random = new System.Random();
 
-        for (int i = 0; i < SEED_SIZE-1; i++)
+        for (int i = 1; i < SEED_SIZE; i++)
         {
-            if (i == SEED_SIZE_FOR_HYPHEN) seedStringBuilder.Append(HYPHEN_CHARACTER);
             char randomCharacter = SEED_CHARACTERS[random.Next(SEED_CHARACTERS.Length)];
             seedStringBuilder.Append(randomCharacter);
         }
 
         return seedStringBuilder.ToString();
+    }
+
+    public static int HashSeed(string seed)
+    {
+        unchecked //Aritmethic overflow ignored
+        {
+            int hash = HASH_BASE_NUMBER;
+            foreach (char character in seed)
+                hash = hash * HASH_MULTIPLIER_NUMBER + character;
+            return hash;
+        }
+    }
+
+    //UnityEngine.Random Can Be Globally Seedable
+    public static void ApplySeedToGlobalRandom(string unhashedSeed)
+    {
+        int hashedSeed = HashSeed(unhashedSeed);
+        UnityEngine.Random.InitState(hashedSeed); 
+    }
+
+    //System.Random Must Create a Seeded Object
+    public static System.Random GetSeededRandom(string unhashedSeed)
+    {
+        int hashedSeed = HashSeed(unhashedSeed);
+        return new System.Random(hashedSeed);
     }
 
     #endregion
