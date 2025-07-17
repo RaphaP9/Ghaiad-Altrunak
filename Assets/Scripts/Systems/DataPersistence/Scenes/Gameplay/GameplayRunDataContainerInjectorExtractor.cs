@@ -10,8 +10,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
     [Space]
     [SerializeField] private PlayerCharacterManager playerCharacterManager;
     [Space]
-    [SerializeField] private GeneralStagesManager generalStagesManager;
-    [Space]
     [SerializeField] private GoldManager goldManager;   
     [Space]
     [SerializeField] private ObjectsInventoryManager objectsInventoryManager;

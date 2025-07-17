@@ -13,18 +13,12 @@ public class CameraConfinerHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        GeneralStagesManager.OnStageInitialized += GeneralStagesManager_OnStageInitialized;
-        GeneralStagesManager.OnStageChange += GeneralStagesManager_OnStageChange;
-
         CameraTransitionHandler.OnCameraTransitionPositionDeterminedPreFollow += CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow;
         CameraTransitionHandler.OnCameraTransitionPositionDeterminedEnd += CameraTransitionHandler_OnCameraTransitionPositionDeterminedEnd;
     }
 
     private void OnDisable()
     {
-        GeneralStagesManager.OnStageInitialized -= GeneralStagesManager_OnStageInitialized;
-        GeneralStagesManager.OnStageChange -= GeneralStagesManager_OnStageChange;
-
         CameraTransitionHandler.OnCameraTransitionPositionDeterminedPreFollow -= CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow;
         CameraTransitionHandler.OnCameraTransitionPositionDeterminedEnd -= CameraTransitionHandler_OnCameraTransitionPositionDeterminedEnd;
     }
@@ -44,16 +38,6 @@ public class CameraConfinerHandler : MonoBehaviour
     private void DisableConfiner()
     {
         cinemachineConfiner2D.enabled = false;
-    }
-
-    private void GeneralStagesManager_OnStageInitialized(object sender, GeneralStagesManager.OnStageChangeEventArgs e)
-    {
-        SwitchConfiner(e.stageGroup.stageHandler.StageConfiner);
-    }
-
-    private void GeneralStagesManager_OnStageChange(object sender, GeneralStagesManager.OnStageChangeEventArgs e)
-    {
-        SwitchConfiner(e.stageGroup.stageHandler.StageConfiner);
     }
 
     private void CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow(object sender, CameraTransitionHandler.OnCameraTransitionEventArgs e)

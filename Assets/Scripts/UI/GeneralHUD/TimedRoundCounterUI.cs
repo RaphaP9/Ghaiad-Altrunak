@@ -27,14 +27,12 @@ public class TimedRoundCounterUI : MonoBehaviour
 
     private void OnEnable()
     {
-        TimedRoundHandler.OnTimedRoundStart += TimedRoundHandler_OnTimedRoundStart;
-        TimedRoundHandler.OnTimedRoundCompleted += TimedRoundHandler_OnTimedRoundCompleted;
+
     }
 
     private void OnDisable()
     {
-        TimedRoundHandler.OnTimedRoundStart -= TimedRoundHandler_OnTimedRoundStart;
-        TimedRoundHandler.OnTimedRoundCompleted -= TimedRoundHandler_OnTimedRoundCompleted;
+
     }
 
     private void Start()
@@ -50,7 +48,7 @@ public class TimedRoundCounterUI : MonoBehaviour
     private void HandleCounter()
     {
         if (!enableCounterUpdate) return;
-        int currentCounter = Mathf.CeilToInt(TimedRoundHandler.Instance.CurrentRoundCountdown);
+        int currentCounter = Mathf.CeilToInt(0f);
 
         if (currentCounter == previousCounter) return;
         if (currentCounter <= 0) return; //Don't update counter to 0, keep countdown on 1 at minimum
@@ -83,16 +81,7 @@ public class TimedRoundCounterUI : MonoBehaviour
     private void ResetPreviousCounter() => previousCounter = 0;
     private void SetCounterText(int counter) => timedRoundCounterText.text = counter.ToString();
 
+    #region Subscriptions
 
-    private void TimedRoundHandler_OnTimedRoundStart(object sender, TimedRoundHandler.OnTimedRoundEventArgs e)
-    {
-        ShowUI();
-        enableCounterUpdate = true;
-    }
-
-    private void TimedRoundHandler_OnTimedRoundCompleted(object sender, TimedRoundHandler.OnTimedRoundEventArgs e)
-    {
-        HideUI();
-        enableCounterUpdate = false;
-    }
+    #endregion
 }

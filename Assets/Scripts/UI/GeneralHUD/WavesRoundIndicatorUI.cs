@@ -24,18 +24,12 @@ public class WavesRoundIndicatorUI : MonoBehaviour
 
     private void OnEnable()
     {
-        WavesRoundHandler.OnWavesRoundStart += WavesRoundHandler_OnWavesRoundStart;
-        WavesRoundHandler.OnWavesRoundCompleted += WavesRoundHandler_OnWavesRoundCompleted;
 
-        WavesRoundHandler.OnWavesRoundWaveStart += WavesRoundHandler_OnWavesRoundWaveStart;
     }
 
     private void OnDisable()
     {
-        WavesRoundHandler.OnWavesRoundStart -= WavesRoundHandler_OnWavesRoundStart;
-        WavesRoundHandler.OnWavesRoundCompleted -= WavesRoundHandler_OnWavesRoundCompleted;
 
-        WavesRoundHandler.OnWavesRoundWaveStart -= WavesRoundHandler_OnWavesRoundWaveStart;
     }
 
     private void ShowUI()
@@ -58,24 +52,7 @@ public class WavesRoundIndicatorUI : MonoBehaviour
 
     private void SetWavesRoundIndicatorText(int currentWave, int totalWaves) => wavesRoundIndicatorText.text = $"{currentWave}/{totalWaves}";
 
-    private void WavesRoundHandler_OnWavesRoundStart(object sender, WavesRoundHandler.OnWavesRoundEventArgs e)
-    {
-        ShowUI();
-    }
+    #region Subscriptions
 
-    private void WavesRoundHandler_OnWavesRoundCompleted(object sender, WavesRoundHandler.OnWavesRoundEventArgs e)
-    {
-        HideUI();
-    }
-
-    private void WavesRoundHandler_OnWavesRoundWaveStart(object sender, WavesRoundHandler.OnWavesRoundWaveEventArgs e)
-    {
-        SetWavesRoundIndicatorText(e.currentWave, e.totalWaves);
-
-        currentWave = e.currentWave;
-        totalWaves = e.totalWaves;
-
-        if (currentWave <= 1) return; //If first wave, do not tick
-        Tick();
-    }
+    #endregion
 }

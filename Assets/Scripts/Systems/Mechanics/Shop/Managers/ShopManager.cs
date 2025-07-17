@@ -85,7 +85,7 @@ public class ShopManager : MonoBehaviour
 
     private void GenerateNewShopItems()
     {
-        List<InventoryObjectSO> newGeneratedItems = ShopGenerator.Instance.GenerateShopObjectsList(GeneralStagesManager.Instance.CurrentStageNumber);
+        List<InventoryObjectSO> newGeneratedItems = ShopGenerator.Instance.GenerateShopObjectsList(1);
         OnShopItemsGenerated?.Invoke(this, new OnShopItemsEventArgs { inventoryObjectSOs = newGeneratedItems });
     }
 
