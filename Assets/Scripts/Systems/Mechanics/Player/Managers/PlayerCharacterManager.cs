@@ -34,12 +34,6 @@ public class PlayerCharacterManager : MonoBehaviour
         SetSingleton();
     }
 
-    //NOTE: PlayerCharacterManager has a ScriptExecutionTime before DefaultTime
-    private void Start() 
-    {
-        InstantiatePlayer();
-    }
-
     private void SetSingleton()
     {
         if (Instance == null)
@@ -52,7 +46,8 @@ public class PlayerCharacterManager : MonoBehaviour
         }
     }
 
-    private void InstantiatePlayer()
+    //Called By GameInitializer
+    public void InstantiatePlayer()
     {
         if(characterSO == null)
         {

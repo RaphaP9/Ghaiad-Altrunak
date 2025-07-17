@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameInitializer : MonoBehaviour
 {
+    //Note: GameInitializer has a ScriptExecutionOrder before default time
+
     public static GameInitializer Instance { get; private set; }
 
     private void Awake()
@@ -27,7 +29,7 @@ public class GameInitializer : MonoBehaviour
 
     private void InitializeGame()
     {
-
+        PlayerCharacterManager.Instance.InstantiatePlayer();
     }
 }
 
