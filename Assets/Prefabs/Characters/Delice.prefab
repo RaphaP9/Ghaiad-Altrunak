@@ -657,7 +657,6 @@ GameObject:
   - component: {fileID: 6586126778679378193}
   - component: {fileID: 4661234364419359008}
   - component: {fileID: 1641142359658672775}
-  - component: {fileID: 4256363878830921393}
   m_Layer: 6
   m_Name: Delice
   m_TagString: Untagged
@@ -792,7 +791,7 @@ MonoBehaviour:
   playerFacingDirectionHandler: {fileID: 4295945866100084352}
   playerWeaponAimHandler: {fileID: 2672523740232767417}
   playerAimDirectionerHandler: {fileID: 8259161917859060450}
-  startingState: 0
+  startingState: 1
   playerState: 0
 --- !u!114 &6586126778679378193
 MonoBehaviour:
@@ -882,21 +881,6 @@ MonoBehaviour:
   secondaryProjectilePrefab: {fileID: 8073931636513284674, guid: 44597aeee90fbd2408fadca2a122bf3f, type: 3}
   secondaryFirePoint1: {fileID: 1043426529153767030}
   secondaryFirePoint2: {fileID: 7933627810132366688}
---- !u!114 &4256363878830921393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851777789475013426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad913cd71fefc114ca99a2f53d8063bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterIdentifier: {fileID: 1965199428449930878}
-  healthRegenStatResolver: {fileID: 3654785395795810660}
-  playerHealth: {fileID: 6586126778679378193}
 --- !u!1 &1977812988520784575
 GameObject:
   m_ObjectHideFlags: 0

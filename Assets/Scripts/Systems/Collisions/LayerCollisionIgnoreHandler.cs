@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionIgnoreHandler : MonoBehaviour
+public class LayerCollisionIgnoreHandler : MonoBehaviour
 {
     [Header("Lists")]
-    [SerializeField] private List<CollisionIgnoreGroup> collisionIgnoreGroups;
+    [SerializeField] private List<LayerCollisionIgnoreGroup> layerCollisionIgnoreGroups;
 
     [System.Serializable]
-    public class CollisionIgnoreGroup
+    public class LayerCollisionIgnoreGroup
     {
         public int colliderLayerIndex;
         public int collideeLayerIndex;
@@ -24,7 +24,7 @@ public class CollisionIgnoreHandler : MonoBehaviour
 
     private void IgnoreCollisions()
     {
-        foreach(CollisionIgnoreGroup collisionIgnoreGroup in collisionIgnoreGroups)
+        foreach(LayerCollisionIgnoreGroup collisionIgnoreGroup in layerCollisionIgnoreGroups)
         {
             if (!collisionIgnoreGroup.enabled) continue;
             Physics2D.IgnoreLayerCollision(collisionIgnoreGroup.colliderLayerIndex, collisionIgnoreGroup.collideeLayerIndex);

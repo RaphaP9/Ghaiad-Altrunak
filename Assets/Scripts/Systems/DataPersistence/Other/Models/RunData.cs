@@ -5,14 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class RunData : DataModel
 {
-    public bool tutorializedRun;
-    [Space]
-    public int currentStageNumber;
-    public int currentRoundNumber;
+    public int currentCharacterID;
     [Space]
     public int currentGold;
-    [Space]
-    public int currentCharacterID;
     [Space]
     public int currentHealth;
     [Space]
@@ -27,11 +22,6 @@ public class RunData : DataModel
 
     public RunData()
     {
-        tutorializedRun = false;
-
-        currentStageNumber = 1;
-        currentRoundNumber = 1;
-
         currentGold = 0;
 
         currentCharacterID = 1;
@@ -58,11 +48,6 @@ public class RunData : DataModel
 
         //JSON Perpetual Data Loads Before Run Data (Loaded From JSON into Data Containers)
         //PerpetualData is Ready before RunData, it is safe to call the following line
-        tutorializedRun = !PerpetualDataContainer.Instance.PerpetualData.hasCompletedTutorial;
-
-        currentStageNumber = GeneralGameSettings.Instance.GetStartingStage();
-        currentRoundNumber = GeneralGameSettings.Instance.GetStartingRound();
-
         currentGold = GeneralGameSettings.Instance.GetStartingGoldQuantity();
 
         currentCharacterID = GeneralGameSettings.Instance.GetDefaultCharacterID();

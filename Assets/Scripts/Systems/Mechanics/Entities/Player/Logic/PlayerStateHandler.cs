@@ -23,18 +23,6 @@ public class PlayerStateHandler : MonoBehaviour
     public PlayerState State => playerState;
     public enum PlayerState {ZeroActions, Combat, NoCombat, Rest, Dead}
 
-    private void OnEnable()
-    {
-        GameManager.OnStateInitialized += GameManager_OnStateInitialized;
-        GameManager.OnStateChanged += GameManager_OnStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnStateInitialized -= GameManager_OnStateInitialized;
-        GameManager.OnStateChanged -= GameManager_OnStateChanged;
-    }
-
     private void Awake()
     {
         //NOTE: If this method is on Start(), must coincide with the first state Initialized By Game Manager (Zero Actions). Line can also be removed
@@ -193,43 +181,5 @@ public class PlayerStateHandler : MonoBehaviour
     }
     #endregion
 
-    private void ChangePlayerStateByGameState(GameManager.State gameState)
-    {
-        switch (gameState)
-        {
-            case GameManager.State.StartingGame:
-            case GameManager.State.BeginningChangingStage:
-            case GameManager.State.EndingChangingStage:
-            case GameManager.State.Lose:
-                SetPlayerState(PlayerState.ZeroActions);
-                break;
-            case GameManager.State.BeginningCombat:
-            case GameManager.State.Combat:
-            case GameManager.State.Tutorial:
-                SetPlayerState(PlayerState.Combat);
-                break;
-            case GameManager.State.EndingCombat:
-            case GameManager.State.Shop:
-            case GameManager.State.Upgrade:
-            case GameManager.State.Win:
-            case GameManager.State.Cinematic:
-            case GameManager.State.Dialogue:
-                SetPlayerState(PlayerState.Rest);
-                break;
-        }
-    }
-
     private void SetPlayerState(PlayerState state) => playerState = state;
-
-    #region Subscriptions
-    private void GameManager_OnStateInitialized(object sender, GameManager.OnStateInitializedEventArgs e)
-    {
-        ChangePlayerStateByGameState(e.state);
-    }
-
-    private void GameManager_OnStateChanged(object sender, GameManager.OnStateChangeEventArgs e)
-    {
-        ChangePlayerStateByGameState(e.newState);
-    }
-    #endregion
 }

@@ -18,19 +18,6 @@ public class GoldMovement : ThrowMovement
     public static event EventHandler OnAnyPlayerDetected;
     public event EventHandler OnPlayerDetected;
 
-    public static event EventHandler OnAnyCollectionByRoundEnd;
-    public event EventHandler OnCollectionByRoundEnd;
-
-    private void OnEnable()
-    {
-        GameManager.OnStateChanged += GameManager_OnStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnStateChanged -= GameManager_OnStateChanged;
-    }
-
     private void Update()
     {
         HandlePlayerDetection();
@@ -71,14 +58,5 @@ public class GoldMovement : ThrowMovement
         if (PlayerTransformRegister.Instance.PlayerTransform == null) return;
 
         transform.position = Vector3.Lerp(transform.position, PlayerTransformRegister.Instance.PlayerTransform.position, moveTowardsPlayerRoundEndSmoothFactor * Time.deltaTime);
-    }
-
-    private void GameManager_OnStateChanged(object sender, GameManager.OnStateChangeEventArgs e)
-    {
-        if (e.newState != GameManager.State.EndingCombat) return;
-
-        collectionByRoundEnd = true;
-        OnAnyCollectionByRoundEnd?.Invoke(this, EventArgs.Empty);
-        OnCollectionByRoundEnd?.Invoke(this, EventArgs.Empty);
     }
 }

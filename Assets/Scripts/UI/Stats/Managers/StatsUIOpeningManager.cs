@@ -99,11 +99,7 @@ public class StatsUIOpeningManager : MonoBehaviour
 
     private bool CanListenToInput()
     {
-        if (GameManager.Instance.GameState == GameManager.State.BeginningCombat) return true;
-        if (GameManager.Instance.GameState == GameManager.State.EndingCombat) return true;
-        if (GameManager.Instance.GameState == GameManager.State.Combat) return true;
-
-        return false;
+        return true;
     }
 
     private void OpenStatsInmediately()

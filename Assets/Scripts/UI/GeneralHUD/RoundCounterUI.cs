@@ -21,21 +21,6 @@ public class RoundCounterUI : MonoBehaviour
     private const string SHOWING_ANIMATION_NAME = "Showing";
     private const string HIDDEN_ANIMATION_NAME = "Hidden";
 
-    private void OnEnable()
-    {
-        GeneralStagesManager.OnStageAndRoundInitialized += GeneralStagesManager_OnStageAndRoundInitialized;
-        GeneralStagesManager.OnStageAndRoundLoad += GeneralStagesManager_OnStageAndRoundLoad;
-
-        GameManager.OnStateChanged += GameManager_OnStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        GeneralStagesManager.OnStageAndRoundInitialized -= GeneralStagesManager_OnStageAndRoundInitialized;
-        GeneralStagesManager.OnStageAndRoundLoad -= GeneralStagesManager_OnStageAndRoundLoad;
-
-        GameManager.OnStateChanged -= GameManager_OnStateChanged;
-    }
 
     #region Show&Hide
     private void ShowUI()
@@ -82,34 +67,6 @@ public class RoundCounterUI : MonoBehaviour
     {
         bufferedStageNumber = e.newStageNumber;
         bufferedRoundNumber = e.newRoundNumber;
-    }
-
-    private void GameManager_OnStateChanged(object sender, GameManager.OnStateChangeEventArgs e)
-    {
-        if(e.newState == GameManager.State.BeginningCombat)
-        {
-            UpdateUIToBufferedValues();
-            ShowUI();
-            return;
-        }
-        
-        if (e.newState == GameManager.State.Shop)
-        {
-            HideUI();
-            return;
-        }
-
-        if (e.newState == GameManager.State.Upgrade)
-        {
-            HideUI();
-            return;
-        }
-
-        if (e.newState == GameManager.State.BeginningChangingStage)
-        {
-            HideUI();
-            return;
-        }
     }
     #endregion
 }

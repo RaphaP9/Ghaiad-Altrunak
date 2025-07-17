@@ -45,10 +45,6 @@ public class RunDataContainer : MonoBehaviour
     #endregion
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void SetTutorializedRunBoolean(bool tutorializedRun) => runData.tutorializedRun = tutorializedRun;
-
-    public void SetCurrentStageNumber(int stageNumber) => runData.currentStageNumber = stageNumber;
-    public void SetCurrentRoundNumber(int roundNumber) => runData.currentRoundNumber = roundNumber;
 
     public void SetCurrentGold(int gold) => runData.currentGold = gold;
 

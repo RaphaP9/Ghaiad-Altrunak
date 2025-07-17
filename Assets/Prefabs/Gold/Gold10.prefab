@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 4218531509883813995}
   - component: {fileID: 6469591813978157181}
   - component: {fileID: 6555358700867857069}
-  - component: {fileID: 1518551645567045109}
   m_Layer: 14
   m_Name: Gold10
   m_TagString: Untagged
@@ -257,23 +256,6 @@ MonoBehaviour:
   basePlayerDetectionRange: 1.5
   moveTowardsPlayerSmoothFactor: 7
   moveTowardsPlayerRoundEndSmoothFactor: 3
---- !u!114 &1518551645567045109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2688988209474201317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e509bc81b8d1980429d7302a87b67bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goldMovement: {fileID: 6555358700867857069}
-  minTimeToStartDespawning: 10
-  maxToStartDespawning: 12
-  minTimeToDespawn: 6
-  maxTimeToDespawn: 6.5
 --- !u!1 &2974979151331855644
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8302249530932692015}
-  goldDespawnHandler: {fileID: 1518551645567045109}
+  goldDespawnHandler: {fileID: 0}
 --- !u!1 &4426129420679657414
 GameObject:
   m_ObjectHideFlags: 0

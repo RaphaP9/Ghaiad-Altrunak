@@ -26,18 +26,12 @@ public class CharacterBodyAnimationController : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        GameManager.OnStateInitialized += GameManager_OnStateInitialized;
-        GameManager.OnStateChanged += GameManager_OnStateChanged;
-
         playerHealth.OnPlayerHealthTakeDamage += PlayerHealth_OnPlayerHealthTakeDamage;
         playerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
     }
 
     protected virtual void OnDisable()
     {
-        GameManager.OnStateInitialized -= GameManager_OnStateInitialized;
-        GameManager.OnStateChanged -= GameManager_OnStateChanged;
-
         playerHealth.OnPlayerHealthTakeDamage -= PlayerHealth_OnPlayerHealthTakeDamage;
         playerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
     }
@@ -67,28 +61,6 @@ public class CharacterBodyAnimationController : MonoBehaviour
     }
 
     #region Subscriptions
-    private void GameManager_OnStateInitialized(object sender, GameManager.OnStateInitializedEventArgs e)
-    {
-        if (e.state == GameManager.State.StartingGame)
-        {
-            PlayAnimation(SPAWN_ANIMATION_NAME);
-        }
-    }
-
-    private void GameManager_OnStateChanged(object sender, GameManager.OnStateChangeEventArgs e)
-    {
-        if(e.newState == GameManager.State.StartingGame)
-        {
-            PlayAnimation(SPAWN_ANIMATION_NAME);
-            return;
-        }
-
-        if (e.previousState == GameManager.State.StartingGame)
-        {
-            PlayAnimation(MOVEMENT_BLEND_TREE_NAME);
-            return;
-        }
-    }
 
     private void PlayerHealth_OnPlayerHealthTakeDamage(object sender, EntityHealth.OnEntityHealthTakeDamageEventArgs e)
     {

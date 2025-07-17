@@ -26,27 +26,18 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
     private void OnEnable()
     {
         PlayerInstantiationHandler.OnPlayerInstantiation += PlayerInstantiationHandler_OnPlayerInstantiation;
-
-        GameManager.OnDataUpdateOnRoundCompleted += GameManager_OnDataUpdateOnRoundCompleted;
     }
 
     private void OnDisable()
     {
         PlayerInstantiationHandler.OnPlayerInstantiation -= PlayerInstantiationHandler_OnPlayerInstantiation;
-
-        GameManager.OnDataUpdateOnRoundCompleted -= GameManager_OnDataUpdateOnRoundCompleted;
     }
 
     #region Abstract Methods
 
     public override void InjectAllDataFromDataContainers()
     {
-        InjectTutorializedRunBoolean();
-
         InjectCurrentCharacter();
-
-        InjectCurrentStageNumber();
-        InjectCurrentRoundNumber();
 
         InjectCurrentGold();
 
@@ -63,12 +54,7 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
 
     public override void ExtractAllDataToDataContainers()
     {
-        ExtractTutorializedRunBoolean();
-
         ExtractPlayerCurrentCharacter();
-
-        ExtractCurrentStageNumber();
-        ExtractCurrentRoundNumber();
 
         ExtractCurrentGold();
 
@@ -87,12 +73,7 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
 
     private void ExtractAllCurrentRoundDataToDataContainers()
     {
-        ExtractTutorializedRunBoolean();
-
         ExtractPlayerCurrentCharacter();
-
-        ExtractCurrentStageNumber();
-        ExtractCurrentRoundNumber();
 
         ExtractCurrentGold();
 
@@ -107,36 +88,18 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
         ExtractCharacterSlotsAbilityVariants();
     }
 
-    #region Injection Methods
-    private void InjectTutorializedRunBoolean()
+    #region Injection 
+    private void InjectCurrentCharacter()
     {
-        if (gameManager == null) return;
-        gameManager.SetTutorializedRun(RunDataContainer.Instance.RunData.tutorializedRun);
+        if (playerCharacterManager == null) return;
+        playerCharacterManager.SetCharacterSO(DataUtilities.TranslateCharacterIDToCharacterSO(RunDataContainer.Instance.RunData.currentCharacterID));
     }
-
-    private void InjectCurrentStageNumber()
-    {
-        if (generalStagesManager == null) return;
-        generalStagesManager.SetStartingStageNumber(RunDataContainer.Instance.RunData.currentStageNumber);
-    }
-
-    private void InjectCurrentRoundNumber()
-    {
-        if (generalStagesManager == null) return;
-        generalStagesManager.SetStartingRoundNumber(RunDataContainer.Instance.RunData.currentRoundNumber);
-    }
-
     private void InjectCurrentGold()
     {
         if (goldManager == null) return;
         goldManager.SetCurrentGold(RunDataContainer.Instance.RunData.currentGold);
     }
 
-    private void InjectCurrentCharacter()
-    {
-        if (playerCharacterManager == null) return;
-        playerCharacterManager.SetCharacterSO(DataUtilities.TranslateCharacterIDToCharacterSO(RunDataContainer.Instance.RunData.currentCharacterID));
-    }
 
     private void InjectObjects()
     {
@@ -191,23 +154,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
     #endregion
 
     #region Extraction Methods
-    private void ExtractTutorializedRunBoolean()
-    {
-        if (gameManager == null) return;
-        RunDataContainer.Instance.SetTutorializedRunBoolean(gameManager.TutorializedRun);
-    }
-    private void ExtractCurrentStageNumber()
-    {
-        if (generalStagesManager == null) return;
-        RunDataContainer.Instance.SetCurrentStageNumber(generalStagesManager.CurrentStageNumber);
-    }
-
-    private void ExtractCurrentRoundNumber()
-    {
-        if (generalStagesManager == null) return;
-        RunDataContainer.Instance.SetCurrentRoundNumber(generalStagesManager.CurrentRoundNumber);
-    }
-
     private void ExtractCurrentGold()
     {
         if(goldManager == null) return;
@@ -282,15 +228,6 @@ public class GameplayRunDataContainerInjectorExtractor : DataContainerInjectorEx
 
         InjectCharacterAbilityLevels();
         InjectCharacterSlotsAbilityVariants();
-    }
-    #endregion
-
-    #region Data Update Subscriptions
-    private void GameManager_OnDataUpdateOnRoundCompleted(object sender, GameManager.OnRoundCompletedEventArgs e)
-    {
-        ExtractAllCurrentRoundDataToDataContainers();
-
-        GeneralDataManager.Instance.SaveRunJSONDataAsyncWrapper();
     }
     #endregion
 }

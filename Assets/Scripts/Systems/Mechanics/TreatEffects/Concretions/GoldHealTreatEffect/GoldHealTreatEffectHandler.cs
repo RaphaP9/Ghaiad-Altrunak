@@ -59,7 +59,6 @@ public class GoldHealTreatEffectHandler : TreatEffectHandler
     {
         if (!isCurrentlyActiveByInventoryObjects) return;
         if (!isMeetingCondition) return;
-        if (GameManager.Instance.GameState != GameManager.State.Combat) return; //Must be in combat
 
         HandleHeal();
     }

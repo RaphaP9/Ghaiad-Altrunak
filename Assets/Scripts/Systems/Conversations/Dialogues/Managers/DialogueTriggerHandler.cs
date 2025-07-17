@@ -38,7 +38,6 @@ public class DialogueTriggerHandler : MonoBehaviour
         {
             if (!dialogueGroup.enabled) continue;
             if (dialogueGroup.hasBeenPlayed && !dialogueGroup.playEvenIfAlreadyPlayed) continue;
-            if (dialogueGroup.onlyTutorializedRun && !GameManager.Instance.TutorializedRun) continue;
 
             if (dialogueGroup.characterSO != characterSO) continue;
             if (dialogueGroup.stageNumber != stageNumber) continue;

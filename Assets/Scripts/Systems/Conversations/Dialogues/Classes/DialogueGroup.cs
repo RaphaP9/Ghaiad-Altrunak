@@ -11,7 +11,6 @@ public class DialogueGroup
     public DialogueSO dialogueSO;
     [Space]
     public bool enabled;
-    public bool onlyTutorializedRun;
     public bool playEvenIfAlreadyPlayed;
 
     [Header("Runtime Filled")]
