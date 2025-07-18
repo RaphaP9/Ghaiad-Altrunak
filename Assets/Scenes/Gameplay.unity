@@ -16645,8 +16645,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomsHolder: {fileID: 946910393}
   generalRoomsSettings: {fileID: 11400000, guid: 68ab6b8bcb9ccb04bb1a9f3119c5179a, type: 2}
-  randomWalkVisualizationPrefab: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
-  randomWalkVisualizationStartPrefab: {fileID: 6266022080058502463, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
+  testRoomAny: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
+  testRoomStart: {fileID: 6266022080058502463, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
+  testRoomBoss: {fileID: 6266022080058502463, guid: 0886ef9900f90184fa0a7a6c62fb4095, type: 3}
 --- !u!1 &765715324
 GameObject:
   m_ObjectHideFlags: 0

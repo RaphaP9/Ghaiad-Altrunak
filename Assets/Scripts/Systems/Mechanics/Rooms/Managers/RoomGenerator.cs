@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -12,8 +13,9 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
     [Header("Testing")]
-    [SerializeField] private Transform randomWalkVisualizationPrefab;
-    [SerializeField] private Transform randomWalkVisualizationStartPrefab;
+    [SerializeField] private Transform testRoomAny;
+    [SerializeField] private Transform testRoomStart;
+    [SerializeField] private Transform testRoomBoss;
 
     private Dictionary<Vector2Int, RoomHandler> roomMap = new();
 
@@ -43,30 +45,50 @@ public class RoomGenerator : MonoBehaviour
         Vector2Int roomsGridSize = levelRoomSettings.roomsGridSize;
         float startRoomCenterBias = levelRoomSettings.roomGenerationStrategy.GetStartRoomCenteringBias(random);
 
-        HashSet<Vector2Int> randomWalk = RoomsUtilities.GenerateRandomWalk(RoomsUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, random);
-        Vector2Int startCell = RoomsUtilities.GetBiasedCenteredCell(randomWalk, startRoomCenterBias);
+        HashSet<Vector2Int> randomWalkCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, random);
 
-        VisualizeGeneratedRandomWalk(randomWalk, startCell);
+        #region StartCell
+        Vector2Int startCell = RoomUtilities.GetBiasedCenteredCell(randomWalkCells, startRoomCenterBias);
+        #endregion
+
+        #region DeadEnds
+        HashSet<Vector2Int> deadEnds = RoomUtilities.GetDeadEndCells(randomWalkCells);
+
+        //If no real Dead Ends, consider Two Neighbour Cells as Dead Ends
+        if(deadEnds.Count <= 0) deadEnds.AddRange(RoomUtilities.GetTwoNeigboursCells(randomWalkCells));
+
+        deadEnds.Remove(startCell); //Remove Start Cell if included in dead ends
+        #endregion
+
+        #region BossCell
+        Vector2Int bossCell = RoomUtilities.GetFurthestCell(startCell, deadEnds);
+        #endregion
+
+        VisualizeGeneratedRandomWalk(randomWalkCells, startCell, bossCell);
     }
 
-    private void VisualizeGeneratedRandomWalk(HashSet<Vector2Int> randomWalk, Vector2Int startCell)
+    private void VisualizeGeneratedRandomWalk(HashSet<Vector2Int> randomWalk, Vector2Int startCell, Vector2Int bossCell)
     {
-        float XrealRoomSpacing = RoomsUtilities.GetRoomRealSize().x + RoomsUtilities.GetRoomRealSpacing().x;
-        float YrealRoomSpacing = RoomsUtilities.GetRoomRealSize().y + RoomsUtilities.GetRoomRealSpacing().y;
+        float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x + RoomUtilities.GetRoomRealSpacing().x;
+        float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y + RoomUtilities.GetRoomRealSpacing().y;
 
         #region StartCell
         Vector3 startCellWorldPos = new Vector3(startCell.x * XrealRoomSpacing, startCell.y * YrealRoomSpacing, 0f);
-        Instantiate(randomWalkVisualizationStartPrefab, startCellWorldPos, Quaternion.identity, roomsHolder);
+        Instantiate(testRoomStart, startCellWorldPos, Quaternion.identity, roomsHolder);
+        #endregion
+
+        #region BossCell
+        Vector3 bossCellWorldPos = new Vector3(bossCell.x * XrealRoomSpacing, bossCell.y * YrealRoomSpacing, 0f);
+        Instantiate(testRoomBoss, bossCellWorldPos, Quaternion.identity, roomsHolder);
         #endregion
 
         foreach (Vector2Int cell in randomWalk)
         {
             if(cell == startCell) continue; 
+            if(cell == bossCell) continue;
 
             Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(randomWalkVisualizationPrefab, worldPos, Quaternion.identity, roomsHolder);
+            Instantiate(testRoomAny, worldPos, Quaternion.identity, roomsHolder);
         }
-
-
     }
 }
