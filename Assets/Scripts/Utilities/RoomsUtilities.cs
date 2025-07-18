@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class RoomsUtilities
@@ -84,6 +85,32 @@ public static class RoomsUtilities
         }
 
         return Vector2Int.zero; 
+    }
+    #endregion
+
+    #region RoomGeneration
+    public static Vector2Int GetBiasedCenteredCell(HashSet<Vector2Int> cells, float bias)
+    {
+        bias = Mathf.Clamp01(bias);
+
+        #region GetAverage
+        Vector2 average = Vector2.zero;
+        foreach (var cell in cells)
+        {
+            average += (Vector2)cell;
+
+        }
+
+        average /= cells.Count;
+        #endregion
+
+        // Step 2: Compute distances from center
+        var sortedCells = cells.Select(cell => new {Cell = cell, DistanceToAverageCenter = ((Vector2)cell - average).sqrMagnitude}).OrderBy(item => item.DistanceToAverageCenter).ToList();
+
+        // Step 3: Interpolate index based on bias (0 = center, 1 = edge)
+        int index = Mathf.FloorToInt(bias * (sortedCells.Count - 1));
+
+        return sortedCells[index].Cell;
     }
     #endregion
 

@@ -15,7 +15,7 @@ public class GameInitializer : MonoBehaviour
 
     private void Start()
     {
-        InitializeGame();
+        InitializeGame(SeedManager.Instance.SeededRandom);
     }
 
     private void SetSingleton()
@@ -31,9 +31,9 @@ public class GameInitializer : MonoBehaviour
         }
     }
 
-    private void InitializeGame()
+    private void InitializeGame(System.Random random)
     {
-        RoomGenerator.Instance.GenerateRooms();
+        RoomGenerator.Instance.GenerateRooms(random);
         PlayerCharacterManager.Instance.InstantiatePlayer();
     }
 }

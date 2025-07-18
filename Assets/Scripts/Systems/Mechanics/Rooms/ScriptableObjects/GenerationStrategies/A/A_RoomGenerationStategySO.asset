@@ -19,5 +19,7 @@ MonoBehaviour:
   narrativeRooms: 3
   startRoomBranching: 2
   nonStartRoomBranching: 2
+  startRoomCenteringMinBias: 0
+  startRoomCenteringMaxBias: 0.25
   minRoomDistanceBetweenNonEmptyRooms: 1
   maxRoomDistanceBetweenNonEmptyRooms: 1
