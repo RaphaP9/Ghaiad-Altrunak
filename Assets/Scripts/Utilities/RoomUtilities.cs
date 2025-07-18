@@ -30,7 +30,7 @@ public static class RoomUtilities
     public static Vector2 GetRoomRealSize() => new Vector2(X_ROOM_REAL_SIZE, Y_ROOM_REAL_SIZE);
     public static Vector2 GetRoomRealSpacing() => new Vector2(X_ROOM_REAL_SPACING, Y_ROOM_REAL_SPACING);
 
-    #region Other
+    #region Random
     public static Vector2Int GetRandomCellFromPool(HashSet<Vector2Int> cellPool, System.Random random)
     {
         int index = random.Next(cellPool.Count);
@@ -233,6 +233,20 @@ public static class RoomUtilities
         }
 
         return cellsWithNeighbors;
+    }
+    #endregion
+
+    #region Validation
+    public static bool IsEveryCellUnique(List<Vector2Int> cellsList)
+    {
+        HashSet<Vector2Int> uniqueCells = new();
+
+        foreach (Vector2Int cell in cellsList)
+        {
+            if (!uniqueCells.Add(cell)) return false; //If can not add to HashSet (Because is already contained there), return false     
+        }
+
+        return true;
     }
     #endregion
 
