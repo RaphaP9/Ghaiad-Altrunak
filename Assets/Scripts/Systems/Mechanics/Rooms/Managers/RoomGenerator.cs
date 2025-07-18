@@ -15,7 +15,8 @@ public class RoomGenerator : MonoBehaviour
     [Header("Testing")]
     [SerializeField] private Transform testRoomAny;
     [SerializeField] private Transform testRoomStart;
-    [SerializeField] private Transform testRoomBoss;
+    [SerializeField] private Transform testRoomEnd;
+    [SerializeField] private Transform testRoomShop;
 
     private Dictionary<Vector2Int, RoomHandler> roomMap = new();
 
@@ -45,29 +46,40 @@ public class RoomGenerator : MonoBehaviour
         Vector2Int roomsGridSize = levelRoomSettings.roomsGridSize;
         float startRoomCenterBias = levelRoomSettings.roomGenerationStrategy.GetStartRoomCenteringBias(random);
 
-        HashSet<Vector2Int> randomWalkCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, random);
+        int shopRooms = levelRoomSettings.roomGenerationStrategy.shopRooms;
+
+        HashSet<Vector2Int> totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, random);
+        HashSet<Vector2Int> nonAsignedCells = new HashSet<Vector2Int>(totalCells); //Can not assign because HashSet is Refference Type!
 
         #region StartCell
-        Vector2Int startCell = RoomUtilities.GetBiasedCenteredCell(randomWalkCells, startRoomCenterBias);
+        Vector2Int startCell = RoomUtilities.GetBiasedCenteredCell(totalCells, startRoomCenterBias);
+        nonAsignedCells.Remove(startCell);
         #endregion
 
-        #region DeadEnds
-        HashSet<Vector2Int> deadEnds = RoomUtilities.GetDeadEndCells(randomWalkCells);
-
-        //If no real Dead Ends, consider Two Neighbour Cells as Dead Ends
-        if(deadEnds.Count <= 0) deadEnds.AddRange(RoomUtilities.GetTwoNeigboursCells(randomWalkCells));
-
-        deadEnds.Remove(startCell); //Remove Start Cell if included in dead ends
+        #region EndCell
+        HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells);
+        Vector2Int endCell = RoomUtilities.GetFurthestCell(startCell, deadEndsForEndCell);
+        nonAsignedCells.Remove(endCell);
         #endregion
 
-        #region BossCell
-        Vector2Int bossCell = RoomUtilities.GetFurthestCell(startCell, deadEnds);
+        #region ShopCells
+        HashSet<Vector2Int> shopCells = new();
+
+        for (int i = 0; i < shopRooms; i++)
+        {
+            HashSet<Vector2Int> deadEndsForShopCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells);
+
+            Vector2Int shopCell = RoomUtilities.GetFurthestCell(endCell, deadEndsForShopCell);
+
+            shopCells.Add(shopCell);
+            nonAsignedCells.Remove(shopCell);
+        }
         #endregion
 
-        VisualizeGeneratedRandomWalk(randomWalkCells, startCell, bossCell);
+        VisualizeGeneratedRooms(nonAsignedCells, startCell, endCell, shopCells);
     }
 
-    private void VisualizeGeneratedRandomWalk(HashSet<Vector2Int> randomWalk, Vector2Int startCell, Vector2Int bossCell)
+    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells)
     {
         float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x + RoomUtilities.GetRoomRealSpacing().x;
         float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y + RoomUtilities.GetRoomRealSpacing().y;
@@ -77,18 +89,25 @@ public class RoomGenerator : MonoBehaviour
         Instantiate(testRoomStart, startCellWorldPos, Quaternion.identity, roomsHolder);
         #endregion
 
-        #region BossCell
-        Vector3 bossCellWorldPos = new Vector3(bossCell.x * XrealRoomSpacing, bossCell.y * YrealRoomSpacing, 0f);
-        Instantiate(testRoomBoss, bossCellWorldPos, Quaternion.identity, roomsHolder);
+        #region EndCell
+        Vector3 endCellWorldPos = new Vector3(endCell.x * XrealRoomSpacing, endCell.y * YrealRoomSpacing, 0f);
+        Instantiate(testRoomEnd, endCellWorldPos, Quaternion.identity, roomsHolder);
         #endregion
 
-        foreach (Vector2Int cell in randomWalk)
+        #region ShopCells
+        foreach (Vector2Int cell in shopCells)
         {
-            if(cell == startCell) continue; 
-            if(cell == bossCell) continue;
+            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
+            Instantiate(testRoomShop, worldPos, Quaternion.identity, roomsHolder);
+        }
+        #endregion
 
+        #region NonAssignedCells
+        foreach (Vector2Int cell in nonAssignedCells)
+        {
             Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
             Instantiate(testRoomAny, worldPos, Quaternion.identity, roomsHolder);
         }
+        #endregion
     }
 }

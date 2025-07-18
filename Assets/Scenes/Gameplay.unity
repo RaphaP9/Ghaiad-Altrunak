@@ -16647,7 +16647,8 @@ MonoBehaviour:
   generalRoomsSettings: {fileID: 11400000, guid: 68ab6b8bcb9ccb04bb1a9f3119c5179a, type: 2}
   testRoomAny: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
   testRoomStart: {fileID: 6266022080058502463, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
-  testRoomBoss: {fileID: 6266022080058502463, guid: 0886ef9900f90184fa0a7a6c62fb4095, type: 3}
+  testRoomEnd: {fileID: 6266022080058502463, guid: 0886ef9900f90184fa0a7a6c62fb4095, type: 3}
+  testRoomShop: {fileID: 6266022080058502463, guid: bd3e2fcc27709394fb2be79e322ee3a9, type: 3}
 --- !u!1 &765715324
 GameObject:
   m_ObjectHideFlags: 0
@@ -20015,7 +20016,7 @@ Transform:
   m_GameObject: {fileID: 946910392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9390212, y: -0.30411905, z: -9.975066}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

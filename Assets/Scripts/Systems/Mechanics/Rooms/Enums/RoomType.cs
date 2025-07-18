@@ -13,5 +13,5 @@ public enum RoomType
     Narrative,
     Shop,
     Reward,
-    Boss
+    End
 }

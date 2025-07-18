@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class RoomGenerationStrategySO : ScriptableObject
 {
     [Header("Settings")]
-    [Range(1, 3)] public int bossRooms = 1;
     [Range(1, 3)] public int shopRooms = 1;
     [Range(1, 3)] public int treasureRooms = 2;
     [Range(1, 7)] public int eventRooms = 5;

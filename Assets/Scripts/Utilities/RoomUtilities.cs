@@ -138,28 +138,47 @@ public static class RoomUtilities
         return furthestCell;
     }
 
-    //Get Cells With Exactly 1 Neighbour (Dead End)
-    public static HashSet<Vector2Int> GetDeadEndCells(HashSet<Vector2Int> visitedCells) => GetVisitedCellsWithNNeightbors(visitedCells, 1);
-    public static HashSet<Vector2Int> GetTwoNeigboursCells(HashSet<Vector2Int> visitedCells) => GetVisitedCellsWithNNeightbors(visitedCells, 2);
+    //Get Cells With Exactly 1,2,3,4 neighbor cells (In Priority Order)
+    public static HashSet<Vector2Int> GetProcessedDeadEndCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool)
+    {
+        HashSet<Vector2Int> oneNeighborCells = GetOneNeighborCells(cellsPool, checkPool);
+
+        if(oneNeighborCells.Count >= 1) return oneNeighborCells;
+
+        HashSet<Vector2Int> twoNeighborCells = GetTwoNeighborsCells(cellsPool, checkPool);
+
+        if (twoNeighborCells.Count >= 1) return twoNeighborCells;
+
+        HashSet<Vector2Int> threeNeighborCells = GetThreeNeighborsCells(cellsPool, checkPool);
+
+        if (threeNeighborCells.Count >= 1) return threeNeighborCells;
+
+        return GetFourNeighborsCells(cellsPool, checkPool);
+    }
+
+    public static HashSet<Vector2Int> GetOneNeighborCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 1);
+    public static HashSet<Vector2Int> GetTwoNeighborsCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 2);
+    public static HashSet<Vector2Int> GetThreeNeighborsCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 3);
+    public static HashSet<Vector2Int> GetFourNeighborsCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 4);
 
     //Get Cells with N neightbors
-    public static HashSet<Vector2Int> GetVisitedCellsWithNNeightbors(HashSet<Vector2Int> cells, int neightbors)
+    public static HashSet<Vector2Int> GetCellsWithNNeightbors(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> neighborCheckCellsPool, int neightborCount)
     {
-        HashSet<Vector2Int> deadEnds = new();
+        HashSet<Vector2Int> cellsWithNeighbors = new();
 
-        foreach (Vector2Int cell in cells)
+        foreach (Vector2Int cell in cellsPool)
         {
             int neighborCount = 0;
 
             foreach (Vector2Int direction in directions)
             {
-                if (cells.Contains(cell + direction)) neighborCount++;
+                if (neighborCheckCellsPool.Contains(cell + direction)) neighborCount++;
             }
 
-            if (neighborCount == neightbors) deadEnds.Add(cell);
+            if (neighborCount == neightborCount) cellsWithNeighbors.Add(cell);
         }
 
-        return deadEnds;
+        return cellsWithNeighbors;
     }
     #endregion
 
