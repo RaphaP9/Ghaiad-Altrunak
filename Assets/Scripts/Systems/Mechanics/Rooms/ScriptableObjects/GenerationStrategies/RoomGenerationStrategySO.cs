@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RoomGenerationStrategySO : ScriptableObject
+[CreateAssetMenu(fileName = "RoomGenerationStategySO", menuName = "ScriptableObjects/Rooms/RoomGenerationStategy")]
+public class RoomGenerationStrategySO : ScriptableObject
 {
     [Header("Settings")]
-    [Range(1, 3)] public int shopRooms = 1;
-    [Range(1, 3)] public int treasureRooms = 2;
-    [Range(1, 7)] public int eventRooms = 5;
-    [Range(1, 5)] public int narrativeRooms = 3;
+    [Range(0, 3)] public int shopRooms = 1;
+    [Range(0, 3)] public int treasureRooms = 2;
+    [Range(0, 7)] public int eventRooms = 5;
+    [Range(0, 5)] public int narrativeRooms = 3;
 
     [Header("Start Room Positioning")]
     [Range(0f, 1f)] public float startRoomCenteringMinBias;

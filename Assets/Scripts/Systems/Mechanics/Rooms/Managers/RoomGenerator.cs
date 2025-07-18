@@ -17,8 +17,7 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Transform testRoomStart;
     [SerializeField] private Transform testRoomEnd;
     [SerializeField] private Transform testRoomShop;
-
-    private Dictionary<Vector2Int, RoomHandler> roomMap = new();
+    [SerializeField] private Transform testRoomTreasure;
 
     private void Awake()
     {
@@ -47,6 +46,7 @@ public class RoomGenerator : MonoBehaviour
         float startRoomCenterBias = levelRoomSettings.roomGenerationStrategy.GetStartRoomCenteringBias(random);
 
         int shopRooms = levelRoomSettings.roomGenerationStrategy.shopRooms;
+        int treasureRooms = levelRoomSettings.roomGenerationStrategy.treasureRooms;
 
         HashSet<Vector2Int> totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, random);
         HashSet<Vector2Int> nonAsignedCells = new HashSet<Vector2Int>(totalCells); //Can not assign because HashSet is Refference Type!
@@ -78,10 +78,26 @@ public class RoomGenerator : MonoBehaviour
         }
         #endregion
 
-        VisualizeGeneratedRooms(nonAsignedCells, startCell, endCell, shopCells);
+        #region TreasureCells
+
+        HashSet<Vector2Int> treasureCells = new();
+        HashSet<Vector2Int> treasureCellsGenerationRefferences = new HashSet<Vector2Int> { startCell, endCell};
+        treasureCellsGenerationRefferences.AddRange(shopCells);
+
+        for (int i = 0; i < treasureRooms; i++)
+        {
+            Vector2Int treasureCell = RoomUtilities.GetFurthestCell(nonAsignedCells, treasureCellsGenerationRefferences);
+
+            treasureCells.Add(treasureCell);
+            treasureCellsGenerationRefferences.Add(treasureCell);
+            nonAsignedCells.Remove(treasureCell);
+        }
+        #endregion
+
+        VisualizeGeneratedRooms(nonAsignedCells, startCell, endCell, shopCells, treasureCells);
     }
 
-    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells)
+    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells)
     {
         float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x + RoomUtilities.GetRoomRealSpacing().x;
         float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y + RoomUtilities.GetRoomRealSpacing().y;
@@ -101,6 +117,14 @@ public class RoomGenerator : MonoBehaviour
         {
             Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
             Instantiate(testRoomShop, worldPos, Quaternion.identity, roomsHolder);
+        }
+        #endregion
+
+        #region TreasureCells
+        foreach (Vector2Int cell in treasureCells)
+        {
+            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
+            Instantiate(testRoomTreasure, worldPos, Quaternion.identity, roomsHolder);
         }
         #endregion
 

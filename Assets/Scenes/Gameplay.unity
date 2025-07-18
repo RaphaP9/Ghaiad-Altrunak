@@ -16649,6 +16649,7 @@ MonoBehaviour:
   testRoomStart: {fileID: 6266022080058502463, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
   testRoomEnd: {fileID: 6266022080058502463, guid: 0886ef9900f90184fa0a7a6c62fb4095, type: 3}
   testRoomShop: {fileID: 6266022080058502463, guid: bd3e2fcc27709394fb2be79e322ee3a9, type: 3}
+  testRoomTreasure: {fileID: 6266022080058502463, guid: 9da1ad8cfffc48e49be57b2e5b4bb8fe, type: 3}
 --- !u!1 &765715324
 GameObject:
   m_ObjectHideFlags: 0

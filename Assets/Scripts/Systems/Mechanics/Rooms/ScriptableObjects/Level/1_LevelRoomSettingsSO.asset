@@ -16,4 +16,4 @@ MonoBehaviour:
   roomsQuantity: 20
   roomsGridSize: {x: 8, y: 8}
   roomsPool: []
-  roomGenerationStrategy: {fileID: 11400000, guid: 21e4733aa7634224fadb25644f03c1ea, type: 2}
+  roomGenerationStrategy: {fileID: 11400000, guid: 7d541c9fc6b92f44c8a68b013de786e6, type: 2}
