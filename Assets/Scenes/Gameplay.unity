@@ -16651,6 +16651,7 @@ MonoBehaviour:
   testRoomShop: {fileID: 6266022080058502463, guid: bd3e2fcc27709394fb2be79e322ee3a9, type: 3}
   testRoomTreasure: {fileID: 6266022080058502463, guid: 9da1ad8cfffc48e49be57b2e5b4bb8fe, type: 3}
   testRoomNarrative: {fileID: 6266022080058502463, guid: 39b9ded056e60cb46a2af5085985b074, type: 3}
+  testRoomEvent: {fileID: 6266022080058502463, guid: aaf5e5db27be80242a90b7aee5154496, type: 3}
 --- !u!1 &765715324
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   roomsQuantity: 25
-  roomsGridSize: {x: 10, y: 10}
+  roomsGridSize: {x: 15, y: 15}
   roomsPool: []
-  roomGenerationStrategy: {fileID: 11400000, guid: 7d541c9fc6b92f44c8a68b013de786e6, type: 2}
+  shopRooms: 1
+  treasureRooms: 1
+  eventRooms: 5
+  narrativeRooms: 3
+  startRoomCenteringMinBias: 0
+  startRoomCenteringMaxBias: 0.25
+  minRoomDistanceBetweenNonEmptyRooms: 1
+  maxRoomDistanceBetweenNonEmptyRooms: 1
