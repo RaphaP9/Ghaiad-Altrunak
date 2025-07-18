@@ -57,21 +57,23 @@ public class RoomGenerator : MonoBehaviour
         #endregion
 
         #region EndCell
-        HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells);
-        Vector2Int endCell = RoomUtilities.GetFurthestCell(startCell, deadEndsForEndCell);
+        HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells, random);
+        Vector2Int endCell = RoomUtilities.GetFurthestCell(deadEndsForEndCell, startCell);
         nonAsignedCells.Remove(endCell);
         #endregion
 
         #region ShopCells
+        //Shop is not necessarily a Dead End, Only the furthest room from boss out of non assigned cells
+
         HashSet<Vector2Int> shopCells = new();
+        HashSet<Vector2Int> shopCellsGenerationRefferences = new HashSet<Vector2Int>{ startCell, endCell };
 
         for (int i = 0; i < shopRooms; i++)
         {
-            HashSet<Vector2Int> deadEndsForShopCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells);
-
-            Vector2Int shopCell = RoomUtilities.GetFurthestCell(endCell, deadEndsForShopCell);
+            Vector2Int shopCell = RoomUtilities.GetFurthestCell(nonAsignedCells, shopCellsGenerationRefferences);
 
             shopCells.Add(shopCell);
+            shopCellsGenerationRefferences.Add(shopCell);
             nonAsignedCells.Remove(shopCell);
         }
         #endregion

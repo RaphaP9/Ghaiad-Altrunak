@@ -10,10 +10,6 @@ public abstract class RoomGenerationStrategySO : ScriptableObject
     [Range(1, 7)] public int eventRooms = 5;
     [Range(1, 5)] public int narrativeRooms = 3;
 
-    [Header("Branching")]
-    [Range(1, 4)] public int startRoomBranching = 2;
-    [Range(1, 4)] public int nonStartRoomBranching = 2;
-
     [Header("Start Room Positioning")]
     [Range(0f, 1f)] public float startRoomCenteringMinBias;
     [Range(0f, 1f)] public float startRoomCenteringMaxBias;

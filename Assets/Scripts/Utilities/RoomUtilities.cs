@@ -78,6 +78,11 @@ public static class RoomUtilities
         return directions[random.Next(0, directions.Length)];
     }
 
+    public static HashSet<Vector2Int> ShuffleCells(HashSet<Vector2Int> cells, System.Random random)
+    {
+        return cells.OrderBy(_ => random.NextDouble()).ToHashSet();
+    }
+
     public static Vector2Int GetRandomVisitedCell(HashSet<Vector2Int> visitedCells, System.Random random)
     {
         int index = random.Next(visitedCells.Count);
@@ -119,14 +124,14 @@ public static class RoomUtilities
     }
 
     //Get Furthest Cell To Origin from a Group Of Cells
-    public static Vector2Int GetFurthestCell(Vector2Int origin, HashSet<Vector2Int> cells)
+    public static Vector2Int GetFurthestCell(HashSet<Vector2Int> cells, Vector2Int refferenceCell)
     {
-        Vector2Int furthestCell = origin;
+        Vector2Int furthestCell = refferenceCell;
         float maxDistanceSqr = float.MinValue;
 
         foreach (Vector2Int cell in cells)
         {
-            float distanceSqr = (cell - origin).sqrMagnitude;
+            float distanceSqr = (cell - refferenceCell).sqrMagnitude;
 
             if (distanceSqr > maxDistanceSqr)
             {
@@ -138,28 +143,49 @@ public static class RoomUtilities
         return furthestCell;
     }
 
-    //Get Cells With Exactly 1,2,3,4 neighbor cells (In Priority Order)
-    public static HashSet<Vector2Int> GetProcessedDeadEndCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool)
+    public static Vector2Int GetFurthestCell(HashSet<Vector2Int> cellPool,HashSet<Vector2Int> refferenceCells)
     {
-        HashSet<Vector2Int> oneNeighborCells = GetOneNeighborCells(cellsPool, checkPool);
+        Vector2Int furthestCell = refferenceCells.First();
+        float bestMinDistanceToARefference = float.MinValue;
 
-        if(oneNeighborCells.Count >= 1) return oneNeighborCells;
+        foreach (Vector2Int cell in cellPool)
+        {
+            float minDistanceToRefference = float.MaxValue;
 
-        HashSet<Vector2Int> twoNeighborCells = GetTwoNeighborsCells(cellsPool, checkPool);
+            foreach (Vector2 referenceCell in refferenceCells)
+            {
+                float distanceToRefference = (cell - referenceCell).sqrMagnitude;
+                
+                if (distanceToRefference < minDistanceToRefference) minDistanceToRefference = distanceToRefference;
+            }
 
-        if (twoNeighborCells.Count >= 1) return twoNeighborCells;
+            if (minDistanceToRefference > bestMinDistanceToARefference)
+            {
+                bestMinDistanceToARefference = minDistanceToRefference;
+                furthestCell = cell;
+            }
+        }
 
-        HashSet<Vector2Int> threeNeighborCells = GetThreeNeighborsCells(cellsPool, checkPool);
-
-        if (threeNeighborCells.Count >= 1) return threeNeighborCells;
-
-        return GetFourNeighborsCells(cellsPool, checkPool);
+        return furthestCell;
     }
 
-    public static HashSet<Vector2Int> GetOneNeighborCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 1);
-    public static HashSet<Vector2Int> GetTwoNeighborsCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 2);
-    public static HashSet<Vector2Int> GetThreeNeighborsCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 3);
-    public static HashSet<Vector2Int> GetFourNeighborsCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool) => GetCellsWithNNeightbors(cellsPool, checkPool, 4);
+    //Get Cells With Exactly 1,2,3,4 neighbor cells (In Priority Order)
+    public static HashSet<Vector2Int> GetProcessedDeadEndCells(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> checkPool, System.Random random)
+    {
+        HashSet<Vector2Int> oneNeighborCells = GetCellsWithNNeightbors(cellsPool, checkPool,1);
+
+        if(oneNeighborCells.Count >= 1) return ShuffleCells(oneNeighborCells, random);
+
+        HashSet<Vector2Int> twoNeighborCells = GetCellsWithNNeightbors(cellsPool, checkPool,2);
+
+        if (twoNeighborCells.Count >= 1) return ShuffleCells(twoNeighborCells, random);
+
+        HashSet<Vector2Int> threeNeighborCells = GetCellsWithNNeightbors(cellsPool, checkPool,3);
+
+        if (threeNeighborCells.Count >= 1) return ShuffleCells(threeNeighborCells, random);
+
+        return ShuffleCells(GetCellsWithNNeightbors(cellsPool, checkPool, 4), random);
+    }
 
     //Get Cells with N neightbors
     public static HashSet<Vector2Int> GetCellsWithNNeightbors(HashSet<Vector2Int> cellsPool, HashSet<Vector2Int> neighborCheckCellsPool, int neightborCount)

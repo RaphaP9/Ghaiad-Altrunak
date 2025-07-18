@@ -9,7 +9,7 @@ public class LevelRoomSettingsSO : ScriptableObject
     public int level;
 
     [Header("Rooms")]
-    [Range(1,20)] public int roomsQuantity;
+    [Range(10,50)] public int roomsQuantity;
     [Space]
     public Vector2Int roomsGridSize;
     [Space]

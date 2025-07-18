@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_LevelRoomSettingsSO
   m_EditorClassIdentifier: 
   level: 1
-  roomsQuantity: 15
-  roomsGridSize: {x: 7, y: 7}
+  roomsQuantity: 20
+  roomsGridSize: {x: 8, y: 8}
   roomsPool: []
   roomGenerationStrategy: {fileID: 11400000, guid: 21e4733aa7634224fadb25644f03c1ea, type: 2}
