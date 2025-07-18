@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public static class RoomUtilities
 {
@@ -29,7 +30,56 @@ public static class RoomUtilities
     public static Vector2 GetRoomRealSize() => new Vector2(X_ROOM_REAL_SIZE, Y_ROOM_REAL_SIZE);
     public static Vector2 GetRoomRealSpacing() => new Vector2(X_ROOM_REAL_SPACING, Y_ROOM_REAL_SPACING);
 
+    #region Other
+    public static Vector2Int GetRandomCellFromPool(HashSet<Vector2Int> cellPool, System.Random random)
+    {
+        int index = random.Next(cellPool.Count);
 
+        foreach (Vector2Int cell in cellPool)
+        {
+            if (index-- == 0) return cell;
+        }
+
+        return Vector2Int.zero;
+    }
+
+    public static HashSet<Vector2Int> ShuffleCells(HashSet<Vector2Int> cells, System.Random random)
+    {
+        return new HashSet<Vector2Int>(cells.OrderBy(_ => random.NextDouble()));
+    }
+    #endregion
+
+    #region Directions & Neighbors
+    public static Vector2Int GetRandomDirection(System.Random random)
+    {
+        return directions[random.Next(0, directions.Length)];
+    }
+
+    public static HashSet<Vector2Int> Get4DirectionalCellNeighbors(Vector2Int cell)
+    {
+        HashSet<Vector2Int> neighborCells = new();
+
+        foreach(Vector2Int direction in directions)
+        {
+            neighborCells.Add(cell + direction);
+        }
+
+        return neighborCells;
+    }
+
+    public static HashSet<Vector2Int> Get4DirectionalCellsNeighbors(HashSet<Vector2Int> cells)
+    {
+        HashSet<Vector2Int> neighborCells = new();
+
+        foreach(Vector2Int cell in cells)
+        {
+            HashSet<Vector2Int> cellNeighbors = Get4DirectionalCellNeighbors(cell);
+            neighborCells.AddRange(cellNeighbors);
+        }
+
+        return neighborCells;
+    }
+    #endregion
 
     #region Random Walk
     public static HashSet<Vector2Int> GenerateRandomWalk(Vector2Int startCell, int steps, Vector2Int gridSize, System.Random random)
@@ -58,7 +108,7 @@ public static class RoomUtilities
 
                 if (stuckCount >= RANDOM_WALK_STUCK_COUNT_THRESHOLD)
                 {
-                    currentCell = GetRandomVisitedCell(visitedCells, random);
+                    currentCell = GetRandomCellFromPool(visitedCells, random);
                     stuckCount = 0;
                 }
 
@@ -71,28 +121,6 @@ public static class RoomUtilities
         }
 
         return visitedCells;
-    }
-
-    public static Vector2Int GetRandomDirection(System.Random random)
-    {
-        return directions[random.Next(0, directions.Length)];
-    }
-
-    public static HashSet<Vector2Int> ShuffleCells(HashSet<Vector2Int> cells, System.Random random)
-    {
-        return cells.OrderBy(_ => random.NextDouble()).ToHashSet();
-    }
-
-    public static Vector2Int GetRandomVisitedCell(HashSet<Vector2Int> visitedCells, System.Random random)
-    {
-        int index = random.Next(visitedCells.Count);
-
-        foreach (Vector2Int cell in visitedCells)
-        {
-            if (index-- == 0) return cell;
-        }
-
-        return Vector2Int.zero; 
     }
     #endregion
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -18,6 +19,7 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Transform testRoomEnd;
     [SerializeField] private Transform testRoomShop;
     [SerializeField] private Transform testRoomTreasure;
+    [SerializeField] private Transform testRoomNarrative;
 
     private void Awake()
     {
@@ -37,19 +39,21 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateRooms(System.Random random)
+    public void GenerateRooms(System.Random seededRandom)
     {
         LevelRoomSettingsSO levelRoomSettings = generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
 
         int roomCount = levelRoomSettings.roomsQuantity;
         Vector2Int roomsGridSize = levelRoomSettings.roomsGridSize;
-        float startRoomCenterBias = levelRoomSettings.roomGenerationStrategy.GetStartRoomCenteringBias(random);
+        float startRoomCenterBias = levelRoomSettings.roomGenerationStrategy.GetStartRoomCenteringBias(seededRandom);
 
         int shopRooms = levelRoomSettings.roomGenerationStrategy.shopRooms;
         int treasureRooms = levelRoomSettings.roomGenerationStrategy.treasureRooms;
+        int narrativeRooms = levelRoomSettings.roomGenerationStrategy.narrativeRooms;
+        int eventRooms = levelRoomSettings.roomGenerationStrategy.eventRooms;
 
-        HashSet<Vector2Int> totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, random);
-        HashSet<Vector2Int> nonAsignedCells = new HashSet<Vector2Int>(totalCells); //Can not assign because HashSet is Refference Type!
+        HashSet<Vector2Int> totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, seededRandom);
+        HashSet<Vector2Int> nonAsignedCells = new (totalCells); //Can not assign because HashSet is Refference Type!
 
         #region StartCell
         Vector2Int startCell = RoomUtilities.GetBiasedCenteredCell(totalCells, startRoomCenterBias);
@@ -57,7 +61,7 @@ public class RoomGenerator : MonoBehaviour
         #endregion
 
         #region EndCell
-        HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells, random);
+        HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells, seededRandom);
         Vector2Int endCell = RoomUtilities.GetFurthestCell(deadEndsForEndCell, startCell);
         nonAsignedCells.Remove(endCell);
         #endregion
@@ -71,6 +75,7 @@ public class RoomGenerator : MonoBehaviour
         for (int i = 0; i < shopRooms; i++)
         {
             Vector2Int shopCell = RoomUtilities.GetFurthestCell(nonAsignedCells, shopCellsGenerationRefferences);
+            //Vector2Int shopCell = RoomUtilities.GetFurthestCell(RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells, random), shopCellsGenerationRefferences);
 
             shopCells.Add(shopCell);
             shopCellsGenerationRefferences.Add(shopCell);
@@ -94,10 +99,39 @@ public class RoomGenerator : MonoBehaviour
         }
         #endregion
 
-        VisualizeGeneratedRooms(nonAsignedCells, startCell, endCell, shopCells, treasureCells);
+        
+        #region Narrative Cells
+        HashSet<Vector2Int> narrativeCells = new();
+
+        HashSet<Vector2Int> forbiddenNarrativeRooms = new() { startCell, endCell };
+        HashSet<Vector2Int> forbiddenNeighbors = RoomUtilities.Get4DirectionalCellsNeighbors(forbiddenNarrativeRooms);
+
+        forbiddenNarrativeRooms.AddRange(forbiddenNeighbors);
+
+        HashSet<Vector2Int> narrativeCellsPool = new(nonAsignedCells);
+        narrativeCellsPool.ExceptWith(forbiddenNarrativeRooms);
+
+        for (int i = 0; i < narrativeRooms; i++)
+        {
+            if (narrativeCellsPool.Count <= 0) break; //Break if no cells in pool (will not generate desired narrativeRooms count)
+
+            Vector2Int narrativeCell = RoomUtilities.GetRandomCellFromPool(narrativeCellsPool, seededRandom);
+
+            narrativeCells.Add(narrativeCell);
+            narrativeCellsPool.Remove(narrativeCell);  
+            nonAsignedCells.Remove(narrativeCell);
+
+            HashSet<Vector2Int> newForbiddenNeighbors = RoomUtilities.Get4DirectionalCellNeighbors(narrativeCell);
+            narrativeCellsPool.ExceptWith(newForbiddenNeighbors);
+        }
+
+        #endregion
+
+
+        VisualizeGeneratedRooms(nonAsignedCells, startCell, endCell, shopCells, treasureCells, narrativeCells);
     }
 
-    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells)
+    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells, HashSet<Vector2Int> narrativeCells)
     {
         float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x + RoomUtilities.GetRoomRealSpacing().x;
         float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y + RoomUtilities.GetRoomRealSpacing().y;
@@ -125,6 +159,14 @@ public class RoomGenerator : MonoBehaviour
         {
             Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
             Instantiate(testRoomTreasure, worldPos, Quaternion.identity, roomsHolder);
+        }
+        #endregion
+
+        #region NarrativeCells
+        foreach (Vector2Int cell in narrativeCells)
+        {
+            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
+            Instantiate(testRoomNarrative, worldPos, Quaternion.identity, roomsHolder);
         }
         #endregion
 
