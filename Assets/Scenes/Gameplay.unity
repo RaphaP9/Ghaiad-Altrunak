@@ -16644,6 +16644,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomsHolder: {fileID: 946910393}
+  generalRoomsSettings: {fileID: 11400000, guid: 68ab6b8bcb9ccb04bb1a9f3119c5179a, type: 2}
+  randomWalkVisualizationPrefab: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
 --- !u!1 &765715324
 GameObject:
   m_ObjectHideFlags: 0

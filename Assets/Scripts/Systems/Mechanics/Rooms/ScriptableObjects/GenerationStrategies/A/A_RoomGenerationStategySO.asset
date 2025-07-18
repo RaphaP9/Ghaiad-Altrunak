@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde5909cec46b1340a99fc5daa0ef935, type: 3}
   m_Name: A_RoomGenerationStategySO
   m_EditorClassIdentifier: 
+  bossRooms: 1
+  shopRooms: 1
+  treasureRooms: 2
+  eventRooms: 5
+  narrativeRooms: 3
+  startRoomBranching: 2
+  nonStartRoomBranching: 2
+  minRoomDistanceBetweenNonEmptyRooms: 1
+  maxRoomDistanceBetweenNonEmptyRooms: 1

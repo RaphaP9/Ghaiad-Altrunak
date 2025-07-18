@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2e51df00e073ba45aee862e7e8626c7, type: 3}
-  m_Name: GeneralSettingsSO
+  m_Script: {fileID: 11500000, guid: 5dc9ce999ab45124b9f8cd62c9a798d2, type: 3}
+  m_Name: 1_LevelRoomSettingsSO
   m_EditorClassIdentifier: 
-  levelSettingsList: []
-  defaultLevelSettings: {fileID: 0}
+  level: 1
+  roomsQuantity: 11
+  roomsGridSize: {x: 7, y: 7}
+  roomsPool: []
+  roomGenerationStrategy: {fileID: 11400000, guid: 21e4733aa7634224fadb25644f03c1ea, type: 2}

@@ -17,7 +17,6 @@ public static class GeneralUtilities
     private const int HASH_MULTIPLIER_NUMBER = 31;
     #endregion
 
-
     private static readonly Vector2Int[] directions8 = new Vector2Int[]
     {
         new Vector2Int(0,  1),  // Up
@@ -227,7 +226,6 @@ public static class GeneralUtilities
 
         return closestDirection;
     }
-
     #endregion
 
     #region Floats
