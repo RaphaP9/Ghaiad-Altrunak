@@ -25,5 +25,11 @@ MonoBehaviour:
   minRoomDistanceBetweenNonEmptyRooms: 1
   maxRoomDistanceBetweenNonEmptyRooms: 1
   roomShapeCandidates:
-  - roomShape: 3
-    targetReplacements: 2
+  - roomShape: 4
+    targetReplacements: 1
+  - roomShape: 5
+    targetReplacements: 1
+  - roomShape: 6
+    targetReplacements: 1
+  - roomShape: 7
+    targetReplacements: 1

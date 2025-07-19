@@ -10,8 +10,22 @@ public class RoomHandler : MonoBehaviour
     [SerializeField] private RoomType roomType;
     [SerializeField] private RoomShape roomShape;
 
+    [Header("Components")]
+    [SerializeField] private PolygonCollider2D roomConfiner;
+
+    [Header("Spawn Positions")]
+    [SerializeField] private Transform defaultSpawnPosition;
+    [SerializeField] private List<Transform> doorSpawnPositions;
+
+    [Header("Doors")]
+    [SerializeField] private List<DoorHandler> doorHandlers;
+
     public int ID => id;
     public RoomDificulty RoomDificulty => roomDificulty;
     public RoomType RoomType => roomType;
     public RoomShape RoomShape => roomShape;
+
+    public PolygonCollider2D RoomConfiner => roomConfiner;
+    public Transform DefaultSpawnPosition => defaultSpawnPosition;
+    public List<Transform> DoorSpawnPositions => doorSpawnPositions;
 }

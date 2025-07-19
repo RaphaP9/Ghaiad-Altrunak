@@ -47,4 +47,15 @@ public class PlayerTeleporterManager : MonoBehaviour
 
         OnPlayerTeleported?.Invoke(this, new OnPlayerTeleportEventArgs { teleportPosition = position, cameraInstantPosition = cameraInstantPosition });
     }
+
+    public void InstantPositionPlayer(Vector2 position)
+    {
+        if (PlayerTransformRegister.Instance == null || PlayerTransformRegister.Instance.PlayerTransform == null)
+        {
+            if (debug) Debug.Log("Can not Instant Position Player. Either PlayerTransformRegister or PlayerTransform is null");
+            return;
+        }
+
+        PlayerTransformRegister.Instance.PlayerTransform.position = GeneralUtilities.Vector2ToVector3(position);
+    }
 }
