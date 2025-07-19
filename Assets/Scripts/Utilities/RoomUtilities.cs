@@ -103,15 +103,12 @@ public static class RoomUtilities
 
         while (stepsTaken < steps - 1)
         {
-            if (visitedCells.Count >= maxCellsInGrid)
-            {
-                Debug.LogWarning($"Requested {steps} Steps, but the Grid can only fit {maxCellsInGrid} unique cells. Walk will be truncated to fill the grid.");
-                break;
-            }
-
             Vector2Int next = currentCell + GetRandomDirection(random);
 
-            if (Mathf.Abs(next.x) > gridSize.x / 2 || Mathf.Abs(next.y) > gridSize.y / 2 || visitedCells.Contains(next)) //If out of grid or already visited
+            int halfWidth = gridSize.x / 2;
+            int halfHeight = gridSize.y / 2;
+
+            if (Mathf.Abs(next.x) > halfWidth || Mathf.Abs(next.y) > halfHeight || visitedCells.Contains(next)) //If out of grid or already visited
             {
                 stuckCount++;
 
@@ -127,6 +124,12 @@ public static class RoomUtilities
             currentCell = next;
             visitedCells.Add(currentCell);
             stepsTaken++;
+
+            if (visitedCells.Count >= maxCellsInGrid)
+            {
+                Debug.LogWarning($"Requested {steps} Steps, but the Grid can only fit {maxCellsInGrid} unique cells. Walk will be truncated to fill the grid.");
+                break;
+            }
         }
 
         return visitedCells;
@@ -145,15 +148,12 @@ public static class RoomUtilities
 
         while (stepsTaken < steps - 1)
         {
-            if (cellsContainer.Count >= maxCellsInGrid)
-            {
-                Debug.LogWarning($"Requested {steps} Steps, but the Grid can only fit {maxCellsInGrid} unique cells. Walk will be truncated to fill the grid.");
-                break;
-            }
-
             Vector2Int next = currentCell + GetRandomDirection(random);
 
-            if (Mathf.Abs(next.x) > gridSize.x / 2 || Mathf.Abs(next.y) > gridSize.y / 2 || cellsContainer.Contains(next)) //If out of grid or already visited
+            int halfWidth = gridSize.x / 2;
+            int halfHeight = gridSize.y / 2;
+
+            if (Mathf.Abs(next.x) > halfWidth || Mathf.Abs(next.y) > halfHeight || cellsContainer.Contains(next)) //If out of grid or already visited
             {
                 stuckCount++;
 
@@ -169,6 +169,12 @@ public static class RoomUtilities
             currentCell = next;
             cellsContainer.Add(currentCell);
             stepsTaken++;
+
+            if (cellsContainer.Count >= maxCellsInGrid)
+            {
+                Debug.LogWarning($"Requested {steps} Steps, but the Grid can only fit {maxCellsInGrid} unique cells. Walk will be truncated to fill the grid.");
+                break;
+            }
         }
     }
     #endregion
@@ -181,7 +187,7 @@ public static class RoomUtilities
 
         #region GetAverage
         Vector2 average = Vector2.zero;
-        foreach (var cell in cells)
+        foreach (Vector2Int cell in cells)
         {
             average += (Vector2)cell;
         }
@@ -206,7 +212,7 @@ public static class RoomUtilities
 
         #region GetAverage
         Vector2 average = Vector2.zero;
-        foreach (var cell in cells)
+        foreach (Vector2Int cell in cells)
         {
             average += (Vector2)cell;
         }
@@ -215,14 +221,21 @@ public static class RoomUtilities
         #endregion
 
         #region Order By Distance to Average
-        var sortedCells = cells.Select(cell => new { Cell = cell, DistanceToAverageCenter = ((Vector2)cell - average).sqrMagnitude }).OrderBy(item => item.DistanceToAverageCenter).ToList();
+        List<Vector2Int> sortedCells = cells.ToList();
+
+        sortedCells.Sort((a, b) =>
+        {
+            float distanceCompareeA = ((Vector2)a - average).sqrMagnitude;
+            float distanceCompareeB = ((Vector2)b - average).sqrMagnitude;
+            return distanceCompareeA.CompareTo(distanceCompareeB);
+        });
         #endregion
 
         #region Interpolate to Find Desired Element Index
         int index = Mathf.FloorToInt(bias * (sortedCells.Count - 1));
         #endregion
 
-        cellContainer = sortedCells[index].Cell;
+        cellContainer = sortedCells[index];
     }
 
     //Get Furthest Cell To Origin from a Group Of Cells
@@ -233,7 +246,7 @@ public static class RoomUtilities
 
         foreach (Vector2Int cell in cells)
         {
-            float distanceSqr = (cell - refferenceCell).sqrMagnitude;
+            float distanceSqr = (cell - refferenceCell).sqrMagnitude; //Cast as Vector2 If more precission needed (Slower)
 
             if (distanceSqr > maxDistanceSqr)
             {
@@ -252,7 +265,7 @@ public static class RoomUtilities
 
         foreach (Vector2Int cell in cells)
         {
-            float distanceSqr = (cell - refferenceCell).sqrMagnitude;
+            float distanceSqr = (cell - refferenceCell).sqrMagnitude; //Cast as Vector2 If more precission needed (Slower)
 
             if (distanceSqr > maxDistanceSqr)
             {
@@ -262,7 +275,7 @@ public static class RoomUtilities
         }
     }
 
-    public static Vector2Int GetFurthestCell(HashSet<Vector2Int> cellPool,HashSet<Vector2Int> refferenceCells)
+    public static Vector2Int GetFurthestCell(HashSet<Vector2Int> cellPool, HashSet<Vector2Int> refferenceCells)
     {
         Vector2Int furthestCell = refferenceCells.First();
         float bestMinDistanceToARefference = float.MinValue;
@@ -271,10 +284,10 @@ public static class RoomUtilities
         {
             float minDistanceToRefference = float.MaxValue;
 
-            foreach (Vector2 referenceCell in refferenceCells)
+            foreach (Vector2Int referenceCell in refferenceCells)
             {
-                float distanceToRefference = (cell - referenceCell).sqrMagnitude;
-                
+                float distanceToRefference = (cell - referenceCell).sqrMagnitude; //Cast as Vector2 If more precission needed (Slower)
+
                 if (distanceToRefference < minDistanceToRefference) minDistanceToRefference = distanceToRefference;
             }
 
@@ -286,6 +299,30 @@ public static class RoomUtilities
         }
 
         return furthestCell;
+    }
+
+    public static void GetFurthestCellNonAlloc(HashSet<Vector2Int> cellPool, HashSet<Vector2Int> refferenceCells, ref Vector2Int cellContainer)
+    {
+        cellContainer = refferenceCells.First();
+        float bestMinDistanceToARefference = float.MinValue;
+
+        foreach (Vector2Int cell in cellPool)
+        {
+            float minDistanceToRefference = float.MaxValue;
+
+            foreach (Vector2Int referenceCell in refferenceCells)
+            {
+                float distanceToRefference = (cell - referenceCell).sqrMagnitude; //Cast as Vector2 If more precission needed (Slower)
+
+                if (distanceToRefference < minDistanceToRefference) minDistanceToRefference = distanceToRefference;
+            }
+
+            if (minDistanceToRefference > bestMinDistanceToARefference)
+            {
+                bestMinDistanceToARefference = minDistanceToRefference;
+                cellContainer = cell;
+            }
+        }
     }
 
     //Get Cells With Exactly 1,2,3,4 neighbor cells (In Priority Order)

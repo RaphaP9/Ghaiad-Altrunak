@@ -180,7 +180,7 @@ public class RoomGenerator : MonoBehaviour
                 nonAssignedCells.Remove(narrativeCell);
 
                 //Narrative Rooms Can not be next to each other
-                HashSet<Vector2Int> newNarrativeForbiddenNeighbors = RoomUtilities.Get4DirectionalCellNeighbors(narrativeCell);
+                HashSet<Vector2Int> newNarrativeForbiddenNeighbors = RoomUtilities.Get4DirectionalCellNeighbors(narrativeCell); //No need to create or use a NonAlloc Method (for loop does very few iterations)
                 narrativeCellsPool.ExceptWith(newNarrativeForbiddenNeighbors);
             }
 
@@ -205,7 +205,7 @@ public class RoomGenerator : MonoBehaviour
                 eventCellsPool.Remove(eventCell);
                 nonAssignedCells.Remove(eventCell);
 
-                HashSet<Vector2Int> newEventForbiddenNeighbors = RoomUtilities.Get4DirectionalCellNeighbors(eventCell);
+                HashSet<Vector2Int> newEventForbiddenNeighbors = RoomUtilities.Get4DirectionalCellNeighbors(eventCell); //No need to create or use a NonAlloc Method (for loop does very few iterations)
                 eventCellsPool.ExceptWith(newEventForbiddenNeighbors);
             }
 
