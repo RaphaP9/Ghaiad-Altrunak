@@ -11,6 +11,9 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Transform roomsHolder;
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
+    [Header("Runtime Filled")]
+    [SerializeField] private List<PlacedRoom> placedRooms;
+
     [Header("Testing")]
     [SerializeField] private Transform testRoomUnassigned;
     [SerializeField] private Transform testRoomStart;
@@ -53,8 +56,9 @@ public class RoomGenerator : MonoBehaviour
 
     public void GenerateRooms(System.Random seededRandom)
     {
-        #region Initialize Variables & HashSets
+        placedRooms.Clear();
 
+        #region Initialize Variables & HashSets
         System.Random localRandom = GeneralUtilities.RandomizeRandomByRandom(seededRandom); //Can not clone the OG random but whatever
 
         LevelRoomSettingsSO levelRoomSettings = generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
@@ -240,8 +244,36 @@ public class RoomGenerator : MonoBehaviour
 
         #endregion
 
+        #region First Placed Room List Population
+
+        //All Special Rooms are 1x1 Single Cell
+
+        placedRooms.Add(new PlacedRoom(startCell, RoomType.Start, RoomShape.SingleCell));
+        placedRooms.Add(new PlacedRoom(endCell, RoomType.End, RoomShape.SingleCell));
+
+        foreach (Vector2Int shopCell in shopCells)
+        {
+            placedRooms.Add(new PlacedRoom(shopCell, RoomType.Shop, RoomShape.SingleCell));
+        }
+
+        foreach (Vector2Int treasureCell in treasureCells)
+        {
+            placedRooms.Add(new PlacedRoom(treasureCell, RoomType.Treasure, RoomShape.SingleCell));
+        }
+
+        foreach (Vector2Int narrativeCell in narrativeCells)
+        {
+            placedRooms.Add(new PlacedRoom(narrativeCell, RoomType.Narrative, RoomShape.SingleCell));
+        }
+
+        foreach (Vector2Int eventCell in eventCells)
+        {
+            placedRooms.Add(new PlacedRoom(eventCell, RoomType.Event, RoomShape.SingleCell));
+        }
+        #endregion
+
         #region Non 1x1 Dimensional Cell Candidate Replacement
-        List<PlacedRoom> replacementPlacedRooms = new List<PlacedRoom>();
+        List<PlacedRoomPrimitive> replacementPlacedRooms = new List<PlacedRoomPrimitive>();
 
         HashSet<Vector2Int> untouchableCells = new HashSet<Vector2Int>();
         untouchableCells.Add(startCell);
@@ -252,10 +284,11 @@ public class RoomGenerator : MonoBehaviour
         untouchableCells.UnionWith(eventCells);
 
         HashSet<Vector2Int> replacementCandidatesPool = new HashSet<Vector2Int>(nonAssignedCells);
-        replacementCandidatesPool = RoomUtilities.ShuffleCells(replacementCandidatesPool, localRandom);
 
         foreach(RoomShapeCandidates roomShapeCandidates in roomShapeCandidatesList)
         {
+            replacementCandidatesPool = RoomUtilities.ShuffleCells(replacementCandidatesPool, localRandom);
+
             RoomShape roomShape = roomShapeCandidates.roomShape;
             int targetCount = roomShapeCandidates.targetReplacements;
             int placedCount = 0;
@@ -273,16 +306,27 @@ public class RoomGenerator : MonoBehaviour
                 untouchableCells.UnionWith(desiredOccupiedCells);
                 nonAssignedCells.ExceptWith(desiredOccupiedCells);
 
-                replacementPlacedRooms.Add(new PlacedRoom(anchorCell, roomShape));
+                replacementPlacedRooms.Add(new PlacedRoomPrimitive(anchorCell, roomShape));
+                placedRooms.Add(new PlacedRoom(anchorCell, RoomType.Transition, roomShape)); //Populate Placed Rooms List on Iteration, All are of Transition Room Type
                 placedCount++;
             }
+        }
+        #endregion
+
+        #region Second Placed Room List Population
+
+        //All Remaining Non Assigned Cells are 1x1 Single Cell Transition Type Rooms
+
+        foreach (Vector2Int nonAssignedCell in nonAssignedCells)
+        {
+            placedRooms.Add(new PlacedRoom(nonAssignedCell, RoomType.Transition, RoomShape.SingleCell));
         }
         #endregion
 
         VisualizeGeneratedRooms(nonAssignedCells, startCell, endCell, shopCells, treasureCells, narrativeCells, eventCells, replacementPlacedRooms);
     }
 
-    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells, HashSet<Vector2Int> narrativeCells, HashSet<Vector2Int> eventCells, List<PlacedRoom> replacementPlacedRooms)
+    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells, HashSet<Vector2Int> narrativeCells, HashSet<Vector2Int> eventCells, List<PlacedRoomPrimitive> replacementPlacedRooms)
     {
         float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x;
         float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y;
@@ -330,7 +374,7 @@ public class RoomGenerator : MonoBehaviour
         #endregion
 
         #region ReplacementNonAssignedCells
-        foreach (PlacedRoom replacementRoom in replacementPlacedRooms)
+        foreach (PlacedRoomPrimitive replacementRoom in replacementPlacedRooms)
         {
             Transform prefab = replacementRoom.roomShape switch
             {
@@ -359,14 +403,30 @@ public class RoomGenerator : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public class PlacedRoom
+{
+    public Vector2Int anchorCell;
+    public RoomType roomType;
+    public RoomShape roomShape;
+
+    public PlacedRoom(Vector2Int anchorCell,RoomType roomType, RoomShape roomShape)
+    {
+        this.anchorCell = anchorCell;
+        this.roomType = roomType;
+        this.roomShape = roomShape;
+    }
+}
+
+public class PlacedRoomPrimitive
 {
     public Vector2Int anchorCell;
     public RoomShape roomShape;
 
-    public PlacedRoom(Vector2Int anchorCell, RoomShape roomShape)
+    public PlacedRoomPrimitive(Vector2Int anchorCell, RoomShape roomShape)
     {
         this.anchorCell = anchorCell;
         this.roomShape = roomShape;
     }
 }
+

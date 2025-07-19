@@ -5,13 +5,10 @@ using UnityEngine;
 public enum RoomType 
 {
     Start,
-    Transition,
-    Empty,
-    Extermination,
-    SurvivalEnemies,
-    SurvivalHazards,
-    Narrative,
+    End,
     Shop,
-    Reward,
-    End
+    Treasure,
+    Narrative,
+    Event,
+    Transition
 }
