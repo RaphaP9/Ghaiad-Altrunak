@@ -113,17 +113,17 @@ public class RoomGenerator : MonoBehaviour
             #endregion
 
             #region Cell Assignation Logic
-            totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, localRandom);
+            RoomUtilities.GenerateRandomWalkNonAlloc(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, localRandom, totalCells);
             nonAssignedCells = new(totalCells); //Can not assign because HashSet is Refference Type!
 
             #region StartCell
-            startCell = RoomUtilities.GetBiasedCenteredCell(totalCells, startRoomCenterBias);
+            RoomUtilities.GetBiasedCenteredCellNonAlloc(totalCells, startRoomCenterBias, ref startCell);
             nonAssignedCells.Remove(startCell);
             #endregion
 
             #region EndCell
             HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAssignedCells, totalCells, localRandom);
-            endCell = RoomUtilities.GetFurthestCell(deadEndsForEndCell, startCell);
+            RoomUtilities.GetFurthestCellNonAlloc(deadEndsForEndCell, startCell, ref endCell);
             nonAssignedCells.Remove(endCell);
             #endregion
 
@@ -285,7 +285,9 @@ public class RoomGenerator : MonoBehaviour
 
         HashSet<Vector2Int> replacementCandidatesPool = new HashSet<Vector2Int>(nonAssignedCells);
 
-        foreach(RoomShapeCandidates roomShapeCandidates in roomShapeCandidatesList)
+        HashSet<Vector2Int> desiredOccupiedCellsBuffer = new();
+
+        foreach (RoomShapeCandidates roomShapeCandidates in roomShapeCandidatesList)
         {
             replacementCandidatesPool = RoomUtilities.ShuffleCells(replacementCandidatesPool, localRandom);
 
@@ -296,15 +298,14 @@ public class RoomGenerator : MonoBehaviour
             foreach (Vector2Int anchorCell in replacementCandidatesPool)
             {
                 if (placedCount >= targetCount) break;
+                if (untouchableCells.Contains(anchorCell)) continue; //Better to check here if we are adding cells to untouchableCells
 
-                HashSet<Vector2Int> desiredOccupiedCells = RoomUtilities.GetShapeOccupiedCells(anchorCell, roomShape);
+                RoomUtilities.GetShapeOccupiedCellsNonAlloc(anchorCell, roomShape, desiredOccupiedCellsBuffer);
 
-                bool hasConflict = desiredOccupiedCells.Any(cell => untouchableCells.Contains(cell));
+                if (desiredOccupiedCellsBuffer.Overlaps(untouchableCells)) continue;
 
-                if (hasConflict) continue;
-
-                untouchableCells.UnionWith(desiredOccupiedCells);
-                nonAssignedCells.ExceptWith(desiredOccupiedCells);
+                untouchableCells.UnionWith(desiredOccupiedCellsBuffer);
+                nonAssignedCells.ExceptWith(desiredOccupiedCellsBuffer);
 
                 replacementPlacedRooms.Add(new PlacedRoomPrimitive(anchorCell, roomShape));
                 placedRooms.Add(new PlacedRoom(anchorCell, RoomType.Transition, roomShape)); //Populate Placed Rooms List on Iteration, All are of Transition Room Type

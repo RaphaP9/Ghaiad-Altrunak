@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_LevelRoomSettingsSO
   m_EditorClassIdentifier: 
   level: 1
-  roomsQuantity: 25
+  roomsQuantity: 50
   roomsGridSize: {x: 10, y: 10}
   roomsPool: []
   shopRooms: 1
@@ -25,9 +25,5 @@ MonoBehaviour:
   minRoomDistanceBetweenNonEmptyRooms: 1
   maxRoomDistanceBetweenNonEmptyRooms: 1
   roomShapeCandidates:
-  - roomShape: 1
-    targetReplacements: 1
-  - roomShape: 2
-    targetReplacements: 1
-  - roomShape: 4
-    targetReplacements: 1
+  - roomShape: 3
+    targetReplacements: 2

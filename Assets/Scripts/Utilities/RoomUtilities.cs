@@ -22,7 +22,7 @@ public static class RoomUtilities
         Vector2Int.right
     };
 
-    private static readonly Dictionary<RoomShape, List<Vector2Int>> roomShapeLocalCellOccupations = new()
+    private static readonly Dictionary<RoomShape, HashSet<Vector2Int>> roomShapeLocalCellOccupations = new()
     {
         { RoomShape.SingleCell, new() { new Vector2Int(0, 0) } },
         { RoomShape.Horizontal2x1, new() { new Vector2Int(0, 0), new Vector2Int(1, 0) } },
@@ -33,6 +33,8 @@ public static class RoomUtilities
         { RoomShape.LShapedC, new() {new Vector2Int(0, 0), new Vector2Int(-1, 0),new Vector2Int(0, -1)}},
         { RoomShape.LShapedD, new() {new Vector2Int(0, 0), new Vector2Int(-1, 0),new Vector2Int(-1, -1)}},
     };
+
+    private static readonly HashSet<Vector2Int> singeCellFallback = new() { Vector2Int.zero };
 
     public static Vector2Int GetRandomWalkStartingCell() => new Vector2Int(X_RANDOM_WALK_STARTING_CELL, Y_RANDOM_WALK_STARTING_CELL);
     public static Vector2 GetRoomRealSize() => new Vector2(X_ROOM_REAL_SIZE, Y_ROOM_REAL_SIZE);
@@ -129,6 +131,46 @@ public static class RoomUtilities
 
         return visitedCells;
     }
+
+    public static void GenerateRandomWalkNonAlloc(Vector2Int startCell, int steps, Vector2Int gridSize, System.Random random, HashSet<Vector2Int> cellsContainer, bool clearContainer = true)
+    {
+        if(clearContainer) cellsContainer.Clear();
+
+        Vector2Int currentCell = startCell;
+        cellsContainer.Add(currentCell);
+
+        int maxCellsInGrid = gridSize.x * gridSize.y;
+        int stepsTaken = 0;
+        int stuckCount = 0;
+
+        while (stepsTaken < steps - 1)
+        {
+            if (cellsContainer.Count >= maxCellsInGrid)
+            {
+                Debug.LogWarning($"Requested {steps} Steps, but the Grid can only fit {maxCellsInGrid} unique cells. Walk will be truncated to fill the grid.");
+                break;
+            }
+
+            Vector2Int next = currentCell + GetRandomDirection(random);
+
+            if (Mathf.Abs(next.x) > gridSize.x / 2 || Mathf.Abs(next.y) > gridSize.y / 2 || cellsContainer.Contains(next)) //If out of grid or already visited
+            {
+                stuckCount++;
+
+                if (stuckCount >= RANDOM_WALK_STUCK_COUNT_THRESHOLD)
+                {
+                    currentCell = GetRandomCellFromPool(cellsContainer, random);
+                    stuckCount = 0;
+                }
+
+                continue;
+            }
+
+            currentCell = next;
+            cellsContainer.Add(currentCell);
+            stepsTaken++;
+        }
+    }
     #endregion
 
     #region RoomGeneration
@@ -158,6 +200,31 @@ public static class RoomUtilities
         return sortedCells[index].Cell;
     }
 
+    public static void GetBiasedCenteredCellNonAlloc(HashSet<Vector2Int> cells, float bias, ref Vector2Int cellContainer)
+    {
+        bias = Mathf.Clamp01(bias);
+
+        #region GetAverage
+        Vector2 average = Vector2.zero;
+        foreach (var cell in cells)
+        {
+            average += (Vector2)cell;
+        }
+
+        average /= cells.Count;
+        #endregion
+
+        #region Order By Distance to Average
+        var sortedCells = cells.Select(cell => new { Cell = cell, DistanceToAverageCenter = ((Vector2)cell - average).sqrMagnitude }).OrderBy(item => item.DistanceToAverageCenter).ToList();
+        #endregion
+
+        #region Interpolate to Find Desired Element Index
+        int index = Mathf.FloorToInt(bias * (sortedCells.Count - 1));
+        #endregion
+
+        cellContainer = sortedCells[index].Cell;
+    }
+
     //Get Furthest Cell To Origin from a Group Of Cells
     public static Vector2Int GetFurthestCell(HashSet<Vector2Int> cells, Vector2Int refferenceCell)
     {
@@ -176,6 +243,23 @@ public static class RoomUtilities
         }
 
         return furthestCell;
+    }
+
+    public static void GetFurthestCellNonAlloc(HashSet<Vector2Int> cells, Vector2Int refferenceCell, ref Vector2Int cellContainer)
+    {
+        cellContainer = refferenceCell;
+        float maxDistanceSqr = float.MinValue;
+
+        foreach (Vector2Int cell in cells)
+        {
+            float distanceSqr = (cell - refferenceCell).sqrMagnitude;
+
+            if (distanceSqr > maxDistanceSqr)
+            {
+                maxDistanceSqr = distanceSqr;
+                cellContainer = cell;
+            }
+        }
     }
 
     public static Vector2Int GetFurthestCell(HashSet<Vector2Int> cellPool,HashSet<Vector2Int> refferenceCells)
@@ -258,24 +342,37 @@ public static class RoomUtilities
     #endregion
 
     #region RoomShape
-    public static List<Vector2Int> GetRoomShapeLocalCellOccupations(this RoomShape shape)
+    public static HashSet<Vector2Int> GetRoomShapeLocalCellOccupations(this RoomShape shape)
     {
-        if (roomShapeLocalCellOccupations.TryGetValue(shape, out var offsets)) return offsets;
+        if (roomShapeLocalCellOccupations.TryGetValue(shape, out var localOccupations)) return localOccupations;
 
         Debug.LogWarning($"Room Shape '{shape}' not found. Returning single-cell fallback (0,0).");
-        return new() { new Vector2Int(0, 0) };
+        return singeCellFallback;
     }
 
     public static HashSet<Vector2Int> GetShapeOccupiedCells(Vector2Int anchorCell, RoomShape shape)
     {
         HashSet<Vector2Int> realCellOccupations = new();
+        HashSet<Vector2Int> localCellOccupations = shape.GetRoomShapeLocalCellOccupations();
 
-        foreach (Vector2Int localCellOccupation in shape.GetRoomShapeLocalCellOccupations())
+        foreach (Vector2Int localCellOccupation in localCellOccupations)
         {
             realCellOccupations.Add(anchorCell + localCellOccupation);
         }
 
         return realCellOccupations;
+    }
+
+    public static void GetShapeOccupiedCellsNonAlloc(Vector2Int anchorCell, RoomShape shape, HashSet<Vector2Int> occupiedCellsContainer, bool clearContainer = true)
+    {
+        if (clearContainer) occupiedCellsContainer.Clear();
+
+        HashSet<Vector2Int> localCellOccupations = shape.GetRoomShapeLocalCellOccupations();
+
+        foreach (Vector2Int localCellOccupation in localCellOccupations)
+        {
+            occupiedCellsContainer.Add(anchorCell + localCellOccupation);
+        }
     }
     #endregion
 
