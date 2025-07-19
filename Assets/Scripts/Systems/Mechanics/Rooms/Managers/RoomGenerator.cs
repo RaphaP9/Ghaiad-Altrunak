@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class RoomGenerator : MonoBehaviour
 {
@@ -14,13 +12,21 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
     [Header("Testing")]
-    [SerializeField] private Transform testRoomAny;
+    [SerializeField] private Transform testRoomUnassigned;
     [SerializeField] private Transform testRoomStart;
     [SerializeField] private Transform testRoomEnd;
     [SerializeField] private Transform testRoomShop;
     [SerializeField] private Transform testRoomTreasure;
     [SerializeField] private Transform testRoomNarrative;
     [SerializeField] private Transform testRoomEvent;
+    [Space]
+    [SerializeField] private Transform testRoomHorizontal2x1;
+    [SerializeField] private Transform testRoomVertical1x2;
+    [SerializeField] private Transform testRoomSquare2x2;
+    [SerializeField] private Transform testRoomLShapedA;
+    [SerializeField] private Transform testRoomLShapedB;
+    [SerializeField] private Transform testRoomLShapedC;
+    [SerializeField] private Transform testRoomLShapedD;
 
     [Header("Debug")]
     [SerializeField] private bool debug;
@@ -48,6 +54,22 @@ public class RoomGenerator : MonoBehaviour
     public void GenerateRooms(System.Random seededRandom)
     {
         #region Initialize Variables & HashSets
+
+        System.Random localRandom = GeneralUtilities.RandomizeRandomByRandom(seededRandom); //Can not clone the OG random but whatever
+
+        LevelRoomSettingsSO levelRoomSettings = generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
+
+        int roomCount = levelRoomSettings.roomsQuantity;
+        Vector2Int roomsGridSize = levelRoomSettings.roomsGridSize;
+        float startRoomCenterBias = levelRoomSettings.GetStartRoomCenteringBias(localRandom);
+
+        int shopRooms = levelRoomSettings.shopRooms;
+        int treasureRooms = levelRoomSettings.treasureRooms;
+        int narrativeRooms = levelRoomSettings.narrativeRooms;
+        int eventRooms = levelRoomSettings.eventRooms;
+
+        List<RoomShapeCandidates> roomShapeCandidatesList = levelRoomSettings.roomShapeCandidates;
+
         bool generationSucceeded = false;
         int generationIterationsCount = 0;
 
@@ -62,6 +84,8 @@ public class RoomGenerator : MonoBehaviour
         HashSet<Vector2Int> narrativeCells = new();
         HashSet<Vector2Int> eventCells = new();
         #endregion
+
+        #region Preliminar Cell Mapping
 
         while (!generationSucceeded)
         {
@@ -85,18 +109,7 @@ public class RoomGenerator : MonoBehaviour
             #endregion
 
             #region Cell Assignation Logic
-            LevelRoomSettingsSO levelRoomSettings = generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
-
-            int roomCount = levelRoomSettings.roomsQuantity;
-            Vector2Int roomsGridSize = levelRoomSettings.roomsGridSize;
-            float startRoomCenterBias = levelRoomSettings.GetStartRoomCenteringBias(seededRandom);
-
-            int shopRooms = levelRoomSettings.shopRooms;
-            int treasureRooms = levelRoomSettings.treasureRooms;
-            int narrativeRooms = levelRoomSettings.narrativeRooms;
-            int eventRooms = levelRoomSettings.eventRooms;
-
-            totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, seededRandom);
+            totalCells = RoomUtilities.GenerateRandomWalk(RoomUtilities.GetRandomWalkStartingCell(), roomCount, roomsGridSize, localRandom);
             nonAssignedCells = new(totalCells); //Can not assign because HashSet is Refference Type!
 
             #region StartCell
@@ -105,7 +118,7 @@ public class RoomGenerator : MonoBehaviour
             #endregion
 
             #region EndCell
-            HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAssignedCells, totalCells, seededRandom);
+            HashSet<Vector2Int> deadEndsForEndCell = RoomUtilities.GetProcessedDeadEndCells(nonAssignedCells, totalCells, localRandom);
             endCell = RoomUtilities.GetFurthestCell(deadEndsForEndCell, startCell);
             nonAssignedCells.Remove(endCell);
             #endregion
@@ -116,6 +129,8 @@ public class RoomGenerator : MonoBehaviour
 
             for (int i = 0; i < shopRooms; i++)
             {
+                if(nonAssignedCells.Count <= 0) break; //Break if no cells remaining in nonAssignedCells (will not generate desired narrativeRooms count)
+
                 Vector2Int shopCell = RoomUtilities.GetFurthestCell(nonAssignedCells, shopCellsGenerationRefferences);
                 //Vector2Int shopCell = RoomUtilities.GetFurthestCell(RoomUtilities.GetProcessedDeadEndCells(nonAsignedCells, totalCells, random), shopCellsGenerationRefferences);
 
@@ -127,10 +142,12 @@ public class RoomGenerator : MonoBehaviour
 
             #region TreasureCells
             HashSet<Vector2Int> treasureCellsGenerationRefferences = new HashSet<Vector2Int> { startCell, endCell };
-            treasureCellsGenerationRefferences.AddRange(shopCells);
+            treasureCellsGenerationRefferences.UnionWith(shopCells);
 
             for (int i = 0; i < treasureRooms; i++)
             {
+                if (nonAssignedCells.Count <= 0) break; //Break if no cells remaining in nonAssignedCells (will not generate desired narrativeRooms count)
+
                 Vector2Int treasureCell = RoomUtilities.GetFurthestCell(nonAssignedCells, treasureCellsGenerationRefferences);
 
                 treasureCells.Add(treasureCell);
@@ -143,7 +160,7 @@ public class RoomGenerator : MonoBehaviour
             HashSet<Vector2Int> forbiddenNarrativeRooms = new() { startCell, endCell };
             HashSet<Vector2Int> forbiddenNarrativeNeighbors = RoomUtilities.Get4DirectionalCellsNeighbors(forbiddenNarrativeRooms);
 
-            forbiddenNarrativeRooms.AddRange(forbiddenNarrativeNeighbors);
+            forbiddenNarrativeRooms.UnionWith(forbiddenNarrativeNeighbors);
 
             HashSet<Vector2Int> narrativeCellsPool = new(nonAssignedCells);
             narrativeCellsPool.ExceptWith(forbiddenNarrativeRooms);
@@ -152,7 +169,7 @@ public class RoomGenerator : MonoBehaviour
             {
                 if (narrativeCellsPool.Count <= 0) break; //Break if no cells in pool (will not generate desired narrativeRooms count)
 
-                Vector2Int narrativeCell = RoomUtilities.GetRandomCellFromPool(narrativeCellsPool, seededRandom);
+                Vector2Int narrativeCell = RoomUtilities.GetRandomCellFromPool(narrativeCellsPool, localRandom);
 
                 narrativeCells.Add(narrativeCell);
                 narrativeCellsPool.Remove(narrativeCell);
@@ -169,7 +186,7 @@ public class RoomGenerator : MonoBehaviour
             HashSet<Vector2Int> forbiddenEventRooms = new() { startCell, endCell };
             HashSet<Vector2Int> forbiddenEventNeighbors = RoomUtilities.Get4DirectionalCellsNeighbors(forbiddenEventRooms);
 
-            forbiddenEventRooms.AddRange(forbiddenEventNeighbors);
+            forbiddenEventRooms.UnionWith(forbiddenEventNeighbors);
 
             HashSet<Vector2Int> eventCellsPool = new(nonAssignedCells);
             eventCellsPool.ExceptWith(forbiddenEventRooms);
@@ -178,7 +195,7 @@ public class RoomGenerator : MonoBehaviour
             {
                 if (eventCellsPool.Count <= 0) break; //Break if no cells in pool (will not generate desired narrativeRooms count)
 
-                Vector2Int eventCell = RoomUtilities.GetRandomCellFromPool(eventCellsPool, seededRandom);
+                Vector2Int eventCell = RoomUtilities.GetRandomCellFromPool(eventCellsPool, localRandom);
 
                 eventCells.Add(eventCell);
                 eventCellsPool.Remove(eventCell);
@@ -208,7 +225,7 @@ public class RoomGenerator : MonoBehaviour
 
             if(!RoomUtilities.IsEveryCellUnique(allCellsList))
             {
-                GeneralUtilities.RandomizeRandom(seededRandom);
+                GeneralUtilities.RandomizeRandomByRandom(localRandom);
                 continue;
             }
 
@@ -221,13 +238,54 @@ public class RoomGenerator : MonoBehaviour
 
         if (debug) Debug.Log($"Found a Valid Cell Layout in {generationIterationsCount} Iteration(s)");
 
-        VisualizeGeneratedRooms(nonAssignedCells, startCell, endCell, shopCells, treasureCells, narrativeCells, eventCells);
+        #endregion
+
+        #region Non 1x1 Dimensional Cell Candidate Replacement
+        List<PlacedRoom> replacementPlacedRooms = new List<PlacedRoom>();
+
+        HashSet<Vector2Int> untouchableCells = new HashSet<Vector2Int>();
+        untouchableCells.Add(startCell);
+        untouchableCells.Add(endCell);
+        untouchableCells.UnionWith(shopCells);
+        untouchableCells.UnionWith(treasureCells);
+        untouchableCells.UnionWith(narrativeCells);
+        untouchableCells.UnionWith(eventCells);
+
+        HashSet<Vector2Int> replacementCandidatesPool = new HashSet<Vector2Int>(nonAssignedCells);
+        replacementCandidatesPool = RoomUtilities.ShuffleCells(replacementCandidatesPool, localRandom);
+
+        foreach(RoomShapeCandidates roomShapeCandidates in roomShapeCandidatesList)
+        {
+            RoomShape roomShape = roomShapeCandidates.roomShape;
+            int targetCount = roomShapeCandidates.targetReplacements;
+            int placedCount = 0;
+
+            foreach (Vector2Int anchorCell in replacementCandidatesPool)
+            {
+                if (placedCount >= targetCount) break;
+
+                HashSet<Vector2Int> desiredOccupiedCells = RoomUtilities.GetShapeOccupiedCells(anchorCell, roomShape);
+
+                bool hasConflict = desiredOccupiedCells.Any(cell => untouchableCells.Contains(cell));
+
+                if (hasConflict) continue;
+
+                untouchableCells.UnionWith(desiredOccupiedCells);
+                nonAssignedCells.ExceptWith(desiredOccupiedCells);
+
+                replacementPlacedRooms.Add(new PlacedRoom(anchorCell, roomShape));
+                placedCount++;
+            }
+        }
+        #endregion
+
+        VisualizeGeneratedRooms(nonAssignedCells, startCell, endCell, shopCells, treasureCells, narrativeCells, eventCells, replacementPlacedRooms);
     }
 
-    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells, HashSet<Vector2Int> narrativeCells, HashSet<Vector2Int> eventCells)
+    private void VisualizeGeneratedRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells, HashSet<Vector2Int> narrativeCells, HashSet<Vector2Int> eventCells, List<PlacedRoom> replacementPlacedRooms)
     {
-        float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x + RoomUtilities.GetRoomRealSpacing().x;
-        float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y + RoomUtilities.GetRoomRealSpacing().y;
+        float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x;
+        float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y;
 
         #region StartCell
         Vector3 startCellWorldPos = new Vector3(startCell.x * XrealRoomSpacing, startCell.y * YrealRoomSpacing, 0f);
@@ -271,12 +329,44 @@ public class RoomGenerator : MonoBehaviour
         }
         #endregion
 
+        #region ReplacementNonAssignedCells
+        foreach (PlacedRoom replacementRoom in replacementPlacedRooms)
+        {
+            Transform prefab = replacementRoom.roomShape switch
+            {
+                RoomShape.Horizontal2x1 => testRoomHorizontal2x1,
+                RoomShape.Vertical1x2 => testRoomVertical1x2,
+                RoomShape.Square2x2 => testRoomSquare2x2,
+                RoomShape.LShapedA => testRoomLShapedA,
+                RoomShape.LShapedB => testRoomLShapedB,
+                RoomShape.LShapedC => testRoomLShapedC,
+                RoomShape.LShapedD => testRoomLShapedD,
+                _ => testRoomUnassigned,
+            };
+
+            Vector3 worldPos = new Vector3(replacementRoom.anchorCell.x * XrealRoomSpacing, replacementRoom.anchorCell.y * YrealRoomSpacing, 0f);
+            Instantiate(prefab, worldPos, Quaternion.identity, roomsHolder);
+        }
+        #endregion
+
         #region NonAssignedCells
         foreach (Vector2Int cell in nonAssignedCells)
         {
             Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(testRoomAny, worldPos, Quaternion.identity, roomsHolder);
+            Instantiate(testRoomUnassigned, worldPos, Quaternion.identity, roomsHolder);
         }
         #endregion
+    }
+}
+
+public class PlacedRoom
+{
+    public Vector2Int anchorCell;
+    public RoomShape roomShape;
+
+    public PlacedRoom(Vector2Int anchorCell, RoomShape roomShape)
+    {
+        this.anchorCell = anchorCell;
+        this.roomShape = roomShape;
     }
 }

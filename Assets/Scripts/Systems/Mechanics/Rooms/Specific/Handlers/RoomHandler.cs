@@ -8,10 +8,10 @@ public class RoomHandler : MonoBehaviour
     [SerializeField] private int id;
     [SerializeField] private RoomDificulty roomDificulty;
     [SerializeField] private RoomType roomType;
-    [SerializeField] private Vector2Int roomDimensions = new Vector2Int (1,1);
+    [SerializeField] private RoomShape roomShape;
 
     public int ID => id;
     public RoomDificulty RoomDificulty => roomDificulty;
     public RoomType RoomType => roomType;
-    public Vector2Int RoomDimensions => roomDimensions;
+    public RoomShape RoomShape => roomShape;
 }

@@ -69,7 +69,7 @@ public static class GeneralUtilities
         return new System.Random(hashedSeed);
     }
 
-    public static System.Random RandomizeRandom(System.Random random)
+    public static System.Random RandomizeRandomByRandom(System.Random random)
     {
         int newSeed = random.Next(int.MinValue, int.MaxValue); // Get a New Seed based on the argument random
         return new System.Random(newSeed); // Return a new Random seeded with that Seed

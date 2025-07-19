@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.VisualScripting;
 
 public static class RoomUtilities
 {
@@ -11,9 +10,6 @@ public static class RoomUtilities
 
     private const float X_ROOM_REAL_SIZE = 16f;
     private const float Y_ROOM_REAL_SIZE = 9f;
-
-    private const float X_ROOM_REAL_SPACING = 0f;
-    private const float Y_ROOM_REAL_SPACING = 0f;
 
     private const int RANDOM_WALK_STUCK_COUNT_THRESHOLD = 5;
 
@@ -26,9 +22,20 @@ public static class RoomUtilities
         Vector2Int.right
     };
 
+    private static readonly Dictionary<RoomShape, List<Vector2Int>> roomShapeLocalCellOccupations = new()
+    {
+        { RoomShape.SingleCell, new() { new Vector2Int(0, 0) } },
+        { RoomShape.Horizontal2x1, new() { new Vector2Int(0, 0), new Vector2Int(1, 0) } },
+        { RoomShape.Vertical1x2, new() { new Vector2Int(0, 0), new Vector2Int(0, 1) } },
+        { RoomShape.Square2x2, new() {new Vector2Int(0, 0), new Vector2Int(1, 0),new Vector2Int(0, 1), new Vector2Int(1, 1)}},
+        { RoomShape.LShapedA, new() {new Vector2Int(0, 0), new Vector2Int(1, 0),new Vector2Int(0, 1)}},
+        { RoomShape.LShapedB, new() {new Vector2Int(0, 0), new Vector2Int(1, 0),new Vector2Int(1, 1)}},
+        { RoomShape.LShapedC, new() {new Vector2Int(0, 0), new Vector2Int(-1, 0),new Vector2Int(0, -1)}},
+        { RoomShape.LShapedD, new() {new Vector2Int(0, 0), new Vector2Int(-1, 0),new Vector2Int(-1, -1)}},
+    };
+
     public static Vector2Int GetRandomWalkStartingCell() => new Vector2Int(X_RANDOM_WALK_STARTING_CELL, Y_RANDOM_WALK_STARTING_CELL);
     public static Vector2 GetRoomRealSize() => new Vector2(X_ROOM_REAL_SIZE, Y_ROOM_REAL_SIZE);
-    public static Vector2 GetRoomRealSpacing() => new Vector2(X_ROOM_REAL_SPACING, Y_ROOM_REAL_SPACING);
 
     #region Random
     public static Vector2Int GetRandomCellFromPool(HashSet<Vector2Int> cellPool, System.Random random)
@@ -74,7 +81,7 @@ public static class RoomUtilities
         foreach(Vector2Int cell in cells)
         {
             HashSet<Vector2Int> cellNeighbors = Get4DirectionalCellNeighbors(cell);
-            neighborCells.AddRange(cellNeighbors);
+            neighborCells.UnionWith(cellNeighbors);
         }
 
         return neighborCells;
@@ -247,6 +254,28 @@ public static class RoomUtilities
         }
 
         return true;
+    }
+    #endregion
+
+    #region RoomShape
+    public static List<Vector2Int> GetRoomShapeLocalCellOccupations(this RoomShape shape)
+    {
+        if (roomShapeLocalCellOccupations.TryGetValue(shape, out var offsets)) return offsets;
+
+        Debug.LogWarning($"Room Shape '{shape}' not found. Returning single-cell fallback (0,0).");
+        return new() { new Vector2Int(0, 0) };
+    }
+
+    public static HashSet<Vector2Int> GetShapeOccupiedCells(Vector2Int anchorCell, RoomShape shape)
+    {
+        HashSet<Vector2Int> realCellOccupations = new();
+
+        foreach (Vector2Int localCellOccupation in shape.GetRoomShapeLocalCellOccupations())
+        {
+            realCellOccupations.Add(anchorCell + localCellOccupation);
+        }
+
+        return realCellOccupations;
     }
     #endregion
 

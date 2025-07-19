@@ -29,6 +29,9 @@ public class LevelRoomSettingsSO : ScriptableObject
     [Range(0, 2)] public int minRoomDistanceBetweenNonEmptyRooms = 1;
     [Range(0, 3)] public int maxRoomDistanceBetweenNonEmptyRooms = 1;
 
+    [Header("Non 1x1 Candidates")]
+    public List<RoomShapeCandidates> roomShapeCandidates;
+
     public float GetStartRoomCenteringBias(System.Random random)
     {
         float startRoomCenteringBias = startRoomCenteringMinBias + (float)random.NextDouble() * (startRoomCenteringMaxBias - startRoomCenteringMinBias);
@@ -40,4 +43,11 @@ public class LevelRoomSettingsSO : ScriptableObject
         int roomDistanceBetweenNonEmptyRooms = random.Next(minRoomDistanceBetweenNonEmptyRooms, maxRoomDistanceBetweenNonEmptyRooms);
         return roomDistanceBetweenNonEmptyRooms;
     }
+}
+
+[System.Serializable]
+public class RoomShapeCandidates
+{
+    public RoomShape roomShape;
+    [Range(0, 5)] public int targetReplacements;
 }

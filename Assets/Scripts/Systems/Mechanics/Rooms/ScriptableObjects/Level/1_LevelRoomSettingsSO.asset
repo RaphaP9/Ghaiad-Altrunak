@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   roomsQuantity: 25
-  roomsGridSize: {x: 15, y: 15}
+  roomsGridSize: {x: 10, y: 10}
   roomsPool: []
   shopRooms: 1
   treasureRooms: 1
@@ -24,3 +24,10 @@ MonoBehaviour:
   startRoomCenteringMaxBias: 0.25
   minRoomDistanceBetweenNonEmptyRooms: 1
   maxRoomDistanceBetweenNonEmptyRooms: 1
+  roomShapeCandidates:
+  - roomShape: 1
+    targetReplacements: 1
+  - roomShape: 2
+    targetReplacements: 1
+  - roomShape: 4
+    targetReplacements: 1

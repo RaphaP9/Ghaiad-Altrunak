@@ -16645,13 +16645,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomsHolder: {fileID: 946910393}
   generalRoomsSettings: {fileID: 11400000, guid: 68ab6b8bcb9ccb04bb1a9f3119c5179a, type: 2}
-  testRoomAny: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
+  testRoomUnassigned: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
   testRoomStart: {fileID: 6266022080058502463, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
   testRoomEnd: {fileID: 6266022080058502463, guid: 0886ef9900f90184fa0a7a6c62fb4095, type: 3}
   testRoomShop: {fileID: 6266022080058502463, guid: bd3e2fcc27709394fb2be79e322ee3a9, type: 3}
   testRoomTreasure: {fileID: 6266022080058502463, guid: 9da1ad8cfffc48e49be57b2e5b4bb8fe, type: 3}
   testRoomNarrative: {fileID: 6266022080058502463, guid: 39b9ded056e60cb46a2af5085985b074, type: 3}
   testRoomEvent: {fileID: 6266022080058502463, guid: aaf5e5db27be80242a90b7aee5154496, type: 3}
+  testRoomHorizontal2x1: {fileID: 6266022080058502463, guid: f4d8db37500452341af1ba704bcf665f, type: 3}
+  testRoomVertical1x2: {fileID: 6266022080058502463, guid: 85be51131615c244f83a0b0dabc8d07c, type: 3}
+  testRoomSquare2x2: {fileID: 6266022080058502463, guid: be172b07a74fffb46848f5339a37c603, type: 3}
+  testRoomLShapedA: {fileID: 6266022080058502463, guid: 50263437b31d40547896ec6042d7a199, type: 3}
+  testRoomLShapedB: {fileID: 6266022080058502463, guid: 1b3703449400aeb408638ac6119ce125, type: 3}
+  testRoomLShapedC: {fileID: 6266022080058502463, guid: 83f6639fe98b8ca44810bff9d0fc3155, type: 3}
+  testRoomLShapedD: {fileID: 6266022080058502463, guid: 916765f6cd880914484e49a041b3f44e, type: 3}
+  debug: 1
 --- !u!1 &765715324
 GameObject:
   m_ObjectHideFlags: 0
