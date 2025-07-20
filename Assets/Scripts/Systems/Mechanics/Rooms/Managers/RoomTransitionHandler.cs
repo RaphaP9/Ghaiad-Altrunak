@@ -8,6 +8,10 @@ public class RoomTransitionHandler : MonoBehaviour
 {
     public static RoomTransitionHandler Instance { get; private set; }
 
+    [Header("Components")]
+    [SerializeField] private CinemachineVirtualCamera mainCMVCAM;
+    [SerializeField] private CinemachineVirtualCamera auxCMVCAM;
+
     [Header("Settings")]
     [SerializeField, Range(0.1f, 2f)] private float roomTransitionTime;
 
@@ -45,10 +49,10 @@ public class RoomTransitionHandler : MonoBehaviour
         if (transitioningToRoom) return;
         if (previousRoom == nextRoom) return;
 
-        StartCoroutine(TransitionToRoomCoroutine(previousRoom, nextRoom, targetTransformToPosition));   
+        StartCoroutine(TransitionToRoomCoroutineCameraSwitch(previousRoom, nextRoom, targetTransformToPosition));   
     }
 
-    private IEnumerator TransitionToRoomCoroutine(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
+    private IEnumerator TransitionToRoomCoroutineConfinerSwitch(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
     {
         transitioningToRoom = true;
 
@@ -64,6 +68,26 @@ public class RoomTransitionHandler : MonoBehaviour
         CinemachineCore.Instance.GetActiveBrain(0).ManualUpdate();
 
         yield return new WaitForSeconds(roomTransitionTime);
+
+        transitioningToRoom = false;
+    }
+
+    private IEnumerator TransitionToRoomCoroutineCameraSwitch(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
+    {
+        transitioningToRoom = true;
+
+        CameraConfinerHandler.Instance.SwitchConfiner(auxCMVCAM, nextRoom.RoomConfiner);
+        PlayerTeleporterManager.Instance.InstantPositionPlayer(GeneralUtilities.TransformPositionVector2(targetTransformToPosition));
+
+        auxCMVCAM.enabled = true;
+        mainCMVCAM.enabled = false;
+
+        yield return new WaitForSeconds(roomTransitionTime);
+
+        CameraConfinerHandler.Instance.SwitchConfiner(mainCMVCAM, nextRoom.RoomConfiner);
+
+        auxCMVCAM.enabled = false;
+        mainCMVCAM.enabled = true;
 
         transitioningToRoom = false;
     }

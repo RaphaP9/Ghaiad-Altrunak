@@ -72,6 +72,25 @@ public class CameraConfinerHandler : MonoBehaviour
         cinemachineConfiner2D.enabled = true;
     }
 
+    public void SwitchConfiner(CinemachineVirtualCamera CMVCAM, Collider2D confiner)
+    {
+        CinemachineConfiner2D cinemachineConfiner2D = CMVCAM.transform.GetComponent<CinemachineConfiner2D>();
+
+        if (cinemachineConfiner2D == null) return;
+
+        cinemachineConfiner2D.m_BoundingShape2D = confiner;
+        cinemachineConfiner2D.enabled = false; //Force Reinitialization 
+        cinemachineConfiner2D.enabled = true;
+    }
+
+    public void SwitchConfiner(List<CinemachineVirtualCamera> CMVCAMs, Collider2D confiner)
+    {
+        foreach(CinemachineVirtualCamera CMVCAM in CMVCAMs)
+        {
+            SwitchConfiner(CMVCAM, confiner);
+        }
+    }
+
     public void EnableConfiner() => cinemachineConfiner2D.enabled = true;
     public void DisableConfiner() => cinemachineConfiner2D.enabled = false;
 
@@ -79,4 +98,6 @@ public class CameraConfinerHandler : MonoBehaviour
     public void RemoveCameraFollowTransform() => CMVCAM.Follow = null;
     public void RecoverCameraFollowTransform() => CMVCAM.Follow = cameraFollowTransform;
     public void SetCameraFollowTransform(Transform followTransform) => CMVCAM.Follow = followTransform;
+
+
 }
