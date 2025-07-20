@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using UnityEngine.Rendering;
 
 public class RoomTransitionHandler : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class RoomTransitionHandler : MonoBehaviour
     [SerializeField] private bool transitioningToRoom;
 
     public bool TransitioningToRoom => transitioningToRoom;
+
+    private const float DAMPING_TRANSITION_DURATION_EMPIRIC_FACTOR = .05f;
 
     private void Awake()
     {
@@ -38,6 +42,7 @@ public class RoomTransitionHandler : MonoBehaviour
 
     public void TransitionToRoom(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
     {
+        if (transitioningToRoom) return;
         if (previousRoom == nextRoom) return;
 
         StartCoroutine(TransitionToRoomCoroutine(previousRoom, nextRoom, targetTransformToPosition));   
@@ -47,9 +52,18 @@ public class RoomTransitionHandler : MonoBehaviour
     {
         transitioningToRoom = true;
 
+        CameraConfinerHandler.Instance.SaveCurrentCameraFollowTransform();
+        CameraConfinerHandler.Instance.RemoveCameraFollowTransform();
+
+        CameraConfinerHandler.Instance.DisableConfiner();
         PlayerTeleporterManager.Instance.InstantPositionPlayer(GeneralUtilities.TransformPositionVector2(targetTransformToPosition));
 
-        yield return StartCoroutine(CameraConfinerHandler.Instance.SmoothSwitchConfinerCoroutine(nextRoom.RoomConfiner, roomTransitionTime));
+        CameraConfinerHandler.Instance.SwitchConfiner(nextRoom.RoomConfiner);
+        CameraConfinerHandler.Instance.RecoverCameraFollowTransform();
+
+        CinemachineCore.Instance.GetActiveBrain(0).ManualUpdate();
+
+        yield return new WaitForSeconds(roomTransitionTime);
 
         transitioningToRoom = false;
     }

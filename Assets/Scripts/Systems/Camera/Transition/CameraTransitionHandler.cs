@@ -29,6 +29,8 @@ public class CameraTransitionHandler : MonoBehaviour
     private const float POSITION_DIFFERENCE_THRESHOLD = 0.2f;
     private const float DISTANCE_DIFFERENCE_THRESHOLD = 0.05f;
 
+    private const float SIMPLE_TRANSITION_POSITION_DIFFERENCE_THRESHOLD = 0.01f;
+
     private Transform currentCameraFollowTransform;
     private float previousCameraDistance;
 
@@ -79,6 +81,8 @@ public class CameraTransitionHandler : MonoBehaviour
     private void SetCurrentCameraFollowTransform(Transform transform) => currentCameraFollowTransform = transform;
     private void ClearCurrentCameraFollowTransform() => currentCameraFollowTransform = null;
     private void SetPreviousCameraDistance(float distance) => previousCameraDistance = distance;
+    public Vector3 CaptureCameraPosition() => cameraRefferenceTransform.position;    
+    public void SetCameraPosition(Vector3 position) => cameraRefferenceTransform.position = position;
 
     public void TransitionMoveCamera(CameraTransition cameraTransition)
     {

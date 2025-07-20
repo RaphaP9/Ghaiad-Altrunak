@@ -16,6 +16,7 @@ public class CameraConfinerHandler : MonoBehaviour
 
     private CinemachineTransposer cinemachineTransposer;
     private Vector3 originalDamping;
+    private Transform cameraFollowTransform;
 
     private void OnEnable()
     {
@@ -53,31 +54,43 @@ public class CameraConfinerHandler : MonoBehaviour
         originalDamping = new Vector3(cinemachineTransposer.m_XDamping, cinemachineTransposer.m_YDamping, cinemachineTransposer.m_ZDamping);
     }
 
-    private void SetDamping(Vector3 damping)
+    public void SetDamping(Vector3 damping)
     {
         cinemachineTransposer.m_XDamping = damping.x;
         cinemachineTransposer.m_YDamping = damping.y;
         cinemachineTransposer.m_ZDamping = damping.z;
     }
 
+    public void DisableDamping() => SetDamping(Vector3.zero);
+    public void RecoverOriginalDamping() => SetDamping(originalDamping);
+
     public IEnumerator SmoothSwitchConfinerCoroutine(PolygonCollider2D newConfiner, float switchTime)
     {
+        SaveCurrentCameraFollowTransform();
+        RemoveCameraFollowTransform();
+
         DisableConfiner();
 
         yield return new WaitForSeconds(switchTime);
 
+        SetCameraFollowTransform(cameraFollowTransform);
         SwitchConfiner(newConfiner);
     }
 
-    private void SwitchConfiner(PolygonCollider2D confiner)
+    public void SwitchConfiner(PolygonCollider2D confiner)
     {
         cinemachineConfiner2D.m_BoundingShape2D = confiner;
         cinemachineConfiner2D.enabled = false; //Force Reinitialization 
         cinemachineConfiner2D.enabled = true;
     }
 
-    private void EnableConfiner() => cinemachineConfiner2D.enabled = true;
-    private void DisableConfiner() => cinemachineConfiner2D.enabled = false;
+    public void EnableConfiner() => cinemachineConfiner2D.enabled = true;
+    public void DisableConfiner() => cinemachineConfiner2D.enabled = false;
+
+    public void SaveCurrentCameraFollowTransform() => cameraFollowTransform = CMVCAM.Follow;
+    public void RemoveCameraFollowTransform() => CMVCAM.Follow = null;
+    public void RecoverCameraFollowTransform() => CMVCAM.Follow = cameraFollowTransform;
+    public void SetCameraFollowTransform(Transform followTransform) => CMVCAM.Follow = followTransform;
 
     private void CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow(object sender, CameraTransitionHandler.OnCameraTransitionEventArgs e)
     {
