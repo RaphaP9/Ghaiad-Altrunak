@@ -17,11 +17,7 @@ public class RoomTransitionHandler : MonoBehaviour
 
     [Header("Runtime Filled")]
     [SerializeField] private bool transitioningToRoom;
-
     public bool TransitioningToRoom => transitioningToRoom;
-
-    private const float DAMPING_TRANSITION_DURATION_EMPIRIC_FACTOR = .05f;
-
     private void Awake()
     {
         SetSingleton();
@@ -52,6 +48,7 @@ public class RoomTransitionHandler : MonoBehaviour
         StartCoroutine(TransitionToRoomCoroutineCameraSwitch(previousRoom, nextRoom, targetTransformToPosition));   
     }
 
+    //Depends on CinemachineConfiner2D Damping
     private IEnumerator TransitionToRoomCoroutineConfinerSwitch(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
     {
         transitioningToRoom = true;
@@ -72,6 +69,7 @@ public class RoomTransitionHandler : MonoBehaviour
         transitioningToRoom = false;
     }
 
+    //Depends on CinemachineBrain Blend Settings
     private IEnumerator TransitionToRoomCoroutineCameraSwitch(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
     {
         transitioningToRoom = true;
