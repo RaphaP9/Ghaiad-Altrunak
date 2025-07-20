@@ -16885,7 +16885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomsHolder: {fileID: 946910393}
   generalRoomsSettings: {fileID: 11400000, guid: 68ab6b8bcb9ccb04bb1a9f3119c5179a, type: 2}
-  placedRooms: []
+  primitiveRooms: []
   testRoomUnassigned: {fileID: 6266022080058502463, guid: f26dbcf9c820e4d488374bb292415250, type: 3}
   testRoomStart: {fileID: 6266022080058502463, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
   testRoomEnd: {fileID: 6266022080058502463, guid: 0886ef9900f90184fa0a7a6c62fb4095, type: 3}
@@ -38529,6 +38529,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomB
       objectReference: {fileID: 0}
+    - target: {fileID: 7216666027498792759, guid: aa613bacbc0e70c4ca15152216e2bb96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -42847,6 +42851,10 @@ PrefabInstance:
     - target: {fileID: 7216666027498792759, guid: aa613bacbc0e70c4ca15152216e2bb96, type: 3}
       propertyPath: m_Name
       value: RoomA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216666027498792759, guid: aa613bacbc0e70c4ca15152216e2bb96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

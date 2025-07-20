@@ -21,15 +21,5 @@ MonoBehaviour:
   eventRooms: 5
   narrativeRooms: 3
   startRoomCenteringMinBias: 0
-  startRoomCenteringMaxBias: 0.25
-  minRoomDistanceBetweenNonEmptyRooms: 1
-  maxRoomDistanceBetweenNonEmptyRooms: 1
-  roomShapeCandidates:
-  - roomShape: 4
-    targetReplacements: 1
-  - roomShape: 5
-    targetReplacements: 1
-  - roomShape: 6
-    targetReplacements: 1
-  - roomShape: 7
-    targetReplacements: 1
+  startRoomCenteringMaxBias: 0
+  roomShapeCandidates: []

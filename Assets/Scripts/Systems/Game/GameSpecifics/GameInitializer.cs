@@ -33,7 +33,7 @@ public class GameInitializer : MonoBehaviour
 
     private void InitializeGame(System.Random random)
     {
-        //RoomGenerator.Instance.GenerateRooms(random);
+        RoomGenerator.Instance.GenerateRooms(random);
         PlayerCharacterManager.Instance.InstantiatePlayer();
     }
 }
