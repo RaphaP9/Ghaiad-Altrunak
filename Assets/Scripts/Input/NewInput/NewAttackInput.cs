@@ -28,7 +28,6 @@ public class NewAttackInput : AttackInput
 
         //if (GameManager.Instance.GameState != GameManager.State.OnWave) return false;
         if (PauseManager.Instance.GamePaused) return false;
-        if (CameraTransitionHandler.Instance.CameraState != CameraTransitionHandler.State.FollowingPlayer) return false;
 
         return true;
     }

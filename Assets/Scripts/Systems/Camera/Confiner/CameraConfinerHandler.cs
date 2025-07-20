@@ -18,18 +18,6 @@ public class CameraConfinerHandler : MonoBehaviour
     private Vector3 originalDamping;
     private Transform cameraFollowTransform;
 
-    private void OnEnable()
-    {
-        CameraTransitionHandler.OnCameraTransitionPositionDeterminedPreFollow += CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow;
-        CameraTransitionHandler.OnCameraTransitionPositionDeterminedEnd += CameraTransitionHandler_OnCameraTransitionPositionDeterminedEnd;
-    }
-
-    private void OnDisable()
-    {
-        CameraTransitionHandler.OnCameraTransitionPositionDeterminedPreFollow -= CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow;
-        CameraTransitionHandler.OnCameraTransitionPositionDeterminedEnd -= CameraTransitionHandler_OnCameraTransitionPositionDeterminedEnd;
-    }
-
     private void Awake()
     {
         SetSingleton();
@@ -77,7 +65,7 @@ public class CameraConfinerHandler : MonoBehaviour
         SwitchConfiner(newConfiner);
     }
 
-    public void SwitchConfiner(PolygonCollider2D confiner)
+    public void SwitchConfiner(Collider2D confiner)
     {
         cinemachineConfiner2D.m_BoundingShape2D = confiner;
         cinemachineConfiner2D.enabled = false; //Force Reinitialization 
@@ -91,14 +79,4 @@ public class CameraConfinerHandler : MonoBehaviour
     public void RemoveCameraFollowTransform() => CMVCAM.Follow = null;
     public void RecoverCameraFollowTransform() => CMVCAM.Follow = cameraFollowTransform;
     public void SetCameraFollowTransform(Transform followTransform) => CMVCAM.Follow = followTransform;
-
-    private void CameraTransitionHandler_OnCameraTransitionPositionDeterminedPreFollow(object sender, CameraTransitionHandler.OnCameraTransitionEventArgs e)
-    {
-        DisableConfiner();
-    }
-
-    private void CameraTransitionHandler_OnCameraTransitionPositionDeterminedEnd(object sender, CameraTransitionHandler.OnCameraTransitionEventArgs e)
-    {
-        EnableConfiner();
-    }
 }

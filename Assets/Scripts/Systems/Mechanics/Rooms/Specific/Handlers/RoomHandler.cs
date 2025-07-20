@@ -11,7 +11,7 @@ public class RoomHandler : MonoBehaviour
     [SerializeField] private RoomShape roomShape;
 
     [Header("Components")]
-    [SerializeField] private PolygonCollider2D roomConfiner;
+    [SerializeField] private CompositeCollider2D roomConfiner;
 
     [Header("Spawn Positions")]
     [SerializeField] private Transform defaultSpawnPosition;
@@ -25,7 +25,7 @@ public class RoomHandler : MonoBehaviour
     public RoomType RoomType => roomType;
     public RoomShape RoomShape => roomShape;
 
-    public PolygonCollider2D RoomConfiner => roomConfiner;
+    public CompositeCollider2D RoomConfiner => roomConfiner;
     public Transform DefaultSpawnPosition => defaultSpawnPosition;
     public List<Transform> DoorSpawnPositions => doorSpawnPositions;
 }
