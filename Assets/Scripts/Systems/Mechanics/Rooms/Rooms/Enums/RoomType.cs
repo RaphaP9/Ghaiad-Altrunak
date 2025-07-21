@@ -10,5 +10,5 @@ public enum RoomType
     Treasure,
     Narrative,
     Event,
-    Transition
+    Regular
 }

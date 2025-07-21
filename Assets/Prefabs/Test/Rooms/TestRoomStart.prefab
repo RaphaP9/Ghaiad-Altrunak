@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6266022080058502463}
+  - component: {fileID: -294618904299698205}
   m_Layer: 0
   m_Name: TestRoomStart
   m_TagString: Untagged
@@ -32,6 +33,26 @@ Transform:
   - {fileID: 8012376555362316356}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-294618904299698205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6615146075823856499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7fdc9e2177c10418039376a00444fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 9991
+  roomDificulty: 0
+  roomType: 0
+  roomShape: 0
+  roomConfiner: {fileID: 0}
+  defaultSpawnPosition: {fileID: 0}
+  doorSpawnPositions: []
+  doorHandlers: []
 --- !u!1 &8685086469144075604
 GameObject:
   m_ObjectHideFlags: 0

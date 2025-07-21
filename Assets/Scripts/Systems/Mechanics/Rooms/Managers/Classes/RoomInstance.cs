@@ -5,12 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class RoomInstance
 {
-    public Vector2Int position;
-    public RoomHandler roomHandler;
+    public Transform roomTransform;
+    public Vector2Int anchorCell;
+    public List<Vector2Int> occupiedCells; //Only List to visualize on inspector, otherwise can be HashSet
 
-    public RoomInstance(Vector2Int pos, RoomHandler handler)
+    public RoomInstance(Transform roomTransform, Vector2Int anchorCell, List<Vector2Int> occupiedCells)
     {
-        position = pos;
-        roomHandler = handler;
+        this.roomTransform = roomTransform;
+        this.anchorCell = anchorCell;
+        this.occupiedCells = occupiedCells;
     }
 }

@@ -52,9 +52,14 @@ public static class RoomUtilities
         return Vector2Int.zero;
     }
 
-    public static HashSet<Vector2Int> ShuffleCells(HashSet<Vector2Int> cells, System.Random random)
+    public static HashSet<Vector2Int> ShuffleCellsHashSet(HashSet<Vector2Int> cells, System.Random random)
     {
         return new HashSet<Vector2Int>(cells.OrderBy(_ => random.NextDouble()));
+    }
+
+    public static List<Transform> ShuffleTransformsList(List<Transform> transforms, System.Random random)
+    {
+        return new List<Transform>(transforms.OrderBy(_ => random.NextDouble()));
     }
     #endregion
 
@@ -330,17 +335,17 @@ public static class RoomUtilities
     {
         HashSet<Vector2Int> oneNeighborCells = GetCellsWithNNeightbors(cellsPool, checkPool,1);
 
-        if(oneNeighborCells.Count >= 1) return ShuffleCells(oneNeighborCells, random);
+        if(oneNeighborCells.Count >= 1) return ShuffleCellsHashSet(oneNeighborCells, random);
 
         HashSet<Vector2Int> twoNeighborCells = GetCellsWithNNeightbors(cellsPool, checkPool,2);
 
-        if (twoNeighborCells.Count >= 1) return ShuffleCells(twoNeighborCells, random);
+        if (twoNeighborCells.Count >= 1) return ShuffleCellsHashSet(twoNeighborCells, random);
 
         HashSet<Vector2Int> threeNeighborCells = GetCellsWithNNeightbors(cellsPool, checkPool,3);
 
-        if (threeNeighborCells.Count >= 1) return ShuffleCells(threeNeighborCells, random);
+        if (threeNeighborCells.Count >= 1) return ShuffleCellsHashSet(threeNeighborCells, random);
 
-        return ShuffleCells(GetCellsWithNNeightbors(cellsPool, checkPool, 4), random);
+        return ShuffleCellsHashSet(GetCellsWithNNeightbors(cellsPool, checkPool, 4), random);
     }
 
     //Get Cells with N neightbors
@@ -413,4 +418,38 @@ public static class RoomUtilities
     }
     #endregion
 
+    #region RoomInstantiation
+    public static Transform GetRoomTransformFromPoolByPreliminarRoom(List<Transform> roomTransformsPool, PreliminarRoom preliminarRoom)
+    {
+        foreach(Transform roomTransform in roomTransformsPool)
+        {
+            if (!roomTransform.TryGetComponent(out RoomHandler roomHandler)) continue;
+            if(roomHandler.RoomType != preliminarRoom.roomType) continue;
+            if(roomHandler.RoomShape != preliminarRoom.roomShape) continue;
+
+            return roomTransform;
+        }
+
+        Debug.Log($"No Room Transform Matches the PreliminarRoom - RoomShape: {preliminarRoom.roomType} - RoomType: {preliminarRoom.roomShape}.");
+        return null;
+    }
+
+
+    public static Transform GetDifferentRoomTransformFromPoolByPreliminarRoom(List<Transform> roomTransformsPool, List<Transform> remainingUniqueRoomTransformsPool,  PreliminarRoom preliminarRoom)
+    {
+        foreach (Transform roomTransform in remainingUniqueRoomTransformsPool)
+        {
+            if (!roomTransform.TryGetComponent(out RoomHandler roomHandler)) continue;
+            if (roomHandler.RoomType != preliminarRoom.roomType) continue;
+            if (roomHandler.RoomShape != preliminarRoom.roomShape) continue;
+
+            return roomTransform;
+        }
+
+        Debug.Log($"No Room Transform in RemainingUniqueRoomTransformsPool Matches the PreliminarRoom - RoomShape: {preliminarRoom.roomType} - RoomType: {preliminarRoom.roomShape}. Trying non unique room finding.");
+        
+        Transform nonUniqueRoomTransform = GetRoomTransformFromPoolByPreliminarRoom(roomTransformsPool, preliminarRoom);
+        return nonUniqueRoomTransform;
+    }
+    #endregion
 }

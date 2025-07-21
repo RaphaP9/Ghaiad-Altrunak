@@ -12,29 +12,15 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
     [Header("Runtime Filled")]
-    [SerializeField] private List<PrimitiveRoom> primitiveRooms;
-
-    [Header("Testing")]
-    [SerializeField] private Transform testRoomUnassigned;
-    [SerializeField] private Transform testRoomStart;
-    [SerializeField] private Transform testRoomEnd;
-    [SerializeField] private Transform testRoomShop;
-    [SerializeField] private Transform testRoomTreasure;
-    [SerializeField] private Transform testRoomNarrative;
-    [SerializeField] private Transform testRoomEvent;
-    [Space]
-    [SerializeField] private Transform testRoomHorizontal2x1;
-    [SerializeField] private Transform testRoomVertical1x2;
-    [SerializeField] private Transform testRoomSquare2x2;
-    [SerializeField] private Transform testRoomLShapedA;
-    [SerializeField] private Transform testRoomLShapedB;
-    [SerializeField] private Transform testRoomLShapedC;
-    [SerializeField] private Transform testRoomLShapedD;
+    [SerializeField] private List<PreliminarRoom> preliminarRooms;
+    [SerializeField] private List<RoomInstance> roomInstances;
 
     [Header("Debug")]
     [SerializeField] private bool debug;
 
     private const int MAX_NUMBER_OF_GENERATION_ITERATIONS = 5;
+
+    private List<RoomInstance> preliminaryRoomInstances;
 
     private void Awake()
     {
@@ -59,16 +45,20 @@ public class RoomGenerator : MonoBehaviour
         #region Clear Lists & Containers
         LevelRoomSettingsSO levelRoomSettings = FindLevelRoomSettings();
 
-        primitiveRooms.Clear();
+        preliminarRooms.Clear();
+        roomInstances.Clear();
 
         #endregion
 
-        if (!FillRoomMapList(seededRandom, levelRoomSettings)) return;
+        if (!FillPreliminarRooms(seededRandom, levelRoomSettings)) return;
+        if(!FillPreliminaryRoomInstances(seededRandom,levelRoomSettings)) return;
+
+        InstantiateRooms();
     }
 
     private LevelRoomSettingsSO FindLevelRoomSettings() => generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
 
-    private bool FillRoomMapList(System.Random seededRandom, LevelRoomSettingsSO levelRoomSettings)
+    private bool FillPreliminarRooms(System.Random seededRandom, LevelRoomSettingsSO levelRoomSettings)
     {
         #region Initialize Variables & HashSets
         System.Random localRandom = GeneralUtilities.RandomizeRandomByRandom(seededRandom); //Can not clone the OG random but whatever
@@ -254,37 +244,35 @@ public class RoomGenerator : MonoBehaviour
 
         #endregion
 
-        #region First Primitive Room List Population
+        #region First Preliminar Room List Population
 
         //All Special Rooms are 1x1 Single Cell
 
-        primitiveRooms.Add(new PrimitiveRoom(startCell, RoomType.Start, RoomShape.SingleCell, new List<Vector2Int> {startCell}));
-        primitiveRooms.Add(new PrimitiveRoom(endCell, RoomType.End, RoomShape.SingleCell, new List<Vector2Int> { endCell }));
+        preliminarRooms.Add(new PreliminarRoom(startCell, RoomType.Start, RoomShape.SingleCell, new List<Vector2Int> {startCell}));
+        preliminarRooms.Add(new PreliminarRoom(endCell, RoomType.End, RoomShape.SingleCell, new List<Vector2Int> { endCell }));
 
         foreach (Vector2Int shopCell in shopCells)
         {
-            primitiveRooms.Add(new PrimitiveRoom(shopCell, RoomType.Shop, RoomShape.SingleCell, new List<Vector2Int> { shopCell }));
+            preliminarRooms.Add(new PreliminarRoom(shopCell, RoomType.Shop, RoomShape.SingleCell, new List<Vector2Int> { shopCell }));
         }
 
         foreach (Vector2Int treasureCell in treasureCells)
         {
-            primitiveRooms.Add(new PrimitiveRoom(treasureCell, RoomType.Treasure, RoomShape.SingleCell, new List<Vector2Int> { treasureCell }));
+            preliminarRooms.Add(new PreliminarRoom(treasureCell, RoomType.Treasure, RoomShape.SingleCell, new List<Vector2Int> { treasureCell }));
         }
 
         foreach (Vector2Int narrativeCell in narrativeCells)
         {
-            primitiveRooms.Add(new PrimitiveRoom(narrativeCell, RoomType.Narrative, RoomShape.SingleCell, new List<Vector2Int> { narrativeCell }));
+            preliminarRooms.Add(new PreliminarRoom(narrativeCell, RoomType.Narrative, RoomShape.SingleCell, new List<Vector2Int> { narrativeCell }));
         }
 
         foreach (Vector2Int eventCell in eventCells)
         {
-            primitiveRooms.Add(new PrimitiveRoom(eventCell, RoomType.Event, RoomShape.SingleCell, new List<Vector2Int> { eventCell }));
+            preliminarRooms.Add(new PreliminarRoom(eventCell, RoomType.Event, RoomShape.SingleCell, new List<Vector2Int> { eventCell }));
         }
         #endregion
 
         #region Non 1x1 Dimensional Cell Candidate Replacement
-        List<OnlyVisualPrimitiveRoom> replacementPrimitiveRooms = new List<OnlyVisualPrimitiveRoom>();
-
         HashSet<Vector2Int> untouchableCells = new HashSet<Vector2Int>();
         untouchableCells.Add(startCell);
         untouchableCells.Add(endCell);
@@ -299,7 +287,7 @@ public class RoomGenerator : MonoBehaviour
 
         foreach (RoomShapeCandidates roomShapeCandidates in roomShapeCandidatesList)
         {
-            replacementCandidatesPool = RoomUtilities.ShuffleCells(replacementCandidatesPool, localRandom);
+            replacementCandidatesPool = RoomUtilities.ShuffleCellsHashSet(replacementCandidatesPool, localRandom);
 
             RoomShape roomShape = roomShapeCandidates.roomShape;
             int targetCount = roomShapeCandidates.targetReplacements;
@@ -317,117 +305,71 @@ public class RoomGenerator : MonoBehaviour
                 untouchableCells.UnionWith(desiredOccupiedCellsBuffer);
                 nonAssignedCells.ExceptWith(desiredOccupiedCellsBuffer);
 
-                replacementPrimitiveRooms.Add(new OnlyVisualPrimitiveRoom(anchorCell, roomShape));
-
                 List<Vector2Int> occupiedCells = new(desiredOccupiedCellsBuffer);
 
-                primitiveRooms.Add(new PrimitiveRoom(anchorCell, RoomType.Transition, roomShape, occupiedCells)); //Populate Primitive Rooms List on Iteration, All are of Transition Room Type
+                preliminarRooms.Add(new PreliminarRoom(anchorCell, RoomType.Regular, roomShape, occupiedCells)); //Populate Preliminar Rooms List on Iteration, All are of Transition Room Type
                 replacedCount++;
             }
         }
         #endregion
 
-        #region Second Primitive Room List Population
+        #region Second Preliminar Room List Population
 
         //All Remaining Non Assigned Cells are 1x1 Single Cell Transition Type Rooms
 
         foreach (Vector2Int nonAssignedCell in nonAssignedCells)
         {
-            primitiveRooms.Add(new PrimitiveRoom(nonAssignedCell, RoomType.Transition, RoomShape.SingleCell, new List<Vector2Int> { nonAssignedCell }));
+            preliminarRooms.Add(new PreliminarRoom(nonAssignedCell, RoomType.Regular, RoomShape.SingleCell, new List<Vector2Int> { nonAssignedCell }));
         }
         #endregion
 
-        VisualizePreliminarRooms(nonAssignedCells, startCell, endCell, shopCells, treasureCells, narrativeCells, eventCells, replacementPrimitiveRooms);
-        
+        return true;
+    }
+    private bool FillPreliminaryRoomInstances(System.Random seededRandom, LevelRoomSettingsSO levelRoomSettingsSO)
+    {
+        List<Transform> totalRoomsTransformPool = new(levelRoomSettingsSO.roomsPool); //Create another list - we are going to make some shuffles
+        List<Transform> remainingUniqueRoomsPool = new(levelRoomSettingsSO.roomsPool);
+
+        List<RoomInstance> preliminaryRoomInstances = new();
+
+        foreach (PreliminarRoom preliminarRoom in preliminarRooms)
+        {
+            totalRoomsTransformPool = RoomUtilities.ShuffleTransformsList(totalRoomsTransformPool, seededRandom);
+            remainingUniqueRoomsPool = RoomUtilities.ShuffleTransformsList(remainingUniqueRoomsPool, seededRandom);
+
+            Transform foundRoomTransform = RoomUtilities.GetDifferentRoomTransformFromPoolByPreliminarRoom(totalRoomsTransformPool, remainingUniqueRoomsPool, preliminarRoom);
+
+            if(foundRoomTransform == null)
+            {
+                preliminaryRoomInstances.Clear();
+
+                if (debug) Debug.Log("No room transform was found. Can not generate rooms");
+                return false;
+            }
+
+            remainingUniqueRoomsPool.Remove(foundRoomTransform);
+
+            RoomInstance preliminaryRoomInstance = new(foundRoomTransform, preliminarRoom.anchorCell, preliminarRoom.occupiedCells );
+            preliminaryRoomInstances.Add(preliminaryRoomInstance);
+        }
+
+        this.preliminaryRoomInstances = preliminaryRoomInstances;
+
         return true;
     }
 
-    private void VisualizePreliminarRooms(HashSet<Vector2Int> nonAssignedCells, Vector2Int startCell, Vector2Int endCell, HashSet<Vector2Int> shopCells, HashSet<Vector2Int> treasureCells, HashSet<Vector2Int> narrativeCells, HashSet<Vector2Int> eventCells, List<OnlyVisualPrimitiveRoom> replacementPrimitiveRooms)
+    private void InstantiateRooms()
     {
         float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x;
         float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y;
 
-        #region StartCell
-        Vector3 startCellWorldPos = new Vector3(startCell.x * XrealRoomSpacing, startCell.y * YrealRoomSpacing, 0f);
-        Instantiate(testRoomStart, startCellWorldPos, Quaternion.identity, roomsHolder);
-        #endregion
-
-        #region EndCell
-        Vector3 endCellWorldPos = new Vector3(endCell.x * XrealRoomSpacing, endCell.y * YrealRoomSpacing, 0f);
-        Instantiate(testRoomEnd, endCellWorldPos, Quaternion.identity, roomsHolder);
-        #endregion
-
-        #region ShopCells
-        foreach (Vector2Int cell in shopCells)
+        foreach (RoomInstance preliminarRoomInstance in preliminaryRoomInstances)
         {
-            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(testRoomShop, worldPos, Quaternion.identity, roomsHolder);
-        }
-        #endregion
+            Vector3 roomWorldPos = new Vector3(preliminarRoomInstance.anchorCell.x * XrealRoomSpacing, preliminarRoomInstance.anchorCell.y * YrealRoomSpacing, 0f);
+            Transform roomInstanceTransform = Instantiate(preliminarRoomInstance.roomTransform, roomWorldPos, Quaternion.identity, roomsHolder);
 
-        #region TreasureCells
-        foreach (Vector2Int cell in treasureCells)
-        {
-            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(testRoomTreasure, worldPos, Quaternion.identity, roomsHolder);
+            RoomInstance roomInstance = new(roomInstanceTransform, preliminarRoomInstance.anchorCell, preliminarRoomInstance .occupiedCells);
+            roomInstances.Add(roomInstance);
         }
-        #endregion
-
-        #region NarrativeCells
-        foreach (Vector2Int cell in narrativeCells)
-        {
-            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(testRoomNarrative, worldPos, Quaternion.identity, roomsHolder);
-        }
-        #endregion
-
-        #region EventCells
-        foreach (Vector2Int cell in eventCells)
-        {
-            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(testRoomEvent, worldPos, Quaternion.identity, roomsHolder);
-        }
-        #endregion
-
-        #region ReplacementNonAssignedCells
-        foreach (OnlyVisualPrimitiveRoom replacementRoom in replacementPrimitiveRooms)
-        {
-            Transform prefab = replacementRoom.roomShape switch
-            {
-                RoomShape.Horizontal2x1 => testRoomHorizontal2x1,
-                RoomShape.Vertical1x2 => testRoomVertical1x2,
-                RoomShape.Square2x2 => testRoomSquare2x2,
-                RoomShape.LShapedA => testRoomLShapedA,
-                RoomShape.LShapedB => testRoomLShapedB,
-                RoomShape.LShapedC => testRoomLShapedC,
-                RoomShape.LShapedD => testRoomLShapedD,
-                _ => testRoomUnassigned,
-            };
-
-            Vector3 worldPos = new Vector3(replacementRoom.anchorCell.x * XrealRoomSpacing, replacementRoom.anchorCell.y * YrealRoomSpacing, 0f);
-            Instantiate(prefab, worldPos, Quaternion.identity, roomsHolder);
-        }
-        #endregion
-
-        #region NonAssignedCells
-        foreach (Vector2Int cell in nonAssignedCells)
-        {
-            Vector3 worldPos = new Vector3(cell.x * XrealRoomSpacing, cell.y * YrealRoomSpacing, 0f);
-            Instantiate(testRoomUnassigned, worldPos, Quaternion.identity, roomsHolder);
-        }
-        #endregion
     }
 }
-
-public class OnlyVisualPrimitiveRoom
-{
-    public Vector2Int anchorCell;
-    public RoomShape roomShape;
-
-    public OnlyVisualPrimitiveRoom(Vector2Int anchorCell, RoomShape roomShape)
-    {
-        this.anchorCell = anchorCell;
-        this.roomShape = roomShape;
-    }
-}
-
