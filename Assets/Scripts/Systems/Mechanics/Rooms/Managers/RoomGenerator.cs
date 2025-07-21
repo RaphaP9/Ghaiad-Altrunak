@@ -368,6 +368,12 @@ public class RoomGenerator : MonoBehaviour
             Vector3 roomWorldPos = new Vector3(preliminarRoomInstance.anchorCell.x * XrealRoomSpacing, preliminarRoomInstance.anchorCell.y * YrealRoomSpacing, 0f);
             Transform roomInstanceTransform = Instantiate(preliminarRoomInstance.roomTransform, roomWorldPos, Quaternion.identity, roomsHolder);
 
+            if(roomInstanceTransform.TryGetComponent(out RoomData roomHandler))
+            {
+                roomHandler.SetAnchorCell(preliminarRoomInstance.anchorCell);
+                roomHandler.SetOccupiedCells(preliminarRoomInstance.occupiedCells);
+            }
+
             RoomInstance roomInstance = new(roomInstanceTransform, preliminarRoomInstance.anchorCell, preliminarRoomInstance .occupiedCells);
             roomInstances.Add(roomInstance);
         }

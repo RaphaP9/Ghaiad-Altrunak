@@ -40,7 +40,7 @@ public class RoomTransitionHandler : MonoBehaviour
         }
     }
 
-    public void TransitionToRoom(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
+    public void TransitionToRoom(RoomData previousRoom, RoomData nextRoom, Transform targetTransformToPosition)
     {
         if (transitioningToRoom) return;
         if (previousRoom == nextRoom) return;
@@ -49,18 +49,18 @@ public class RoomTransitionHandler : MonoBehaviour
     }
 
     //Depends on CinemachineConfiner2D Damping
-    private IEnumerator TransitionToRoomCoroutineConfinerSwitch(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
+    private IEnumerator TransitionToRoomCoroutineConfinerSwitch(RoomData previousRoom, RoomData nextRoom, Transform targetTransformToPosition)
     {
         transitioningToRoom = true;
 
-        CameraConfinerHandler.Instance.SaveCurrentCameraFollowTransform();
-        CameraConfinerHandler.Instance.RemoveCameraFollowTransform();
+        CameraConfinerHandler.Instance.SaveCurrentCameraFollowTransform(mainCMVCAM);
+        CameraConfinerHandler.Instance.RemoveCameraFollowTransform(mainCMVCAM);
 
-        CameraConfinerHandler.Instance.DisableConfiner();
+        CameraConfinerHandler.Instance.DisableConfiner(mainCMVCAM);
         PlayerTeleporterManager.Instance.InstantPositionPlayer(GeneralUtilities.TransformPositionVector2(targetTransformToPosition));
 
-        CameraConfinerHandler.Instance.SwitchConfiner(nextRoom.RoomConfiner);
-        CameraConfinerHandler.Instance.RecoverCameraFollowTransform();
+        CameraConfinerHandler.Instance.SwitchConfiner(mainCMVCAM, nextRoom.RoomConfiner);
+        CameraConfinerHandler.Instance.RecoverCameraFollowTransform(mainCMVCAM);
 
         CinemachineCore.Instance.GetActiveBrain(0).ManualUpdate();
 
@@ -70,7 +70,7 @@ public class RoomTransitionHandler : MonoBehaviour
     }
 
     //Depends on CinemachineBrain Blend Settings
-    private IEnumerator TransitionToRoomCoroutineCameraSwitch(RoomHandler previousRoom, RoomHandler nextRoom, Transform targetTransformToPosition)
+    private IEnumerator TransitionToRoomCoroutineCameraSwitch(RoomData previousRoom, RoomData nextRoom, Transform targetTransformToPosition)
     {
         transitioningToRoom = true;
 

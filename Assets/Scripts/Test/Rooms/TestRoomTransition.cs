@@ -5,8 +5,8 @@ using UnityEngine;
 public class TestRoomTransition : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private RoomHandler roomA;
-    [SerializeField] private RoomHandler roomB;
+    [SerializeField] private RoomData roomA;
+    [SerializeField] private RoomData roomB;
 
     private void Update()
     {

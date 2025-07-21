@@ -8,21 +8,16 @@ public class CameraConfinerHandler : MonoBehaviour
     public static CameraConfinerHandler Instance { get; private set; }
 
     [Header("Components")]
-    [SerializeField] private CinemachineConfiner2D cinemachineConfiner2D;
-    [SerializeField] private CinemachineVirtualCamera CMVCAM;
+    [SerializeField] private List<CinemachineVirtualCamera> CMVCAMs;
 
     [Header("Debug")]
     [SerializeField] private bool debug;
 
-    private CinemachineTransposer cinemachineTransposer;
-    private Vector3 originalDamping;
-    private Transform cameraFollowTransform;
+    private Transform storedCameraFollowTransform;
 
     private void Awake()
     {
         SetSingleton();
-        cinemachineTransposer = CMVCAM.GetCinemachineComponent<CinemachineTransposer>();
-        InitializeDamping();
     }
 
     private void SetSingleton()
@@ -35,41 +30,6 @@ public class CameraConfinerHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void InitializeDamping()
-    {
-        originalDamping = new Vector3(cinemachineTransposer.m_XDamping, cinemachineTransposer.m_YDamping, cinemachineTransposer.m_ZDamping);
-    }
-
-    public void SetDamping(Vector3 damping)
-    {
-        cinemachineTransposer.m_XDamping = damping.x;
-        cinemachineTransposer.m_YDamping = damping.y;
-        cinemachineTransposer.m_ZDamping = damping.z;
-    }
-
-    public void DisableDamping() => SetDamping(Vector3.zero);
-    public void RecoverOriginalDamping() => SetDamping(originalDamping);
-
-    public IEnumerator SmoothSwitchConfinerCoroutine(PolygonCollider2D newConfiner, float switchTime)
-    {
-        SaveCurrentCameraFollowTransform();
-        RemoveCameraFollowTransform();
-
-        DisableConfiner();
-
-        yield return new WaitForSeconds(switchTime);
-
-        SetCameraFollowTransform(cameraFollowTransform);
-        SwitchConfiner(newConfiner);
-    }
-
-    public void SwitchConfiner(Collider2D confiner)
-    {
-        cinemachineConfiner2D.m_BoundingShape2D = confiner;
-        cinemachineConfiner2D.enabled = false; //Force Reinitialization 
-        cinemachineConfiner2D.enabled = true;
     }
 
     public void SwitchConfiner(CinemachineVirtualCamera CMVCAM, Collider2D confiner)
@@ -91,13 +51,21 @@ public class CameraConfinerHandler : MonoBehaviour
         }
     }
 
-    public void EnableConfiner() => cinemachineConfiner2D.enabled = true;
-    public void DisableConfiner() => cinemachineConfiner2D.enabled = false;
+    public void EnableConfiner(CinemachineVirtualCamera CMVCAM)
+    {
+        CinemachineConfiner2D cinemachineConfiner2D = CMVCAM.transform.GetComponent<CinemachineConfiner2D>();
+        if (cinemachineConfiner2D == null) return;
+        cinemachineConfiner2D.enabled = true;
+    }
 
-    public void SaveCurrentCameraFollowTransform() => cameraFollowTransform = CMVCAM.Follow;
-    public void RemoveCameraFollowTransform() => CMVCAM.Follow = null;
-    public void RecoverCameraFollowTransform() => CMVCAM.Follow = cameraFollowTransform;
-    public void SetCameraFollowTransform(Transform followTransform) => CMVCAM.Follow = followTransform;
+    public void DisableConfiner(CinemachineVirtualCamera CMVCAM)
+    {
+        CinemachineConfiner2D cinemachineConfiner2D = CMVCAM.transform.GetComponent<CinemachineConfiner2D>();
+        if (cinemachineConfiner2D == null) return;
+        cinemachineConfiner2D.enabled = false;
+    }
 
-
+    public void SaveCurrentCameraFollowTransform(CinemachineVirtualCamera CMVCAM) => storedCameraFollowTransform = CMVCAM.Follow;
+    public void RemoveCameraFollowTransform(CinemachineVirtualCamera CMVCAM) => CMVCAM.Follow = null;
+    public void RecoverCameraFollowTransform(CinemachineVirtualCamera CMVCAM) => CMVCAM.Follow = storedCameraFollowTransform;
 }
