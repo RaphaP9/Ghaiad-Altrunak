@@ -13,9 +13,23 @@ MonoBehaviour:
   m_Name: 1_LevelRoomSettingsSO
   m_EditorClassIdentifier: 
   level: 1
-  roomsQuantity: 10
+  roomsQuantity: 15
   roomsGridSize: {x: 9, y: 9}
-  roomsPool: []
+  roomsPool:
+  - {fileID: 1180364525947639681, guid: 7e2c5f0587ff7f44f9432a6ad3247012, type: 3}
+  - {fileID: 1180364525947639681, guid: b22528f5078da5649a348004760a72ff, type: 3}
+  - {fileID: 1180364525947639681, guid: a7712d3fa07ced4459d282145b62f66d, type: 3}
+  - {fileID: 1180364525947639681, guid: ffb81308ea5c04a44a2472f9b49ea6ea, type: 3}
+  - {fileID: 1180364525947639681, guid: af0ac709e8645544e9dcb210941e1473, type: 3}
+  - {fileID: 1180364525947639681, guid: 24e0d97f6f0366c41b352ab992e03fa1, type: 3}
+  - {fileID: 1180364525947639681, guid: 7bdf590c616ed724ab650892e522c286, type: 3}
+  - {fileID: 1180364525947639681, guid: 537425c4d96b27c408a68324d253497e, type: 3}
+  - {fileID: 1180364525947639681, guid: 7f301a9568a28d74c9a21da4c810d481, type: 3}
+  - {fileID: 1180364525947639681, guid: c0ca8247ece113146a4b7dd3d5d24cde, type: 3}
+  - {fileID: 1180364525947639681, guid: 871ab73c23d47a74f8efeae8e7efac27, type: 3}
+  - {fileID: 1180364525947639681, guid: 198996cd2d4908b4cb43b9951644c7e0, type: 3}
+  - {fileID: 1180364525947639681, guid: 7b4144cccbc5db24698b2d9c07ce039a, type: 3}
+  - {fileID: 1180364525947639681, guid: 2e6981afbb3be6c47851bef2900c02d2, type: 3}
   shopRooms: 1
   treasureRooms: 1
   eventRooms: 3

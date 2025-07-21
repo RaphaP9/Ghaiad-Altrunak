@@ -8,8 +8,8 @@ public static class RoomUtilities
     private const int X_RANDOM_WALK_STARTING_CELL = 0;
     private const int Y_RANDOM_WALK_STARTING_CELL = 0;
 
-    private const float X_ROOM_REAL_SIZE = 16f;
-    private const float Y_ROOM_REAL_SIZE = 9f;
+    private const float X_ROOM_REAL_SIZE = 32f;
+    private const float Y_ROOM_REAL_SIZE = 18f;
 
     private const int RANDOM_WALK_STUCK_COUNT_THRESHOLD = 5;
 
@@ -430,7 +430,8 @@ public static class RoomUtilities
             return roomTransform;
         }
 
-        Debug.Log($"No Room Transform Matches the PreliminarRoom - RoomShape: {preliminarRoom.roomType} - RoomType: {preliminarRoom.roomShape}.");
+        //Debug.Log($"No Room Transform Matches the PreliminarRoom - RoomShape: {preliminarRoom.roomType} - RoomType: {preliminarRoom.roomShape}.");
+        
         return null;
     }
 
@@ -446,7 +447,7 @@ public static class RoomUtilities
             return roomTransform;
         }
 
-        Debug.Log($"No Room Transform in RemainingUniqueRoomTransformsPool Matches the PreliminarRoom - RoomShape: {preliminarRoom.roomType} - RoomType: {preliminarRoom.roomShape}. Trying non unique room finding.");
+        //Debug.Log($"No Room Transform in RemainingUniqueRoomTransformsPool Matches the PreliminarRoom - RoomShape: {preliminarRoom.roomType} - RoomType: {preliminarRoom.roomShape}. Trying non unique room finding.");
         
         Transform nonUniqueRoomTransform = GetRoomTransformFromPoolByPreliminarRoom(roomTransformsPool, preliminarRoom);
         return nonUniqueRoomTransform;
