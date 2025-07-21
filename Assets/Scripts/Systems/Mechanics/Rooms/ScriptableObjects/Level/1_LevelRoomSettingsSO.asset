@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_LevelRoomSettingsSO
   m_EditorClassIdentifier: 
   level: 1
-  roomsQuantity: 15
+  roomsQuantity: 10
   roomsGridSize: {x: 9, y: 9}
   roomsPool:
   - {fileID: 1180364525947639681, guid: 7e2c5f0587ff7f44f9432a6ad3247012, type: 3}
@@ -32,8 +32,8 @@ MonoBehaviour:
   - {fileID: 1180364525947639681, guid: 2e6981afbb3be6c47851bef2900c02d2, type: 3}
   shopRooms: 1
   treasureRooms: 1
-  eventRooms: 3
-  narrativeRooms: 2
+  eventRooms: 1
+  narrativeRooms: 1
   startRoomCenteringMinBias: 0
   startRoomCenteringMaxBias: 0
   roomShapeCandidates: []

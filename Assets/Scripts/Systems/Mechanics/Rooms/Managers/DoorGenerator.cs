@@ -77,9 +77,7 @@ public class DoorGenerator : MonoBehaviour
 
             if (doorAppearancesByKey.TryGetValue(doorKey, out DoorAppearanceInfo doorAppearanceInfo))
             {
-
                 linkCounter++;
-
             }
         }
 
