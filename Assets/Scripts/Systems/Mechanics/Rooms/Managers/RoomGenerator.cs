@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,6 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Transform roomsHolder;
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
-    [Header("Doors Pool")]
-    [SerializeField] private List<Transform> doorsPool;
-
     [Header("Runtime Filled")]
     [SerializeField] private List<PreliminarRoom> preliminarRooms;
     [SerializeField] private List<RoomInstance> roomInstances;
@@ -21,9 +19,17 @@ public class RoomGenerator : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool debug;
 
-    private const int MAX_NUMBER_OF_GENERATION_ITERATIONS = 5;
+    public List<RoomInstance> RoomInstances => roomInstances;
 
+    public static event EventHandler OnRoomsInstantiated;
+
+    private const int MAX_NUMBER_OF_GENERATION_ITERATIONS = 5;
     private List<RoomInstance> preliminaryRoomInstances;
+
+    public class OnRoomsIntantiatedEventArgs : EventArgs
+    {
+        public List<RoomInstance> roomInstances;
+    }
 
     private void Awake()
     {
@@ -57,7 +63,8 @@ public class RoomGenerator : MonoBehaviour
         if(!FillPreliminaryRoomInstances(seededRandom,levelRoomSettings)) return;
 
         InstantiateRooms();
-        InstantiateDoors();
+
+        DoorGenerator.Instance.GenerateDoors(roomInstances);
     }
 
     private LevelRoomSettingsSO FindLevelRoomSettings() => generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
@@ -381,13 +388,7 @@ public class RoomGenerator : MonoBehaviour
             RoomInstance roomInstance = new(roomInstanceTransform, preliminarRoomInstance.anchorCell, preliminarRoomInstance .occupiedCells);
             roomInstances.Add(roomInstance);
         }
-    }
 
-    private void InstantiateDoors()
-    {
-        foreach (RoomInstance roomInstance in roomInstances)
-        {
-
-        }
+        OnRoomsInstantiated?.Invoke(this, new OnRoomsIntantiatedEventArgs { roomInstances = roomInstances });
     }
 }

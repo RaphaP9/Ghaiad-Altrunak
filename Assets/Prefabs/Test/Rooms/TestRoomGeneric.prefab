@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPositionTransform: {fileID: 5290424156753906891}
-  doorDirection: 3
+  leadingDirection: 3
   leadingLocalCell: {x: 1, y: 0}
 --- !u!1 &1941715906310778700
 GameObject:
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPositionTransform: {fileID: 4216825851504993889}
-  doorDirection: 2
+  leadingDirection: 2
   leadingLocalCell: {x: -1, y: 0}
 --- !u!1 &2122885034450531172
 GameObject:
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPositionTransform: {fileID: 4373360991653946290}
-  doorDirection: 1
+  leadingDirection: 1
   leadingLocalCell: {x: 0, y: -1}
 --- !u!1 &4033044905356884289
 GameObject:
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPositionTransform: {fileID: 8044150041618234257}
-  doorDirection: 0
+  leadingDirection: 0
   leadingLocalCell: {x: 0, y: 1}
 --- !u!1 &4071416314931714856
 GameObject:
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearanceTransform: {fileID: 8029102014980425777}
-  incomingDoorDirection: 1
+  incomingDirection: 1
   incomingLocalCell: {x: 0, y: 0}
 --- !u!1 &4214796722721828785
 GameObject:
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearanceTransform: {fileID: 8383560284885517403}
-  incomingDoorDirection: 0
+  incomingDirection: 0
   incomingLocalCell: {x: 0, y: 0}
 --- !u!1 &5515200094490074647
 GameObject:
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearanceTransform: {fileID: 7204830078252544132}
-  incomingDoorDirection: 3
+  incomingDirection: 3
   incomingLocalCell: {x: 0, y: 0}
 --- !u!1 &8015437092596797602
 GameObject:
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearanceTransform: {fileID: 1130440409028880919}
-  incomingDoorDirection: 2
+  incomingDirection: 2
   incomingLocalCell: {x: 0, y: 0}
 --- !u!1 &8045345051831969749
 GameObject:

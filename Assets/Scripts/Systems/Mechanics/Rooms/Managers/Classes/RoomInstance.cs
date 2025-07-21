@@ -15,4 +15,10 @@ public class RoomInstance
         this.anchorCell = anchorCell;
         this.occupiedCells = occupiedCells;
     }
+
+    public RoomData GetRoomDataComponent()
+    {
+        if (roomTransform.TryGetComponent(out RoomData roomData)) return roomData;
+        return null;
+    }
 }

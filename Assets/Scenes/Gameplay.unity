@@ -16801,6 +16801,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomsHolder: {fileID: 946910393}
   generalRoomsSettings: {fileID: 11400000, guid: 68ab6b8bcb9ccb04bb1a9f3119c5179a, type: 2}
+  doorsPool:
+  - {fileID: 6658866953952425484, guid: 2f4a50d5ce3b6224b8d8e6b9f627acac, type: 3}
+  - {fileID: 6658866953952425484, guid: 8d80422ca6835e74c8f9b37be0a7ee87, type: 3}
+  - {fileID: 6658866953952425484, guid: 79fa45e123634d541ae51caae68b8227, type: 3}
+  - {fileID: 6658866953952425484, guid: 45e7065e7d37063439e40134e02b60de, type: 3}
+  - {fileID: 6658866953952425484, guid: 4e7462beb13d08d4595b3dab34351f00, type: 3}
+  - {fileID: 6658866953952425484, guid: cbdd4297dea02e54aac1dd641a83339f, type: 3}
+  - {fileID: 6658866953952425484, guid: 9d02836cdc244e14cac6eb9b54fa4244, type: 3}
   preliminarRooms: []
   roomInstances: []
   debug: 1

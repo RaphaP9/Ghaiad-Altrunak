@@ -33,6 +33,10 @@ public class RoomData : MonoBehaviour
     public CompositeCollider2D RoomConfiner => roomConfiner;
     public Transform DefaultSpawnPosition => defaultSpawnPosition;
 
+    public Transform DoorsContainer => doorsContainer;
+    public List<DoorPosition> DoorPositionList => doorPositionList;
+    public List<DoorAppearance> DoorAppearanceList => doorAppearanceList;
+
     public void SetAnchorCell(Vector2Int anchorCell) => this.anchorCell = anchorCell;
     public void SetOccupiedCells(List<Vector2Int> occupiedCells) => this.occupiedCells = occupiedCells;
 }

@@ -6,10 +6,10 @@ public class DoorPosition : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Transform doorPositionTransform;
-    [SerializeField] private Direction doorDirection;
+    [SerializeField] private Direction leadingDirection;
     [SerializeField] private Vector2Int leadingLocalCell;
 
     public Transform DoorPositionTransform => doorPositionTransform;
-    public Direction DoorDirection => doorDirection;
+    public Direction LeadingDirection => leadingDirection;
     public Vector2Int LeadingLocalCell => leadingLocalCell;
 }
