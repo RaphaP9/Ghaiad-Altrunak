@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using UnityEngine;
 
 public static class RoomUtilities
@@ -13,13 +14,12 @@ public static class RoomUtilities
 
     private const int RANDOM_WALK_STUCK_COUNT_THRESHOLD = 5;
 
-
-    private static readonly Vector2Int[] directions = new Vector2Int[]
+    private static readonly Dictionary<Direction, Vector2Int> directionDictionary = new()
     {
-        Vector2Int.up,
-        Vector2Int.down,
-        Vector2Int.left,
-        Vector2Int.right
+        { Direction.Up, Vector2Int.up},
+        { Direction.Down, Vector2Int.down},
+        { Direction.Left, Vector2Int.left},
+        { Direction.Right, Vector2Int.right},
     };
 
     private static readonly Dictionary<RoomShape, HashSet<Vector2Int>> roomShapeLocalCellOccupations = new()
@@ -35,6 +35,7 @@ public static class RoomUtilities
     };
 
     private static readonly HashSet<Vector2Int> singeCellFallback = new() { Vector2Int.zero };
+    private static readonly Vector2Int vector2IntFallBack = Vector2Int.zero;
 
     public static Vector2Int GetRandomWalkStartingCell() => new Vector2Int(X_RANDOM_WALK_STARTING_CELL, Y_RANDOM_WALK_STARTING_CELL);
     public static Vector2 GetRoomRealSize() => new Vector2(X_ROOM_REAL_SIZE, Y_ROOM_REAL_SIZE);
@@ -66,16 +67,17 @@ public static class RoomUtilities
     #region Directions & Neighbors
     public static Vector2Int GetRandomDirection(System.Random random)
     {
-        return directions[random.Next(0, directions.Length)];
+        KeyValuePair<Direction, Vector2Int> direction = directionDictionary.ElementAt(random.Next(directionDictionary.Count));
+        return direction.Value;
     }
 
     public static HashSet<Vector2Int> Get4DirectionalCellNeighbors(Vector2Int cell)
     {
         HashSet<Vector2Int> neighborCells = new();
 
-        foreach(Vector2Int direction in directions)
+        foreach(KeyValuePair<Direction, Vector2Int> direction in directionDictionary)
         {
-            neighborCells.Add(cell + direction);
+            neighborCells.Add(cell + direction.Value);
         }
 
         return neighborCells;
@@ -92,6 +94,19 @@ public static class RoomUtilities
         }
 
         return neighborCells;
+    }
+
+    public static Vector2Int GetCellNeighborByDirection(Vector2Int cell, Direction direction)
+    {
+        if (directionDictionary.TryGetValue(direction, out var directionVector))
+        {
+            return cell + directionVector;
+        }
+        else
+        {
+            Debug.Log($"No Key: {direction} was found in DirectionsDictionary. Returning default FallBack (0,0)");
+            return vector2IntFallBack;
+        }
     }
     #endregion
 
@@ -357,9 +372,9 @@ public static class RoomUtilities
         {
             int neighborCount = 0;
 
-            foreach (Vector2Int direction in directions)
+            foreach (KeyValuePair<Direction, Vector2Int> direction in directionDictionary)
             {
-                if (neighborCheckCellsPool.Contains(cell + direction)) neighborCount++;
+                if (neighborCheckCellsPool.Contains(cell + direction.Value)) neighborCount++;
             }
 
             if (neighborCount == neightborCount) cellsWithNeighbors.Add(cell);
@@ -451,6 +466,22 @@ public static class RoomUtilities
         
         Transform nonUniqueRoomTransform = GetRoomTransformFromPoolByPreliminarRoom(roomTransformsPool, preliminarRoom);
         return nonUniqueRoomTransform;
+    }
+    #endregion
+
+    #region Doors
+    public static Transform GetDoorTransformByRoomType(List<Transform> doorsPool, RoomType roomType)
+    {
+        foreach(Transform roomTransform in doorsPool)
+        {
+            if(!roomTransform.TryGetComponent(out DoorData doorData)) continue;
+            if(doorData.DoorRoomType != roomType) continue;
+
+            return roomTransform;
+        }
+
+        Debug.Log($"Could not find Door Transform for RoomType: {roomType}. Returning null");
+        return null;
     }
     #endregion
 }

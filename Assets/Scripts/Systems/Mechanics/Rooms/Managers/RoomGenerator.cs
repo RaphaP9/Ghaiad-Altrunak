@@ -11,6 +11,9 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Transform roomsHolder;
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
+    [Header("Doors Pool")]
+    [SerializeField] private List<Transform> doorsPool;
+
     [Header("Runtime Filled")]
     [SerializeField] private List<PreliminarRoom> preliminarRooms;
     [SerializeField] private List<RoomInstance> roomInstances;
@@ -54,6 +57,7 @@ public class RoomGenerator : MonoBehaviour
         if(!FillPreliminaryRoomInstances(seededRandom,levelRoomSettings)) return;
 
         InstantiateRooms();
+        InstantiateDoors();
     }
 
     private LevelRoomSettingsSO FindLevelRoomSettings() => generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
@@ -376,6 +380,14 @@ public class RoomGenerator : MonoBehaviour
 
             RoomInstance roomInstance = new(roomInstanceTransform, preliminarRoomInstance.anchorCell, preliminarRoomInstance .occupiedCells);
             roomInstances.Add(roomInstance);
+        }
+    }
+
+    private void InstantiateDoors()
+    {
+        foreach (RoomInstance roomInstance in roomInstances)
+        {
+
         }
     }
 }

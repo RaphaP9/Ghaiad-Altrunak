@@ -19,7 +19,6 @@ public class RoomData : MonoBehaviour
 
     [Header("Spawn Positions")]
     [SerializeField] private Transform defaultSpawnPosition;
-    [SerializeField] private List<Transform> doorSpawnPositions;
 
     [Header("Doors")]
     [SerializeField] private Transform doorsContainer;

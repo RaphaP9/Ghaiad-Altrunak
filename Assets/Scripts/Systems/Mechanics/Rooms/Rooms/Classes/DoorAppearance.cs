@@ -6,10 +6,10 @@ public class DoorAppearance : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Transform appearanceTransform;
-    [SerializeField] private DoorDirection incomingDoorDirection;
+    [SerializeField] private Direction incomingDoorDirection;
     [SerializeField] private Vector2Int incomingLocalCell;
 
     public Transform AppearanceTransform => appearanceTransform;
-    public DoorDirection IncomingDoorDirection => incomingDoorDirection;
+    public Direction IncomingDoorDirection => incomingDoorDirection;
     public Vector2Int IncomingLocalCell => incomingLocalCell;
 }
