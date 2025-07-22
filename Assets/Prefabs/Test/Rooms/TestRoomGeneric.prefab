@@ -86,9 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8246197837306689502}
-  - component: {fileID: 2979684299336511548}
-  - component: {fileID: 6295264427627974814}
-  - component: {fileID: 6869459671920453410}
+  - component: {fileID: 1768594821893286370}
   m_Layer: 8
   m_Name: Confiner
   m_TagString: Untagged
@@ -111,8 +109,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6266022080058502463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!66 &2979684299336511548
-CompositeCollider2D:
+--- !u!60 &1768594821893286370
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -144,90 +142,6 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 6869459671920453410}
-    m_ColliderPaths:
-    - - X: 310000000
-        Y: 170000000
-      - X: 10000000
-        Y: 170000000
-      - X: 10000000
-        Y: 10000000
-      - X: 310000000
-        Y: 10000000
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 30.999971, y: 1}
-      - {x: 30.999971, y: 17}
-      - {x: 1, y: 16.999971}
-      - {x: 1.0000293, y: 1}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
-  m_UseDelaunayMesh: 0
-  m_CompositeGameObject: {fileID: 1533158951625822900}
---- !u!50 &6295264427627974814
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533158951625822900}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &6869459671920453410
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533158951625822900}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 1
-  m_Offset: {x: 16, y: 9}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -237,9 +151,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 30, y: 16}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 18}
+      - {x: 0, y: 0}
+      - {x: 32, y: 0}
+      - {x: 32, y: 18}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1584393618269960530
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +671,7 @@ MonoBehaviour:
   roomShape: 0
   anchorCell: {x: 0, y: 0}
   occupiedCells: []
-  roomConfiner: {fileID: 2979684299336511548}
+  roomConfiner: {fileID: 1768594821893286370}
   defaultSpawnPosition: {fileID: 0}
   doorsContainer: {fileID: 0}
   doorPositionList:

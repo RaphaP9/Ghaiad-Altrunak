@@ -15,7 +15,7 @@ public class RoomData : MonoBehaviour
     [SerializeField] private List<Vector2Int> occupiedCells;
 
     [Header("Components")]
-    [SerializeField] private CompositeCollider2D roomConfiner;
+    [SerializeField] private PolygonCollider2D roomConfiner;
 
     [Header("Spawn Positions")]
     [SerializeField] private Transform defaultSpawnPosition;
@@ -30,7 +30,7 @@ public class RoomData : MonoBehaviour
     public RoomType RoomType => roomType;
     public RoomShape RoomShape => roomShape;
 
-    public CompositeCollider2D RoomConfiner => roomConfiner;
+    public PolygonCollider2D RoomConfiner => roomConfiner;
     public Transform DefaultSpawnPosition => defaultSpawnPosition;
 
     public Transform DoorsContainer => doorsContainer;
