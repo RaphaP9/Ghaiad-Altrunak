@@ -14,6 +14,8 @@ public class LevelRoomSettingsSO : ScriptableObject
     public Vector2Int roomsGridSize;
     [Space]
     public List<Transform> roomsPool;
+    [Space]
+    public List<Transform> doorsPool;
 
     [Header("Generation")]
     [Range(0, 3)] public int shopRooms = 1;

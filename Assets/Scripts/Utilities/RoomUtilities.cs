@@ -439,8 +439,8 @@ public static class RoomUtilities
         foreach(Transform roomTransform in roomTransformsPool)
         {
             if (!roomTransform.TryGetComponent(out RoomData roomHandler)) continue;
-            if(roomHandler.RoomType != preliminarRoom.roomType) continue;
-            if(roomHandler.RoomShape != preliminarRoom.roomShape) continue;
+            if(roomHandler.RoomType != preliminarRoom.RoomType) continue;
+            if(roomHandler.RoomShape != preliminarRoom.RoomShape) continue;
 
             return roomTransform;
         }
@@ -456,8 +456,8 @@ public static class RoomUtilities
         foreach (Transform roomTransform in remainingUniqueRoomTransformsPool)
         {
             if (!roomTransform.TryGetComponent(out RoomData roomHandler)) continue;
-            if (roomHandler.RoomType != preliminarRoom.roomType) continue;
-            if (roomHandler.RoomShape != preliminarRoom.roomShape) continue;
+            if (roomHandler.RoomType != preliminarRoom.RoomType) continue;
+            if (roomHandler.RoomShape != preliminarRoom.RoomShape) continue;
 
             return roomTransform;
         }

@@ -13,7 +13,6 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GeneralRoomsSettingsSO generalRoomsSettings;
 
     [Header("Runtime Filled")]
-    [SerializeField] private List<PreliminarRoom> preliminarRooms;
     [SerializeField] private List<RoomInstance> roomInstances;
 
     [Header("Debug")]
@@ -21,10 +20,12 @@ public class RoomGenerator : MonoBehaviour
 
     public List<RoomInstance> RoomInstances => roomInstances;
 
-    public static event EventHandler OnRoomsInstantiated;
+    public static event EventHandler<OnRoomsIntantiatedEventArgs> OnRoomsInstantiated;
 
     private const int MAX_NUMBER_OF_GENERATION_ITERATIONS = 5;
-    private List<RoomInstance> preliminaryRoomInstances;
+
+    private List<PreliminarRoom> preliminarRooms = new();
+    private List<RoomInstance> preliminarRoomInstances = new();
 
     public class OnRoomsIntantiatedEventArgs : EventArgs
     {
@@ -55,16 +56,17 @@ public class RoomGenerator : MonoBehaviour
         LevelRoomSettingsSO levelRoomSettings = FindLevelRoomSettings();
 
         preliminarRooms.Clear();
+        preliminarRoomInstances.Clear();
         roomInstances.Clear();
 
         #endregion
 
         if (!FillPreliminarRooms(seededRandom, levelRoomSettings)) return;
-        if(!FillPreliminaryRoomInstances(seededRandom,levelRoomSettings)) return;
+        if(!FillPreliminarRoomInstances(seededRandom,levelRoomSettings)) return;
 
         InstantiateRooms();
 
-        DoorGenerator.Instance.GenerateDoors(roomInstances);
+        DoorGenerator.Instance.GenerateDoors(roomInstances, levelRoomSettings);
     }
 
     private LevelRoomSettingsSO FindLevelRoomSettings() => generalRoomsSettings.FindLevelSettingsByLevel(LevelManager.Instance.CurrentLevel);
@@ -336,12 +338,12 @@ public class RoomGenerator : MonoBehaviour
 
         return true;
     }
-    private bool FillPreliminaryRoomInstances(System.Random seededRandom, LevelRoomSettingsSO levelRoomSettingsSO)
+    private bool FillPreliminarRoomInstances(System.Random seededRandom, LevelRoomSettingsSO levelRoomSettingsSO)
     {
         List<Transform> totalRoomsTransformPool = new(levelRoomSettingsSO.roomsPool); //Create another list - we are going to make some shuffles
         List<Transform> remainingUniqueRoomsPool = new(levelRoomSettingsSO.roomsPool);
 
-        List<RoomInstance> preliminaryRoomInstances = new();
+        List<RoomInstance> preliminarRoomInstances = new();
 
         foreach (PreliminarRoom preliminarRoom in preliminarRooms)
         {
@@ -352,7 +354,7 @@ public class RoomGenerator : MonoBehaviour
 
             if(foundRoomTransform == null)
             {
-                preliminaryRoomInstances.Clear();
+                preliminarRoomInstances.Clear();
 
                 if (debug) Debug.Log("No room transform was found. Can not generate rooms");
                 return false;
@@ -360,11 +362,11 @@ public class RoomGenerator : MonoBehaviour
 
             remainingUniqueRoomsPool.Remove(foundRoomTransform);
 
-            RoomInstance preliminaryRoomInstance = new(foundRoomTransform, preliminarRoom.anchorCell, preliminarRoom.occupiedCells );
-            preliminaryRoomInstances.Add(preliminaryRoomInstance);
+            RoomInstance preliminarRoomInstance = new(foundRoomTransform, preliminarRoom.AnchorCell, preliminarRoom.OccupiedCells );
+            preliminarRoomInstances.Add(preliminarRoomInstance);
         }
 
-        this.preliminaryRoomInstances = preliminaryRoomInstances;
+        this.preliminarRoomInstances = preliminarRoomInstances;
 
         return true;
     }
@@ -374,18 +376,17 @@ public class RoomGenerator : MonoBehaviour
         float XrealRoomSpacing = RoomUtilities.GetRoomRealSize().x;
         float YrealRoomSpacing = RoomUtilities.GetRoomRealSize().y;
 
-        foreach (RoomInstance preliminarRoomInstance in preliminaryRoomInstances)
+        foreach (RoomInstance preliminarRoomInstance in preliminarRoomInstances)
         {
-            Vector3 roomWorldPos = new Vector3(preliminarRoomInstance.anchorCell.x * XrealRoomSpacing, preliminarRoomInstance.anchorCell.y * YrealRoomSpacing, 0f);
-            Transform roomInstanceTransform = Instantiate(preliminarRoomInstance.roomTransform, roomWorldPos, Quaternion.identity, roomsHolder);
+            Vector3 roomWorldPos = new Vector3(preliminarRoomInstance.AnchorCell.x * XrealRoomSpacing, preliminarRoomInstance.AnchorCell.y * YrealRoomSpacing, 0f);
+            Transform roomInstanceTransform = Instantiate(preliminarRoomInstance.RoomTransform, roomWorldPos, Quaternion.identity, roomsHolder);
 
-            if(roomInstanceTransform.TryGetComponent(out RoomData roomHandler))
+            if(roomInstanceTransform.TryGetComponent(out RoomData roomData))
             {
-                roomHandler.SetAnchorCell(preliminarRoomInstance.anchorCell);
-                roomHandler.SetOccupiedCells(preliminarRoomInstance.occupiedCells);
+                roomData.SetRoomData(preliminarRoomInstance.AnchorCell, preliminarRoomInstance.OccupiedCells);
             }
 
-            RoomInstance roomInstance = new(roomInstanceTransform, preliminarRoomInstance.anchorCell, preliminarRoomInstance .occupiedCells);
+            RoomInstance roomInstance = new(roomInstanceTransform, preliminarRoomInstance.AnchorCell, preliminarRoomInstance .OccupiedCells);
             roomInstances.Add(roomInstance);
         }
 

@@ -37,6 +37,9 @@ public class RoomData : MonoBehaviour
     public List<DoorPosition> DoorPositionList => doorPositionList;
     public List<DoorAppearance> DoorAppearanceList => doorAppearanceList;
 
-    public void SetAnchorCell(Vector2Int anchorCell) => this.anchorCell = anchorCell;
-    public void SetOccupiedCells(List<Vector2Int> occupiedCells) => this.occupiedCells = occupiedCells;
+    public void SetRoomData(Vector2Int anchorCell, List<Vector2Int> occupiedCells)
+    {
+        this.anchorCell = anchorCell;
+        this.occupiedCells = occupiedCells;
+    }
 }
