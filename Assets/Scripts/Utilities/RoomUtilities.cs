@@ -123,12 +123,12 @@ public static class RoomUtilities
 
         while (stepsTaken < steps - 1)
         {
-            Vector2Int next = currentCell + GetRandomDirection(random);
+            Vector2Int nextCell = currentCell + GetRandomDirection(random);
 
             int halfWidth = gridSize.x / 2;
             int halfHeight = gridSize.y / 2;
 
-            if (Mathf.Abs(next.x) > halfWidth || Mathf.Abs(next.y) > halfHeight || visitedCells.Contains(next)) //If out of grid or already visited
+            if (Mathf.Abs(nextCell.x) > halfWidth || Mathf.Abs(nextCell.y) > halfHeight || visitedCells.Contains(nextCell)) //If out of grid or already visited
             {
                 stuckCount++;
 
@@ -141,7 +141,7 @@ public static class RoomUtilities
                 continue;
             }
 
-            currentCell = next;
+            currentCell = nextCell;
             visitedCells.Add(currentCell);
             stepsTaken++;
 
